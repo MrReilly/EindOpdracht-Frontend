@@ -1,7 +1,5 @@
 import React from "react";
 
-console.log(distance() + " km");
-
 function distance(lat1, lat2, lon1, lon2)
 {
     lon1 =  lon1 * Math.PI / 180;

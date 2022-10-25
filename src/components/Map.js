@@ -1,18 +1,10 @@
 import {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/api"
 import mapStyles from "./MapStyles";
-import PlacesAutoComplete from "./PlacesAutoComplete";
-
-const libraries = ["places"]
-const options = {
-    styles: mapStyles,
-    disableDefaultUI: true,
-    zoomControl: true
-}
+import React from "react";
 
 export default function Map(props){
-    console.log(props.markers)
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, libraries,
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
 
     if(loadError) return <p>Error Loading Map</p>
@@ -21,9 +13,10 @@ export default function Map(props){
     return <div className= "map-box">
 
     <GoogleMap
-        options={options}
+
         center = {props.center}
-        zoom = {12}
+        zoom = {props.zoom}
+        options={{styles: mapStyles, disableDefaultUI: true, zoomControl: true}}
         mapContainerClassName="map-container"
     >
             {props.markers.map(marker => (
@@ -44,9 +37,13 @@ export default function Map(props){
                 onCloseClick={() =>{
                 props.setSelected(null);
                 }}>
-            <div>
-                <p>Hello</p>
-            </div>
+                <div>
+                <p>{props.selected.id}</p>
+                <h2>{props.selected.name} </h2>
+                <h3>{props.selected.category}</h3>
+                <p>{props.selected.startDate.toDateString()}</p>
+                <p>{props.selected.endDate.toDateString()}</p>
+                </div>
 
             </InfoWindow>) : null}
 

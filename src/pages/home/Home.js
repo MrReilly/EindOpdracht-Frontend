@@ -6,8 +6,8 @@ import logoFlame from "../../assets/white flame icon.png"
 import {useState} from "react";
 import React from "react";
 import CategoryButton from "../../components/CategoryButton";
+import Locate from "../../components/Locate"
 import databaseDummy from "../../components/DatabaseDummy";
-
 import conferenceImage from "../../assets/Conventie icon white.png"
 import artImage from "../../assets/gallery-white.png"
 import marketImage from "../../assets/market-white.png"
@@ -21,14 +21,19 @@ import natureImage from "../../assets/leaf icon white.png"
 import sportsImage from "../../assets/trophy-white.png"
 import otherImage from "../../assets/questionmark icon white.png"
 import Search from "../../components/PlacesAutoComplete";
+import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import DateConverter from "../../components/DateConverter";
+import DistanceKmCalculator from "../../components/DistanceKmCalculator";
+
 
 function Home() {
 
+    const[address, setAddress] = useState("")
+    const[zoom, setZoom] = useState(7)
     const [center, setCenter] = useState({lat: 51.866, lng: 5.823})
     const [markers, setMarkers] = useState([])
     const [selectedMarker, setSelectedMarker] = useState(null)
-
-    console.log(selectedMarker)
+    const [coordinates, setCoordinates] =useState(null)
 
     const [conferenceClicked, setConferenceClicked] = useState(false)
     const [artClicked, setArtClicked] = useState(false)
@@ -43,29 +48,89 @@ function Home() {
     const [sportsClicked, setSportsClicked] = useState(false)
     const [otherClicked, setOtherClicked] = useState(false)
 
-    const [location, setLocation] = useState("")
-    const [date, setDate] = useState("")
-    const [distance, setDistance] = useState(30)
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
+    const [distance, setDistance] = useState(null)
 
-    function handleClick() {
-        setCenter({id: 0, lat: 51.866, lng: 5.823})
-        setMarkers([
-            {id: 1, lat: 51.844, lng: 5.845},
-            {id: 2, lat: 51.820, lng: 5.833},
-            {id: 3, lat: 51.866, lng: 5.823},
-            {id: 4, lat: 51.852, lng: 5.813}
-        ])
+    function getEventMarkers(){
+
+        const eventArray = []
+
+        const selectedCategories = []
+
+        if(conferenceClicked === true){selectedCategories.push('CONFERENCE')}
+        if(artClicked === true){selectedCategories.push('ART')}
+        if(marketClicked === true){selectedCategories.push('MARKET')}
+        if(festivalClicked === true){selectedCategories.push('FESTIVAL')}
+        if(theaterClicked === true){selectedCategories.push("THEATER")}
+        if(concertClicked === true){selectedCategories.push('CONCERT')}
+        if(kidsClicked === true){selectedCategories.push('KIDS')}
+        if(fairClicked === true){selectedCategories.push('FAIR')}
+        if(circusClicked === true){selectedCategories.push('CIRCUS')}
+        if(natureClicked === true){selectedCategories.push('NATURE')}
+        if(sportsClicked === true){selectedCategories.push('OTHER')}
+        if(otherClicked === true){selectedCategories.push('OTHER')}
+
+        console.log(selectedCategories)
+
+
+        databaseDummy.map((e) => {
+
+            const distanceEvent = DistanceKmCalculator(e.lat, coordinates.lat, e.lng, coordinates.lng )
+
+                const event = {id: null, lat: null, lng: null, category: "", name: "", startDate: null, endDate: null}
+
+                event.id = e.id;
+                event.lat = e.lat;
+                event.lng = e.lng;
+                event.category = e.category.category;
+                event.name = e.name;
+                event.startDate = DateConverter(e.startDate);
+                event.endDate = DateConverter(e.endDate);
+
+            if(selectedCategories.includes(e.category.category)){
+
+            if(distanceEvent <= distance){
+                if((e.startDate >= startDate && e.startDate <= endDate) || (e.endDate >= startDate && e.endDate <= endDate)) {
+
+                eventArray.push(event)
+
+                return null
+            }}}
+            return  null
+
+
+        })
+
+        return eventArray;
     }
 
-    console.log(fairClicked)
+    const handleSelect = async value => {
+        const results = await geocodeByAddress(value);
+        const ll = await getLatLng(results[0])
+        setCoordinates(ll)
+        setAddress(value)
+    }
 
     function handleSubmit(e) {
-        e.preventDefault();}
+        e.preventDefault();
 
-        console.log(location, date, distance)
+        setCenter(null)
+        setCenter(coordinates)
+
+        handleSelect().then(() => {});
+
+        if(distance > 50 ) {setZoom(8)}
+        if(distance > 40 && distance <=50 ) {setZoom(8.5)}
+        if(distance > 30 && distance <=40 ) {setZoom(9)}
+        if(distance > 20 && distance <=30) {setZoom(9.5)}
+        if(distance > 10 && distance <=20) {setZoom(10)}
+        if(distance >= 5 && distance <= 10) {setZoom(11)}
+
+        setMarkers(getEventMarkers)
+    }
 
         return (
-
             <div className="wrapper">
                 <main>
                     <div className="inner-main">
@@ -73,39 +138,60 @@ function Home() {
                         <section className="left-side-container">
 
                             <form onSubmit={handleSubmit}>
-                                <Search/>
-                                <input
-                                    name="location"
-                                    className="location"
-                                    id="location"
-                                    type="text"
-                                    value={location}
-                                    onChange={(e) => {
-                                        setLocation(e.target.value)
-                                    }}
-                                />
+                                <div className="search-locate-container">
+                                    <Search
+                                    address={address}
+                                    setAddress={setAddress}
+                                    setZoom={setZoom}
+                                    setCenter={setCenter}
+                                    value={address}
+                                    handleSelect={handleSelect}
+                                     />
+                                    <Locate/>
+                                </div>
                                 <div className="date-distance-container">
+                                  <div className= "date-dist-inner-container">
+                                    <label htmlFor="start-date">After:</label>
                                     <input
-                                        name="date"
+                                        name="start-date"
                                         className="date"
-                                        id="date"
-                                        type="text"
-                                        value={date}
+                                        id="start-date"
+                                        type="date"
+                                        value={startDate}
                                         onChange={(e) => {
-                                            setDate(e.target.value)
+                                            setStartDate(e.target.value)
                                         }}
                                     />
+                                  </div>
 
+                                    <div className= "date-dist-inner-container">
+                                    <label htmlFor="end-date">Before:</label>
+                                    <input
+                                        name="end-date"
+                                        className="date"
+                                        id="end-date"
+                                        type="date"
+                                        value={endDate}
+                                        onChange={(e) => {
+                                            setEndDate(e.target.value)
+                                        }}
+                                    />
+                                    </div>
+
+                                    <div className= "date-dist-inner-container">
+                                    <label htmlFor="distance">distance</label>
                                     <input
                                         name="distance"
                                         className="distance"
                                         id="distance"
-                                        type="text"
+                                        type="number"
+                                        placeholder= "... km"
                                         value={distance}
                                         onChange={(e) => {
                                             setDistance(e.target.value)
                                         }}
                                     />
+                                    </div>
                                 </div>
 
                                 <button
@@ -116,14 +202,6 @@ function Home() {
                                 > Search Events
                                 </button>
                             </form>
-
-                            <button
-                                className="button"
-                                type="button"
-                                onClick={() => {
-                                    (handleClick())
-                                }}>klikker
-                            </button>
 
                             <div className="category-grid">
                                 <CategoryButton
@@ -241,6 +319,7 @@ function Home() {
 
                                 <Map
                                     center={center}
+                                    zoom={zoom}
                                     markers={markers}
                                     selected={selectedMarker}
                                     setSelected={setSelectedMarker}
@@ -255,9 +334,9 @@ function Home() {
                                 <div className="results-container">
                                     <div className="search-result">
                                         <ul className="search-result-item">
-                                            <li>{date}</li>
+
                                             <li>eventName</li>
-                                            <li>{location}</li>
+                                            <li>{address}</li>
                                             <li>{distance} Km</li>
                                         </ul>
                                     </div>

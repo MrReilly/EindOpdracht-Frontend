@@ -1,46 +1,50 @@
-/*import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
+import React from 'react';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
+    export default function Search(props) {
 
-const PlacesAutoComplete = () => (
-    <div>
-        <GooglePlacesAutocomplete
-            apiKey = {placesAPIKey}
-        />
-    </div>
-);
-*/
+                return(
+            <div className="search-container">
+            <PlacesAutocomplete
+                value={props.address}
+                onChange={props.setAddress}
+                onSelect={props.handleSelect}
+            >
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div key= "place-auto-complete">
+                        <input
+                            {...getInputProps({
+                                placeholder: 'Search Places ...',
+                                className: 'location-search-input',
+                            })}
+                        />
+                        <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                    ? 'suggestion-item--active'
+                                    : 'suggestion-item';
 
-import React from "react"
-
-import usePlacesAutocomplete, {getGeocode, getLatLng}  from "use-places-autocomplete";
-
-const placesAPIKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-
-function Search(){
-    const {ready, value, suggestions: {status, data}, setValue, clearSuggestions
-    } = usePlacesAutocomplete({
-        apiKey: {placesAPIKey},
-        requestOptions: {
-            location: { lat: () => 51.81206, lng: () => 5.82295},
-            radius: 50 * 1000
-        }
-    });
-
-    return(
-        <input
-            value={value}
-            onChange={(e) => {
-                setValue(e.target.value);
-            }}
-            disabled={!ready}
-            placeholder="Enter address or location"
-        />
-
-    )
+                                const style = suggestion.active
+                                    ? { backgroundColor: '#cccccc', cursor: 'pointer' }
+                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                    <div
+                                        {...getSuggestionItemProps(suggestion, {
+                                            className,
+                                            style,
+                                        })}
+                                    >
+                                        <span>{suggestion.description}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+            </PlacesAutocomplete>
+            </div>
+        );
 
 }
-
-
-
-export default Search

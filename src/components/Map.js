@@ -1,8 +1,18 @@
 import {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/api"
 import mapStyles from "./MapStyles";
-import React from "react";
+import React, {useContext} from "react";
+import {useState} from "react";
+import  {MapFormContext} from "./Context/MapFormContextProvider";
 
-export default function Map(props){
+function Map(){
+
+
+    const {selectedEvents} = useContext(MapFormContext)
+    const {center} = useContext(MapFormContext)
+    const {zoom} = useContext(MapFormContext)
+
+    const [selectedMarker, setSelectedMarker] = useState(null)
+
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
@@ -14,12 +24,12 @@ export default function Map(props){
 
     <GoogleMap
 
-        center = {props.center}
-        zoom = {props.zoom}
+        center = {center}
+        zoom = {zoom}
         options={{styles: mapStyles, disableDefaultUI: true, zoomControl: true}}
         mapContainerClassName="map-container"
     >
-            {props.markers.map(marker => (
+            {selectedEvents.map(marker => (
                 <Marker
                     key ={marker.id}
                     position={{
@@ -27,22 +37,22 @@ export default function Map(props){
                         lng: marker.lng}}
                     icon={{url:(require("../assets/pin.png")),
                 scaledSize: new window.google.maps.Size(40, 40)}}
-                    onClick={() => props.setSelected(marker)}
+                    onClick={() => setSelectedMarker(marker)}
                 />
             ))}
 
-        {props.selected ? (
+        {selectedMarker ? (
             <InfoWindow
-                position={{lat: props.selected.lat, lng: props.selected.lng}}
+                position={{lat: selectedMarker.lat, lng: selectedMarker.lng}}
                 onCloseClick={() =>{
-                props.setSelected(null);
+                setSelectedMarker(null);
                 }}>
                 <div>
-                <p>{props.selected.id}</p>
-                <h2>{props.selected.name} </h2>
-                <h3>{props.selected.category}</h3>
-                <p>{props.selected.startDate.toDateString()}</p>
-                <p>{props.selected.endDate.toDateString()}</p>
+                <p>{selectedMarker.id}</p>
+                <h2>{selectedMarker.name} </h2>
+                <h3>{selectedMarker.category}</h3>
+                <p>{selectedMarker.startDate.toDateString()}</p>
+                <p>{selectedMarker.endDate.toDateString()}</p>
                 </div>
 
             </InfoWindow>) : null}
@@ -50,3 +60,5 @@ export default function Map(props){
     </GoogleMap>
         </div>
 }
+
+export default Map

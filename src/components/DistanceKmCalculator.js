@@ -1,6 +1,6 @@
 import React from "react";
 
-function distance(lat1, lat2, lon1, lon2)
+function DistanceKmCalculator(lat1, lat2, lon1, lon2)
 {
     lon1 =  lon1 * Math.PI / 180;
     lon2 =  lon2 * Math.PI / 180;
@@ -20,4 +20,4 @@ function distance(lat1, lat2, lon1, lon2)
     return(c * r);
 }
 
-export default distance
+export default DistanceKmCalculator

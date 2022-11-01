@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DateConverter(date){
 
-    const [dateString, dateTime] = date.split("T")
+    const [dateString] = date.split("T")
 
     const [day, month, year] = dateString.split("-")
 

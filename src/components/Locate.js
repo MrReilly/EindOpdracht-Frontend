@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function locate() {
+export default function Locate() {
     return (
         <button className="locate" onClick={() => {
             navigator.geolocation.getCurrentPosition((position) => {

@@ -1,6 +1,6 @@
 import React from "react"
-import logoFlame from "../assets/white flame icon.png";
-import eventifire from "../assets/Eventifire.png";
+import logoFlame from "../../../assets/white flame icon.png";
+import eventifire from "../../../assets/Eventifire.png";
 
 export default function LogoEventifire(){
 

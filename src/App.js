@@ -1,20 +1,21 @@
-import './App.css';
 
-import React from "react";
-import {Switch, Route} from "react-router-dom";
+import React, {useContext} from "react";
+import {Switch, Route, Redirect} from "react-router-dom";
 
 import Home from "./pages/home/Home";
 import Login from './pages/login/Login'
 import CreateAccount from './pages/createAccount/CreateAccount'
 import CreateEvent from './pages/createEvent/CreateEvent'
 import CreateReview from './pages/createReview/CreateReview'
-import EventView from './pages/eventView/EventView'
 import MyEvents from './pages/myEvents/MyEvents'
 import MyFavoriteEvents from './pages/myFavorites/MyFavorites'
 import MyProfile from './pages/profile/MyProfile'
 import {Layout} from "./components/Layout/Layout";
+import {AuthContext} from "./components/Context/AuthContext";
 
 function App() {
+
+    const {isAuth} = useContext(AuthContext)
 
     return (
 
@@ -23,12 +24,6 @@ function App() {
                 <Route exact path="/">
                     <Home/>
                 </Route>
-                <Route exact path="/my-favorite-events">
-                    <MyFavoriteEvents/>
-                </Route>
-                <Route exact path="/my-events">
-                    <MyEvents/>
-                </Route>
                 <Route exact path="/login">
                     <Login/>
                 </Route>
@@ -36,17 +31,19 @@ function App() {
                     <CreateAccount/>
                 </Route>
                 <Route exact path="/my-profile">
-                    <MyProfile/>
+                    {isAuth ?  <MyProfile/> : <Redirect to="/" />}
                 </Route>
-
-                <Route exact path="/events/:id">
-                    <EventView/>
+                <Route exact path="/my-favorite-events">
+                    {isAuth ? <MyFavoriteEvents /> : <Redirect to="/" />}
+                </Route>
+                <Route exact path="/my-events">
+                    {isAuth ? <MyEvents/> : <Redirect to="/" />}
                 </Route>
                 <Route exact path="/create-event">
-                    <CreateEvent/>
+                    {isAuth ?  <CreateEvent/> : <Redirect to="/" />}
                 </Route>
                 <Route exact path="/create-review/:id">
-                    <CreateReview/>
+                    {isAuth ?  <CreateReview/> : <Redirect to="/" />}
                 </Route>
             </Switch>
         </Layout>

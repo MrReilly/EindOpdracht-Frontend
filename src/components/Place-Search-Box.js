@@ -1,9 +1,8 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import {MapFormContext} from "./Context/MapFormContextProvider";
 
 export default function Search() {
-
 
     const {address} = useContext(MapFormContext)
     const {setAddress} = useContext(MapFormContext)
@@ -18,9 +17,6 @@ export default function Search() {
         setCenter(ll)
     }
 
-
-
-
     return (
         <div className="search-container">
             <PlacesAutocomplete
@@ -30,9 +26,9 @@ export default function Search() {
             >
                 {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
                     <div key="place-auto-complete">
-                        <input key={"places-input"}
-                            {...getInputProps({
-                                placeholder: 'Enter Place...',
+                        <input
+                            key={"places-input"}{...getInputProps({
+                                placeholder: 'Enter address or city..',
                                 className: 'location-search-input',
                             })}
                         />

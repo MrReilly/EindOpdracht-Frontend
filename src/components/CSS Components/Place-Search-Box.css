@@ -1,0 +1,26 @@
+
+.search-container{
+    width: 100%;
+    position: relative;
+    max-height: 30px;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+
+.autocomplete-dropdown-container{
+    width: 100%;
+    position: absolute;
+    font-family: Tahoma, serif;
+    z-index: 2;
+}
+
+.location-search-input {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    box-shadow: inset  0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}

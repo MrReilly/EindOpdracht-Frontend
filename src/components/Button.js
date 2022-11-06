@@ -1,19 +1,16 @@
 import React from "react"
 
-function Button({children, handleClick }){
-
+function Button({children, handleClick, className}){
 
 
     return(
 
         <button
             type="button"
-            className="standard-button"
-            onClick={() => {handleClick()}}
+            className={className}
+            onClick= {handleClick}
         >{children}
-
         </button>
-
     )
 }
 

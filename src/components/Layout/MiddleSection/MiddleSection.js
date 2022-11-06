@@ -1,5 +1,5 @@
 import React from "react"
-import LogoEventifire from "../Logo-Eventifire";
+import LogoEventifire from "../Logo/Logo-Eventifire";
 
 const MiddleSection = ({children}) => {
 

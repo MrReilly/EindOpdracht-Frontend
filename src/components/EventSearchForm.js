@@ -1,30 +1,24 @@
 import Search from "./Place-Search-Box";
 import Locate from "./Locate";
-import {useState} from "react";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {MapFormContext} from "./Context/MapFormContextProvider";
-import EventGetter from "./EventGetter";
+import {useForm} from "react-hook-form";
+import DateConverter from "./DateConverter";
 
 export default function EventSearchForm(props){
-    const {buttonName} = props
+    const {buttonName, setStartDate, setEndDate, distance, setDistance} = props
 
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
+    const { register, handleSubmit, control} = useForm();
 
-    const {distance} = useContext(MapFormContext)
-    const {setDistance} = useContext(MapFormContext)
     const {submitClicked} = useContext(MapFormContext)
     const {setSubmitClicked} = useContext(MapFormContext)
     const {setZoom} = useContext(MapFormContext)
 
-    const {selectedCategories} = useContext(MapFormContext)
+    function onFormSubmit(data){
 
-    const {coordinates} = useContext(MapFormContext)
-    const {setSelectedEvents} = useContext(MapFormContext)
-
-
-    function HandleSubmit(e) {
-        e.preventDefault();
+        setStartDate(data.startDate)
+        setEndDate(data.endDate)
+        setDistance(data.distance)
 
         setSubmitClicked(!submitClicked)
 
@@ -46,67 +40,49 @@ export default function EventSearchForm(props){
         if (distance >= 5 && distance <= 10) {
             setZoom(11)
         }
-
-        setSelectedEvents((EventGetter(coordinates, selectedCategories, distance, startDate, endDate)))
     }
 
-
     return(
-    <form onSubmit= {HandleSubmit}
+    <form onSubmit= {handleSubmit(onFormSubmit)}
             className= "event-search-form">
         <div className="search-locate-container">
             <Search
                 key="search"
             />
-            <Locate/>
+
         </div>
-        <div className="date-distance-container">
-            <div className="date-dist-inner-container">
-                <label htmlFor="start-date">After:</label>
+        <div className="event-search-form-date-distance-container">
+
                 <input
-                    name="start-date"
                     className="date"
+                    placeholder= "start:"
                     id="start-date"
                     type="date"
-                    value={startDate}
-                    onChange={(e) => {setStartDate(e.target.value)
-                    }}
+                    onChange="this.className=(this.value!=''?'has-value':'')"
+                    {...register("startDate")}
                 />
-            </div>
 
-            <div className="date-dist-inner-container">
-                <label htmlFor="end-date">Before:</label>
                 <input
-                    name="end-date"
                     className="date"
+                    placeholder= "end:"
                     id="end-date"
                     type="date"
-                    value={endDate}
-                    onChange={(e) => {setEndDate(e.target.value)
-                    }}
+                    onChange="this.className=(this.value!=''?'has-value':'')"
+                    {...register("endDate")}
                 />
-            </div>
 
-            <div className="date-dist-inner-container">
-                <label htmlFor="distance">distance</label>
                 <input
-                    name="distance"
                     className="distance"
                     id="distance"
                     type="number"
-                    placeholder="... km"
-                    value={distance}
-                    onChange={(e) => {
-                        setDistance(e.target.value)
-                    }}
+                    placeholder="distance .. km"
+                    {...register("distance")}
                 />
-            </div>
         </div>
 
         <button
             id="searchEventButton"
-            className="searchEventButton"
-            name="searchEventButton"
+            className="standard-button"
             type="submit"
         > {buttonName}
         </button>

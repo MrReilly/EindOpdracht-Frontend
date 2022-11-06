@@ -1,18 +1,46 @@
-import '../../App.css'
+
 import Map from "../../components/Map";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import EventList from "../../components/EventList";
 import EventSearchForm from "../../components/EventSearchForm";
 import CategoryGrid from "../../components/CategoryGrid";
-import LeftSideBar from "../../components/Layout/LeftSideBar";
-import MiddleSection from "../../components/Layout/MiddleSection";
-import RightSideBar from "../../components/Layout/RightSideBar";
-import {useContext} from "react";
-import {MapFormContext} from "../../components/Context/MapFormContextProvider";
+import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
+import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
+import RightSideBar from "../../components/Layout/RightSideBar/RightSideBar";
+import axios from "axios";
+import DatabaseDummy from "../../components/DatabaseDummy";
 
 function Home() {
 
-    const {selectedEvents} = useContext(MapFormContext)
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [distance, setDistance] = useState(20);
+
+    const [endpointData, setEndpointData] = useState([]);
+    const [searchEvents, setSearchEvents] = useState([]);
+
+    const title = "Search Results";
+
+        useEffect(() => {
+            async function getEvents() {
+
+                const token = localStorage.getItem("token")
+
+                try {
+                    const response = await axios.get('http://localhost:8080/event/all', {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `${token}`
+                        }
+                    })
+                    setEndpointData(response.data)
+
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+            getEvents()
+        }, [])
 
     return (
 
@@ -24,14 +52,21 @@ function Home() {
                     <CategoryGrid/>
 
                     <EventSearchForm
-                        buttonName="Search All"
+                        buttonName="Search Events"
+                        setDistance={setDistance}
+                        distance={distance}
+                        setStartDate={setStartDate}
+                        setEndDate={setEndDate}
+                        startDate={startDate}
+                        endDate={endDate}
                     />
 
                 </LeftSideBar>
 
                 <MiddleSection>
 
-                    <Map/>
+                    <Map
+                    events={searchEvents}/>
 
                 </MiddleSection>
             </div>
@@ -39,12 +74,16 @@ function Home() {
             <RightSideBar>
 
                 <EventList
-                    title="Results"
-                    selectedEvents={selectedEvents}/>
-
+                    title={title}
+                    endpoint={endpointData}
+                    startDate={startDate}
+                    endDate={endDate}
+                    distance={distance}
+                    setEvents={setSearchEvents}
+                    events={searchEvents}
+                   />
 
             </RightSideBar>
-
         </>
     )
 }

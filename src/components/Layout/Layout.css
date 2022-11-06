@@ -1,0 +1,123 @@
+
+.date {
+    width: 100%;
+    padding: 8px;
+    border-color: lightgrey;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: thin;
+    font-size: 11px;
+}
+
+input[type="date"]:not(.has-value):before{
+    color: #274E5C;
+    content: attr(placeholder);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    z-index: 1;
+    max-height: 30px;
+    padding: 10px 20px 10px 10px ;
+    background-color: #274E5C;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 1366px;
+    max-width: 1800px;
+    justify-content: space-between;
+    align-items: center;
+    color: darkgoldenrod;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav ul {
+
+    font-size: 12px;
+    list-style: none;
+}
+
+.nav-links-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.nav-right-side-links{
+    display: flex;
+}
+
+a {
+    color: lightgrey;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+footer{
+    z-index: 1;
+    width: 100%;
+    height: 20px;
+
+    background-color: #274E5C;
+}
+
+main {
+    background-image: url("../../assets/blueAbstract.svg");
+    background-position: center;
+    background-size: 4000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.inner-main {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 45px);
+    max-width: 1920px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .inner-main {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        overflow-y: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    header {
+        padding: 10px;
+    }
+
+    nav ul li {
+        padding: 5px;
+        align-self: center;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px){
+
+    .nav-links-container{
+
+        gap: 5px;
+    }
+}

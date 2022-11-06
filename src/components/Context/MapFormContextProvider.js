@@ -13,8 +13,10 @@ function MapFormContextProvider ({children}) {
     const [submitClicked, setSubmitClicked] = useState(false)
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
-    const [selectedEvents, setSelectedEvents] = useState ([])
     const [selectedCategories, setSelectedCategories] = useState ([])
+    const [searchEvents, setSearchEvents] = useState ([])
+    const [myEvents, setMyEvents] = useState([])
+    const [selectedEvent, setSelectedEvent] =useState(null)
 
     const data = {
         address: address,
@@ -33,10 +35,14 @@ function MapFormContextProvider ({children}) {
         setStartDate: setStartDate,
         endDate: endDate,
         setEndDate: setEndDate,
-        selectedEvents: selectedEvents,
-        setSelectedEvents: setSelectedEvents,
+        searchEvents: searchEvents,
+        setSearchEvents: setSearchEvents,
         selectedCategories: selectedCategories,
-        setSelectedCategories: setSelectedCategories
+        setSelectedCategories: setSelectedCategories,
+        myEvents: myEvents,
+        setMyEvents: setMyEvents,
+        selectedEvent: selectedEvent,
+        setSelectedEvent: setSelectedEvent,
     }
 
     return (

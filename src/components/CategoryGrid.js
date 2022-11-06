@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import CategoryButton from "./CategoryButton";
 import conferenceImage from "../assets/Conventie icon white.png";
 import artImage from "../assets/gallery-white.png";
@@ -12,10 +12,10 @@ import circusImage from "../assets/circus tens icon white.png";
 import natureImage from "../assets/leaf icon white.png";
 import sportsImage from "../assets/trophy-white.png";
 import otherImage from "../assets/questionmark icon white.png";
-import {useState} from "react";
 import {MapFormContext} from "./Context/MapFormContextProvider";
 
-export default function CategoryGrid(props) {
+
+export default function CategoryGrid() {
 
     const [conferenceClicked, setConferenceClicked] = useState(false)
     const [artClicked, setArtClicked] = useState(false)
@@ -104,7 +104,7 @@ export default function CategoryGrid(props) {
                 id="selectAllButton"
                 name="selectAllButton"
                 type="button"
-                className="selectAllButton"
+                className="standard-button"
                 onClick={HandleSelectAll}
             >Select All
             </button>

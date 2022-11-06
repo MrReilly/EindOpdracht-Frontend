@@ -1,64 +1,78 @@
 import {GoogleMap, InfoWindow, Marker, useLoadScript} from "@react-google-maps/api"
 import mapStyles from "./MapStyles";
 import React, {useContext} from "react";
-import {useState} from "react";
-import  {MapFormContext} from "./Context/MapFormContextProvider";
+import {MapFormContext} from "./Context/MapFormContextProvider";
+import EventView from "./EventView/EventView";
 
-function Map(){
+function Map(props) {
+    const {events} = props
 
-
-    const {selectedEvents} = useContext(MapFormContext)
     const {center} = useContext(MapFormContext)
     const {zoom} = useContext(MapFormContext)
 
-    const [selectedMarker, setSelectedMarker] = useState(null)
+    const {selectedEvent, setSelectedEvent} = useContext(MapFormContext)
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
 
-    if(loadError) return <p>Error Loading Map</p>
-    if(!isLoaded)  return <p>Loading Map...</p>;
+    if (loadError) return <p>Error Loading Map</p>
+    if (!isLoaded) return <p>Loading Map...</p>;
 
-    return <div className= "map-box">
+    const handleClick = () => {document.getElementById("event-view-plate").style.width = "calc(98%)"}
 
-    <GoogleMap
+    return(
 
-        center = {center}
-        zoom = {zoom}
-        options={{styles: mapStyles, disableDefaultUI: true, zoomControl: true}}
-        mapContainerClassName="map-container"
-    >
-            {selectedEvents.map(marker => (
+        <div className= "map-box">
+
+        <EventView
+        />
+
+
+        <GoogleMap
+
+            center={center}
+            zoom={zoom}
+            options={{styles: mapStyles, disableDefaultUI: true, zoomControl: true}}
+            mapContainerClassName="map-container"
+        >
+            {events.map(event => (
                 <Marker
-                    key ={marker.id}
+                    key={event.id}
                     position={{
-                        lat: marker.lat,
-                        lng: marker.lng}}
-                    icon={{url:(require("../assets/pin.png")),
-                scaledSize: new window.google.maps.Size(40, 40)}}
-                    onClick={() => setSelectedMarker(marker)}
+                        lat: event.latCoordinate,
+                        lng: event.longCoordinate
+                    }}
+                    icon={{
+                        url: (require("../assets/pin.png")),
+                        scaledSize: new window.google.maps.Size(40, 40)
+                    }}
+                    onClick= {() => {setSelectedEvent(event)}}
                 />
             ))}
 
-        {selectedMarker ? (
-            <InfoWindow
-                position={{lat: selectedMarker.lat, lng: selectedMarker.lng}}
-                onCloseClick={() =>{
-                setSelectedMarker(null);
-                }}>
-                <div>
-                <p>{selectedMarker.id}</p>
-                <h2>{selectedMarker.name} </h2>
-                <h3>{selectedMarker.category}</h3>
-                <p>{selectedMarker.startDate.toDateString()}</p>
-                <p>{selectedMarker.endDate.toDateString()}</p>
-                </div>
+            {selectedEvent ? (
+                <InfoWindow
+                    position={{lat: selectedEvent.latCoordinate, lng: selectedEvent.longCoordinate}}
+                    onCloseClick={() => {
+                        setSelectedEvent(null)}}
+                    >
+                    <div
+                        onClick={handleClick}
+                        className= "marker-info-window">
+                        <p>{selectedEvent.id}</p>
+                        <h2>{selectedEvent.name} </h2>
+                        <h3>{selectedEvent.category.category}</h3>
+                        <p>{selectedEvent.startDate}</p>
+                        <p>{selectedEvent.endDate}</p>
+                    </div>
 
-            </InfoWindow>) : null}
+                </InfoWindow>) : null}
 
-    </GoogleMap>
-        </div>
+        </GoogleMap>
+    </div>
+        )
+
 }
 
 export default Map

@@ -1,20 +1,24 @@
 import React from "react";
+import Navbar from "./Navbar";
 import './Layout.css'
 import './LeftSideBar/LeftSideBar.css'
 import './Logo/Logo-Eventifire.css'
 import './MiddleSection/MiddleSection.css'
-import './MiddleDropDownPlate/MiddleDropDownPlate.css'
 import './RightSideBar/RightSideBar.css'
-import '../CSS Components/Map.css'
-import '../CSS Components/EventList.css'
-import '../CSS Components/EventSearchForm.css'
-import '../CSS Components/CategoryGrid.css'
-import '../CSS Components/Place-Search-Box.css'
-import '../CSS Components/EventCreateFrom.css'
-import '../CSS Components/Button.css'
+import '../Map/Map.css'
+import '../EventList/EventList.css'
+import '../EventSearchForm/EventSearchForm.css'
+import '../CategoryGrid/CategoryGrid.css'
+import '../PlaceSearchBox/PlaceSearchBox.css'
+import '../EventCreateForm/EventCreateFrom.css'
+import '../Button/Button.css'
 import '../../pages/login/Login.css'
 import '../EventView/EventView.css'
-import Navbar from "./Navbar";
+import '../../pages/createAccount/CreateAccount.css'
+import '../MessageBox/MessageBox.css'
+import '../ReviewForm/ReviewForm.css'
+import '../../pages/profile/MyProfile.css'
+
 
 
 export const Layout = ({children}) => {

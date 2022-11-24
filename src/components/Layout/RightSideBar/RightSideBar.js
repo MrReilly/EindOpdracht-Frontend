@@ -1,15 +1,18 @@
 import React from "react";
 
-const RightSideBar = ({children}) => {
+const RightSideBar = ({children, className}) => {
 
     return (
-        <section className="rightSideBar-container">
-            <div className="rightSideBar-container-shadow"/>
+        <>
+            <div className="rightSideBar-container-shadow">
+            <section className={className}>
 
-            {children}
 
-        </section>
+                {children}
 
+            </section>
+            </div>
+        </>
     )
 }
 

@@ -1,48 +1,46 @@
 import React from "react";
 import {createContext, useState} from "react";
+import {useLoadScript} from "@react-google-maps/api";
+
+const placesLibrary = ["places"]
 
 export const MapFormContext = createContext({})
 
 function MapFormContextProvider ({children}) {
 
-    const [center, setCenter] = useState({lat: 51.866, lng: 5.823});
-    const [coordinates, setCoordinates] = useState({lat: 51.866, lng: 5.823});
-    const [address, setAddress] = useState("")
-    const [zoom, setZoom] = useState(7);
-    const [distance, setDistance] = useState(20)
-    const [submitClicked, setSubmitClicked] = useState(false)
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
-    const [selectedCategories, setSelectedCategories] = useState ([])
-    const [searchEvents, setSearchEvents] = useState ([])
-    const [myEvents, setMyEvents] = useState([])
     const [selectedEvent, setSelectedEvent] =useState(null)
+    const [events, setEvents] = useState([])
+
+    const [reviews, setReviews] = useState([])
+
+    const [viewEventClicked, setViewEventClicked] = useState(false)
+    const [createFormClicked, setCreateFormClicked] = useState(false)
+
+    const [center, setCenter] = useState({lat: 52.0845, lng: 5.0975})
+    const [location, setLocation] = useState("")
+
+    const {isLoaded, loadError} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, libraries: placesLibrary
+    })
 
     const data = {
-        address: address,
-        setAddress: setAddress,
-        center: center,
-        setCenter: setCenter,
-        coordinates: coordinates,
-        setCoordinates: setCoordinates,
-        distance: distance,
-        setDistance: setDistance,
-        zoom: zoom,
-        setZoom: setZoom,
-        submitClicked: submitClicked,
-        setSubmitClicked: setSubmitClicked,
-        startDate: startDate,
-        setStartDate: setStartDate,
-        endDate: endDate,
-        setEndDate: setEndDate,
-        searchEvents: searchEvents,
-        setSearchEvents: setSearchEvents,
-        selectedCategories: selectedCategories,
-        setSelectedCategories: setSelectedCategories,
-        myEvents: myEvents,
-        setMyEvents: setMyEvents,
+
         selectedEvent: selectedEvent,
         setSelectedEvent: setSelectedEvent,
+        viewEventClicked: viewEventClicked,
+        setViewEventClicked: setViewEventClicked,
+        events: events,
+        setEvents: setEvents,
+        isLoaded: isLoaded,
+        loadError: loadError,
+        createFormClicked: createFormClicked,
+        setCreateFormClicked: setCreateFormClicked,
+        center: center,
+        setCenter: setCenter,
+        location: location,
+        setLocation: setLocation,
+        reviews: reviews,
+        setReviews: setReviews,
     }
 
     return (

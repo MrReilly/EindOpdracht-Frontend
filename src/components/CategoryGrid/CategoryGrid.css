@@ -1,0 +1,150 @@
+.selectAllButton{
+    z-index: 1;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+    width: 70%;
+    max-width: 200px;
+}
+
+.category-grid-container{
+
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    max-width: 280px;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 5px;
+}
+
+.category-grid{
+
+    display: flex;
+    flex: 0 1 auto;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.cg-button-overlay-container{
+    position: relative;
+    max-width: 50px;
+    max-height: 50px;
+    height: auto;
+    width: auto;
+    margin: 3px;
+}
+
+.category-button{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: none;
+}
+
+.cg-button-overlay{
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsla(196, 40%, 20%, 50%);
+    transition: .5s ease;
+    position: absolute;
+    top:-4px;
+    left:-6px;
+    width: 120%;
+    height: 120%;
+    padding: 10px;
+    opacity: 0;
+    font-size: 12px;
+    border-style: outset;
+    border-color: 	hsl(196, 40%, 60%);
+    color: white;
+    font-weight: bold;
+    box-shadow: 10px 10px 20px 	hsl(196, 40%, 15%);
+}
+
+.cg-button-overlay-container:hover .cg-button-overlay {
+    opacity: 1;
+
+}
+
+
+.cat-clicked{
+    box-shadow: 0 10px 10px hsl(0, 0%, 25%);
+    background-image: linear-gradient(45deg, hsl(43, 81%, 40%), hsl(43, 81%, 60%));
+    border-radius: 3px;
+}
+
+.blue1{
+    background-color: rgba(173, 232, 244, 0.5)
+}
+
+.blue2{
+    background-color: rgba(0, 180, 216, 0.5)
+}
+
+.blue3{
+    background-color: rgba(0, 119, 182, 0.5)
+}
+
+.blue4{
+    background-color: rgba(2, 62, 138, 0.5);
+}
+
+.category-image{
+    width: 90%;
+    height: auto;
+}
+
+@media screen and (max-height: 600px) {
+
+    .category-grid-container {
+        max-width: 500px;
+    }
+
+    .category-button {
+        max-width: 40px;
+        padding: 5px;
+        margin: 0;
+    }
+
+    .cg-button-overlay{
+        font-size: 10px;
+        left: -8px
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .category-button {
+        max-width: 40px;
+        padding: 5px;
+        margin: 0;
+    }
+
+    .cg-button-overlay{
+        font-size: 10px;
+        left: -8px
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .category-grid-container {
+        max-width: 700px;
+    }
+
+    .category-grid {
+        height: auto;
+        margin: 0 5px 0 0;
+    }
+
+    .selectAllButton {
+        margin: 5px
+    }
+}

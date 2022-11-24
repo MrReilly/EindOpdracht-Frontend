@@ -1,0 +1,35 @@
+.message-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 160px;
+    z-index: 5;
+    width: 50%;
+    height: 20%;
+    margin-top: 80px;
+    background-color: hsl(196, 30%, 40%);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-style: none;
+    border-radius: 10px;
+    align-self: center;
+    color: white;
+    text-align: center;
+}
+
+
+.message-box-close-button{
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right:20px;
+    width: 10px;
+    font-size: 40px;
+    background-color: rgba(0,0,0, 0);
+    border: none;
+    color:white;
+}
+
+.mid-drop-close-button:hover{
+    color: #274E5C
+}

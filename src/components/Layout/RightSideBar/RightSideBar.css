@@ -1,46 +1,43 @@
 
 .rightSideBar-container {
-    position: relative;
+
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex: 1;
-    min-width: 220px;
     max-width: 300px;
     align-items: center;
     height: 100%;
-    width: 100%;
-
     padding: 15px;
     box-shadow: inset -20px 0 15px rgba(5, 8, 8, 0.5);
 }
 
 .rightSideBar-container-shadow {
-    position: absolute;
+
+
     box-shadow: -20px 0 15px rgba(5, 8, 8, 0.5);
-    bottom: 1px;
     height: 100%;
-    width: 100%;
+    width: fit-content;
+}
+
+.empty-bar{
+    width: 220px;
 }
 
 @media screen and (max-width: 1024px) {
 
     .rightSideBar-container{
         flex-direction: row;
-        flex: 0 1;
         width: 100%;
+        max-width: 100%;
+        max-height: 160px;
         box-shadow: none;
         padding: 0;
     }
-
-    .rightSideBar-container-shadow {
-        box-shadow: none;
+    .rightSideBar-container-shadow{
+        width: 100%;
+        max-height: 160px;
     }
-}
 
-@media screen and (max-width: 768px) {
-
-    .rightSideBar-container {
-        display: none;
-    }
 }

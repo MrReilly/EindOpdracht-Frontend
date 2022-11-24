@@ -1,0 +1,89 @@
+
+.mp-container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.mp-container h1 {
+    font-family: "Bradley Hand", sans-serif;
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+.mp-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width:70%;
+    max-width: 500px;
+    max-height: 400px;
+    min-height: 320px;
+    height: 80%;
+    padding: 20px;
+    background-color: white;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+}
+
+.role-organizationName-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px
+}
+
+.role-organizationName-container p, label{
+    padding: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #274E5C;
+}
+.mp-change-organizationName-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.mp-form Button{
+    font-size: 11px;
+    flex-wrap: wrap;
+}
+
+.mp-button-text-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: lightgrey;
+    padding: 5px;
+}
+
+.mp-button-text-container p{
+    padding: 5px 0 2px 10px;
+}
+
+@media screen and (max-width: 480px) {
+
+    .mp-form {
+        width: 80%;
+    }
+}
+
+

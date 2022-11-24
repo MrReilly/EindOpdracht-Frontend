@@ -1,35 +1,33 @@
-import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
-import Map from "../../components/Map";
+import Map from "../../components/Map/Map";
 import RightSideBar from "../../components/Layout/RightSideBar/RightSideBar";
-import EventList from "../../components/EventList";
-import MiddleDropdownPlate from "../../components/Layout/MiddleDropDownPlate/MiddleDropdownPlate";
-import EventCreateForm from "../../components/EventCreateForm";
-import React, {useEffect, useState, useContext} from "react";
-import Button from "../../components/Button";
+import EventList from "../../components/EventList/EventList";
+import EventCreateForm from "../../components/EventCreateForm/EventCreateForm";
+import React, {useEffect, useContext, useState} from "react";
+import Button from "../../components/Button/Button";
 import axios from "axios";
 import {AuthContext} from "../../components/Context/AuthContext";
-import mapFormContextProvider, {MapFormContext} from "../../components/Context/MapFormContextProvider";
+import {MapFormContext} from "../../components/Context/MapFormContextProvider";
+import EventView from "../../components/EventView/EventView";
+import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
+import MediaQuery from "react-responsive";
 
 function MyEvents() {
 
     const {user} = useContext(AuthContext)
-    const {setZoom} = useContext(MapFormContext)
-    const {selectedEvent, setSelectedEvent} = useContext(MapFormContext)
-    const {setDistance} = useContext(MapFormContext)
-    const {myEvents, setMyEvents} = useContext(MapFormContext)
-    const [endpointData, setEndpointData] = useState([]);
+    const {events, setEvents} = useContext(MapFormContext)
+    const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
 
-    const title = "My Events"
+    const [createFormClicked, setCreateFormClicked] = useState(false)
 
-    useEffect(() => {
-        setZoom(9)
-        setDistance(300)
-    }, [])
+    const zoom = 7
 
-    const handleClick = () => {
-        document.getElementById("middle-plate").style.height = "calc(100vh - 60px)"
-    }
+    const title = `${user}'s Events`
+
+    useEffect(() => { return (() => {
+            setViewEventClicked(false)
+            setEvents([])}
+    )}, [])
 
     useEffect(() => {
         async function getEvents() {
@@ -43,60 +41,47 @@ function MyEvents() {
                         Authorization: `${token}`
                     }
                 })
-                setEndpointData(response.data.myEvents)
+                setEvents(response.data.myEvents)
 
             } catch (e) {
                 console.error(e);
             }
         }
-
         getEvents()
 
-        return () => {
-            setSelectedEvent(null)
-        }
-    }, [])
+    }, [createFormClicked])
 
     return (<>
-            <div className="leftSideBar-middleSection-container">
+        <MediaQuery query="(min-device-width: 1024px)">
+            <LeftSideBar
+            className="lsb-slim-container"/>
+        </MediaQuery>
 
-                <LeftSideBar>
+            <MiddleSection>
 
-                    <h2>{user}'s Events</h2>
+                <Map zoom={zoom}/>
 
-                    <Button
-                        handleClick={handleClick}
-                        className="standard-button"
-                        buttonClass=".mid-drop-close-button"
-                    >{"Create Event"}
-                    </Button>
-                </LeftSideBar>
+                <Button
+                    click={() => {setCreateFormClicked(true)}}
+                    className="standard-button"
+                >{"Create Event"}
+                </Button>
 
-                <MiddleSection>
+                {viewEventClicked &&
+                    <EventView
+                        buttonName="Delete this Event"
+                    setViewEventClicked={setViewEventClicked}/>}
 
-                    <Map
-                        events={myEvents}
-                    />
-                    <MiddleDropdownPlate
-                        buttonClass="mid-drop-close-button"
-                        >
-                        <div className="create-event-form-container">
-                            <EventCreateForm
-                            />
-                        </div>
-                    </MiddleDropdownPlate>
+                {createFormClicked &&
+                    <EventCreateForm
+                        setCreateFormClicked={setCreateFormClicked}/>}
 
-                </MiddleSection>
-            </div>
+            </MiddleSection>
 
-            <RightSideBar>
+            <RightSideBar className="rightSideBar-container">
 
-                <EventList
-                    title={title}
-                    endpoint={endpointData}
-                    setEvents={setMyEvents}
-                    events={myEvents}
-                />
+                {events.length > 0 ? <EventList title={title}/> : null}
+
             </RightSideBar>
         </>
     )

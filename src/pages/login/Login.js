@@ -1,16 +1,17 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import axios from "axios";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
-import MiddleDropdownPlate from "../../components/Layout/MiddleDropDownPlate/MiddleDropdownPlate";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import RightSideBar from "../../components/Layout/RightSideBar/RightSideBar";
 import {AuthContext} from "../../components/Context/AuthContext";
+import MediaQuery from "react-responsive";
 
 function Login() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, toggleError] = useState(false)
+
 
     const {login} = useContext(AuthContext)
 
@@ -33,32 +34,25 @@ function Login() {
         }
     }
 
-    function openMiddlePlate() {
-        document.getElementById("middle-plate").style.height = "calc(100vh - 60px)"
-    }
 
-    useEffect(() => {
-
-        openMiddlePlate()
-
-    }, [])
 
 
     return (
         <>
             <div className="leftSideBar-middleSection-container">
 
-                <LeftSideBar/>
+                <MediaQuery query="(min-device-width: 768px)">
+                    <LeftSideBar className="lsb-container"/>
+                </MediaQuery>
+
                 <MiddleSection>
-                    <MiddleDropdownPlate
-                        className="login-dropdown-button"
-                    >
                         <div className="login-form-container">
+
                             <h1 className="login-title">Login</h1>
                         <form
                             onSubmit={handleSubmit}
                             className="login-form">
-                            <label htmlFor="login-label">Username
+                            <label htmlFor="login-input">Username
                                 <input
                                     className="login-input"
                                     id="userName"
@@ -68,7 +62,7 @@ function Login() {
                                     required
                                 /></label>
 
-                            <label htmlFor="login-label">Password
+                            <label htmlFor="login-input">Password
                                 <input
                                     className="login-input"
                                     type="password"
@@ -85,11 +79,16 @@ function Login() {
                             </button>
                         </form>
                         </div>
-                    </MiddleDropdownPlate>
 
                 </MiddleSection>
             </div>
-            <RightSideBar/>
+            <MediaQuery query="(min-device-width: 1024px)">
+                <RightSideBar
+                    className="rightSideBar-container">
+                    <div className="empty-bar"></div>
+                </RightSideBar>
+
+            </MediaQuery>
         </>)
 }
 

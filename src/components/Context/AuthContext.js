@@ -10,6 +10,8 @@ function AuthContextProvider ({children}) {
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
         user: null,
+        role: null,
+        organizationName: null,
         status: "pending"
     });
 
@@ -20,12 +22,14 @@ function AuthContextProvider ({children}) {
         const token = localStorage.getItem("token")
 
         if (token) {
-            getUserDetails(token, '/');
+            getUserDetails(token);
         } else {
             // als er GEEN token is doen we niks, en zetten we de status op 'done'
             toggleIsAuth({
                 isAuth: false,
                 user: null,
+                role: null,
+                organizationName: null,
                 status: 'done',
             });
         }
@@ -43,6 +47,8 @@ function AuthContextProvider ({children}) {
         toggleIsAuth({
             isAuth: false,
             user: null,
+            role: null,
+            organizationName: null,
             status: "done"
         });
 
@@ -61,13 +67,14 @@ function AuthContextProvider ({children}) {
                 }
             });
 
-            console.log(response)
-
             toggleIsAuth({
                 ...isAuth,
                 isAuth: true,
                 user: response.data.username,
+                role: response.data.role,
+                organizationName: response.data.organizationName,
                 status:"done"
+
             });
 
             if (redirectUrl) {
@@ -80,6 +87,8 @@ function AuthContextProvider ({children}) {
             toggleIsAuth({
                 isAuth: false,
                 user: null,
+                roles: null,
+                organizationName: null,
                 status: 'done',
             });
         }
@@ -88,6 +97,8 @@ function AuthContextProvider ({children}) {
     const authContextData = {
         isAuth: isAuth.isAuth,
         user: isAuth.user,
+        role: isAuth.role,
+        organizationName: isAuth.organizationName,
         login: login,
         logout: logout,
     };

@@ -42,7 +42,7 @@ function Login() {
             <div className="leftSideBar-middleSection-container">
 
                 <MediaQuery query="(min-device-width: 768px)">
-                    <LeftSideBar className="lsb-container"/>
+                    <LeftSideBar className="lsb-container lsb-slim"/>
                 </MediaQuery>
 
                 <MiddleSection>

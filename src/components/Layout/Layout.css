@@ -21,7 +21,7 @@ input[type="date"]:not(.has-value):before{
 }
 
 header {
-    z-index: 5;
+
     display: flex;
     flex: 1 1 auto;
     justify-content: center;
@@ -43,7 +43,6 @@ nav {
 }
 
 nav ul {
-
     font-size: 12px;
     list-style: none;
 }
@@ -65,11 +64,13 @@ a {
     text-decoration: none;
 }
 
-footer{
+a:hover {
+    color: orange;
+}
 
+footer{
     width: 100%;
     height: 20px;
-
     background-color: #274E5C;
 }
 
@@ -78,23 +79,41 @@ main {
     background-position: center;
     background-size: 4000px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     width: 100%;
+    height: calc(100vh - 50px);
 }
 
 .inner-main {
     display: flex;
     flex-direction: row;
-    height: calc(100vh - 50px);
-    max-width: 1920px;
+    justify-content: center;
+    height: 100%;
     width: 100%;
+    flex: 5 1 1400px;
+    max-width: 1920px;
+    overflow-x: hidden;
+}
+
+.left-outside{
+    z-index: 1;
+    flex: 1 1 30px;
+    box-shadow: 15px 0 15px -1px rgba(5, 8, 8, 0.6 );
+}
+
+.right-outside{
+    z-index: 1;
+    flex: 1 1 30px;
+    box-shadow: -15px 0 15px -1px rgba(5, 8, 8, 0.6 );
 }
 
 .leftSideBar-middleSection-container{
-    display: flex;
+   display: flex;
     flex-direction: row;
-    flex: 100 1 auto;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 1024px) {
@@ -102,8 +121,8 @@ main {
     .inner-main {
         display: flex;
         flex-direction: column;
-        width: 100vw;
-        overflow-y: scroll;
+        overflow-y: auto;
+        flex: 1 1 auto;
     }
 }
 
@@ -121,8 +140,10 @@ main {
     }
 
     .inner-main{
-        height: calc(100vh - 65px);
+        flex: 1 1 auto;
     }
+
+
 
 }
 
@@ -134,5 +155,13 @@ main {
 
     .nav-links-container{
         gap: 5px;
+    }
+
+    .left-outside{
+       display: none;
+    }
+
+    .right-outside {
+        display: none;
     }
 }

@@ -11,6 +11,7 @@ import {MapFormContext} from "../../components/Context/MapFormContextProvider";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import PlaceSearchBox from "../../components/PlaceSearchBox/PlaceSearchBox";
 import DistanceKmCalculator from "../../components/Utils/DistanceKmCalculator";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
 function Home() {
 
@@ -21,16 +22,19 @@ function Home() {
     const [endDate, setEndDate] = useState(null);
     const [zoom, setZoom] = useState(7)
 
-    const {events, setEvents} = useContext(MapFormContext)
-    const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
+    const [favoriteSaveResponse, setFavoriteSaveResponse] = useState(null)
+
+    const {setEvents} = useContext(MapFormContext)
+    const {setViewEventClicked} = useContext(MapFormContext)
     const {selectedEvent} = useContext(MapFormContext)
     const {center} = useContext(MapFormContext)
 
 
-    const title = "Search Results";
+    const title = "Results";
 
     useEffect(() => {
         return (() => {
+                setFavoriteSaveResponse(null)
                 setViewEventClicked(false)
                 setEvents([])
             }
@@ -129,11 +133,14 @@ function Home() {
                         Authorization: `${token}`
                     },
                 })
-            console.log(response)
+
+            setFavoriteSaveResponse({message: response.data, status: response.status})
 
         } catch (e) {
             console.error(e);
         }
+
+        console.log(favoriteSaveResponse)
     }
 
     return (
@@ -161,30 +168,31 @@ function Home() {
 
                 <MiddleSection>
 
+                    {favoriteSaveResponse && <MessageBox
+                        click={() => {setFavoriteSaveResponse(null)}}>
+                        <p>{favoriteSaveResponse.message}</p>
+                    </MessageBox>}
+
                     <Map zoom={zoom}/>
 
-                    {viewEventClicked ?
                         <EventView
                             setViewEventClicked={setViewEventClicked}
                             submitButtonClicked={() => {
                                 handleFavoriteClick()
                             }}
                             buttonName="Save in my Favorites!"
-                        /> : null}
+                        />
 
                 </MiddleSection>
 
             </div>
 
-                <RightSideBar className="rightSideBar-container">
+                <RightSideBar>
 
-                    {events.length > 0 ? <EventList
-                        title={title}
-                    /> : null}
+                    <EventList
+                        title={title}/>
 
                 </RightSideBar>
-
-
         </>
     )
 }

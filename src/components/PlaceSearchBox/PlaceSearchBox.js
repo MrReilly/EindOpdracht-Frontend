@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
 import {MapFormContext} from "../Context/MapFormContextProvider";
@@ -8,6 +8,8 @@ function PlaceSearchBox() {
     const {setCenter, location, setLocation} = useContext(MapFormContext)
 
     const {isLoaded, loadError} = useContext(MapFormContext)
+
+    useEffect(() => {return (setLocation(""))},[])
 
     async function handleSelect(value) {
         const results = await geocodeByAddress(value);

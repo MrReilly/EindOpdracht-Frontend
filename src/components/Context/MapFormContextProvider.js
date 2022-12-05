@@ -8,13 +8,13 @@ export const MapFormContext = createContext({})
 
 function MapFormContextProvider ({children}) {
 
-    const [selectedEvent, setSelectedEvent] =useState(null)
+    const [selectedEvent, setSelectedEvent] =useState({})
     const [events, setEvents] = useState([])
 
     const [reviews, setReviews] = useState([])
 
     const [viewEventClicked, setViewEventClicked] = useState(false)
-    const [createFormClicked, setCreateFormClicked] = useState(false)
+    const [viewEventMounted, setViewEventMounted] = useState(false)
 
     const [center, setCenter] = useState({lat: 52.0845, lng: 5.0975})
     const [location, setLocation] = useState("")
@@ -29,12 +29,12 @@ function MapFormContextProvider ({children}) {
         setSelectedEvent: setSelectedEvent,
         viewEventClicked: viewEventClicked,
         setViewEventClicked: setViewEventClicked,
+        viewEventMounted:  viewEventMounted,
+        setViewEventMounted: setViewEventMounted,
         events: events,
         setEvents: setEvents,
         isLoaded: isLoaded,
         loadError: loadError,
-        createFormClicked: createFormClicked,
-        setCreateFormClicked: setCreateFormClicked,
         center: center,
         setCenter: setCenter,
         location: location,

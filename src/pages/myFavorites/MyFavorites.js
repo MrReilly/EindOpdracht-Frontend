@@ -1,6 +1,5 @@
 import React from 'react';
 import {useContext, useEffect} from "react";
-import {AuthContext} from "../../components/Context/AuthContext";
 import {MapFormContext} from "../../components/Context/MapFormContextProvider";
 import axios from "axios";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
@@ -12,23 +11,20 @@ import {useState} from "react";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import MediaQuery from "react-responsive";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
-function MyFavorites(){
+function MyFavorites() {
 
-    const {user} = useContext(AuthContext)
     const {events, setEvents} = useContext(MapFormContext)
-    const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
+    const {setViewEventClicked} = useContext(MapFormContext)
+    const {setViewEventMounted} = useContext(MapFormContext)
 
     const [reviewClicked, setReviewClicked] = useState(false)
+    const [reviewSubmitResponse, setReviewSubmitResponse] = useState(null)
 
     const zoom = 7
 
-    const title = `${user}'s Favorites`
-
-    useEffect(() => {  return (() => {
-            setViewEventClicked(false)
-            setEvents([])}
-    )}, [])
+    const title = "My Favorites"
 
     useEffect(() => {
         async function getFavorites() {
@@ -48,38 +44,62 @@ function MyFavorites(){
                 console.error(e);
             }
         }
+
         getFavorites()
 
-    }, [viewEventClicked])
+        return (() => {
+            setViewEventMounted(false)
+            setViewEventClicked(false)
+            setEvents([])})
+
+    }, [])
+
+    function handleReviewSuccessMessageClose() {
+        setReviewSubmitResponse(null)
+        setReviewClicked(false)
+        setViewEventClicked(false)
+    }
+
 
     return (<>
             <MediaQuery query="(min-device-width: 1024px)">
 
-                <LeftSideBar className="lsb-slim-container"/>
+                <LeftSideBar className="lsb-container lsb-slim"/>
 
             </MediaQuery>
 
-                <MiddleSection>
+            <MiddleSection>
 
-                    <Map zoom={zoom}/>
+                {reviewSubmitResponse && <MessageBox
+                    click={() => {
+                        handleReviewSuccessMessageClose()
+                    }}>
+                    <p>{reviewSubmitResponse.message}</p>
+                </MessageBox>}
 
-                            {viewEventClicked &&
-                                <EventView
-                                buttonName={"Review this Event!"}
-                                submitButtonClicked={() =>{setReviewClicked(true)}}
-                                />}
+                <Map zoom={zoom}/>
 
-                    {reviewClicked &&
-                        <ReviewForm setReviewClicked={setReviewClicked}/>}
+                  <EventView
+                        buttonName={"Review this Event!"}
+                        submitButtonClicked={() => {
+                            setReviewClicked(true)
+                        }}
+                    />
 
-                </MiddleSection>
+
+                {reviewClicked &&
+                    <ReviewForm
+                        setReviewClicked={setReviewClicked}
+                        setReviewSubmitResponse={setReviewSubmitResponse}/>}
+
+            </MiddleSection>
 
 
             <RightSideBar
 
-                className="rightSideBar-container">
+                className={`rightSideBar-container ${!events.length > 0 ?  "rsb-in" : null}`}>
 
-                {events.length > 0 ? <EventList title={title}/> :null}
+              <EventList title={title}/>
 
             </RightSideBar>
         </>

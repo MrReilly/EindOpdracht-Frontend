@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import Select from "react-select"
 import {useForm, Controller} from "react-hook-form";
 import axios from "axios";
@@ -7,7 +7,11 @@ import {MapFormContext} from "../Context/MapFormContextProvider";
 import Button from "../Button/Button";
 
 function EventCreateForm(props) {
-    const {setCreateFormClicked} = props
+    const {
+        createFormClicked,
+        setCreateFormClicked,
+        setCreateSubmitResponse
+       } = props
 
     const [image, setImage] = useState([])
     const [previewURL, setPreviewURL] = useState('')
@@ -16,6 +20,15 @@ function EventCreateForm(props) {
     const {location, setLocation} = useContext(MapFormContext)
 
     const {register, handleSubmit, control} = useForm();
+
+    const [createFormMounted, setCreateFormMounted] = useState(false)
+
+    const [entryPrice, setEntryPrice] = useState("")
+    const [address, setAddress] = useState("")
+    const [eventName, setEventName] = useState("")
+    const [textDescription, setTextDescription] = useState("")
+
+    useEffect(() => {setCreateFormMounted(true)},[createFormClicked])
 
     const options = [
         {value: "CONFERENCE", label: "Conference"},
@@ -48,13 +61,13 @@ function EventCreateForm(props) {
             const responseEvent = await axios.post('http://localhost:8080/event', {
 
                 category: data.category.value,
-                name: data.eventName,
+                name: eventName,
                 location: location,
-                address: data.address,
+                address: address,
                 latCoordinate: center.lat,
                 longCoordinate: center.lng,
-                entryPrice: data.entryPrice,
-                textDescription: data.textDescription,
+                entryPrice: entryPrice,
+                textDescription: textDescription,
                 startDate: data.startDate,
                 endDate: data.endDate
 
@@ -64,7 +77,7 @@ function EventCreateForm(props) {
                     Authorization: `${token}`
                 },
             })
-            console.log(responseEvent)
+            setCreateSubmitResponse({message: responseEvent.data, status: responseEvent.status})
 
 
             const formData = new FormData();
@@ -92,108 +105,138 @@ function EventCreateForm(props) {
     }
 
     return (
-        <div className="ec-form-container">
+        <div className={`ec-form-container ${createFormClicked ? "ec-out" : "ec-in"}`}>
             <Button
-                className= "mid-drop-close-button"
-                click={() => {setCreateFormClicked(false)}}
+                className="mid-drop-close-button"
+                click={() => {
+                    setCreateFormClicked(false)
+                }}
 
             >&times;</Button>
 
-        <form onSubmit={handleSubmit(onFormSubmit)} className="ec-form">
+            { createFormMounted &&
+            <form
+                onSubmit={handleSubmit(onFormSubmit)}
+                className={`ec-form ${createFormClicked ? "ecf-out" : "ecf-in"}`}
+                >
 
-            <PlaceSearchBox
-                setCenter={setCenter}
-                setLocation={setLocation}
-                location={location}
-            />
 
-            <label htmlFor="category">Category:</label>
-            <Controller
-                name="category"
-                control={control}
-                defaultValue=""
-                render={({field}) => (
-                    <Select options={options} {...field} label="category"/>)}/>
+                <PlaceSearchBox
+                    setCenter={setCenter}
+                    setLocation={setLocation}
+                    location={location}
+                />
 
-            <div className="ec-text-fields-container">
-                <div className="ec-date-price-container">
-                    <label htmlFor="start-date">Start date:</label>
-                    <input
-                        className="date"
-                        placeholder="start:"
-                        id="start-date"
-                        type="date"
-                        onChange="this.className=(this.value!=''?'has-value':'')"
-                        {...register("startDate")}
-                    />
-                    <label htmlFor="organization-name">Organization: </label>
-                    <input
-                        id="organizationName"
-                        type="text"
-                        {...register("organizationName")}
-                    />
+                <label htmlFor="category">Category:</label>
+                <Controller
+                    name="category"
+                    control={control}
+                    defaultValue=""
+                    render={({field}) => (
+                        <Select options={options} {...field} label="category"/>)}/>
 
-                    <label htmlFor="entry-price">Entry price: </label>
-                    <input
-                        id="entry-price"
-                        type="text"
-                        {...register("entryPrice")}
-                    />
+                <div className="ec-text-fields-container">
+                    <div className="ec-date-price-container">
+                        <label htmlFor="start-date">Start date:</label>
+                        <input
+                            className="date"
+                            placeholder="start:"
+                            id="start-date"
+                            type="date"
+                            onChange="this.className=(this.value!=''?'has-value':'')"
+                            {...register("startDate")}
+                        />
+
+                        <div className="ec-label-max-char-container">
+                            <label htmlFor="entry-price">Entry price: </label>
+                            <p className={entryPrice.length >= 15 ? "field-count-max" : undefined}>{entryPrice.length}/15</p>
+                        </div>
+                        <input
+                            maxLength={15}
+                            id="entry-price"
+                            type="text"
+                            value={entryPrice}
+                            onChange={(e) => {
+                                setEntryPrice(e.target.value)
+                            }}
+                        />
+
+                        <label htmlFor="image-upload">Select image to upload:
+                            <input
+                                type="file"
+                                id="image-upload"
+                                className="ec-upload"
+                                accept="image/*"
+                                onChange={onImageChange}
+                            /></label>
+                    </div>
+
+                    <div className="ec-name-address-container">
+                        <label htmlFor="end-date">End date:</label>
+                        <input
+                            className="date"
+                            placeholder="end:"
+                            id="end-date"
+                            type="date"
+                            onChange="this.className=(this.value!=''?'has-value':'')"
+                            {...register("endDate")}
+                        />
+
+                        <div className="ec-label-max-char-container">
+                            <label htmlFor="eventName">Event name: </label>
+                            <p className={eventName.length >= 30 ? "field-count-max" : undefined}>{eventName.length}/30</p>
+                        </div>
+                        <input
+                            id="eventName"
+                            type="text"
+                            maxLength={30}
+                            value={eventName}
+                            onChange={(e) => {
+                                setEventName(e.target.value)
+                            }}
+                        />
+
+                        <div className="ec-label-max-char-container">
+                            <label htmlFor="address">Address: </label>
+                            <p className={address.length >= 30 ? "field-count-max" : undefined}>{address.length}/30</p>
+                        </div>
+                        <input
+                            id="address"
+                            type="text"
+                            maxLength={30}
+                            value={address}
+                            onChange={(e) => {
+                                setAddress(e.target.value)
+                            }}
+                        />
+                    </div>
                 </div>
 
-                <div className="ec-name-address-container">
-                    <label htmlFor="end-date">End date:</label>
-                    <input
-                        className="date"
-                        placeholder="end:"
-                        id="end-date"
-                        type="date"
-                        onChange="this.className=(this.value!=''?'has-value':'')"
-                        {...register("endDate")}
-                    />
-
-                    <label htmlFor="eventName">Event name: </label>
-                    <input
-                        id="eventName"
-                        type="text"
-                        {...register("eventName")}
-                    />
-
-                    <label htmlFor="address">Address: </label>
-                    <input
-                        id="address"
-                        type="text"
-                        {...register("address")}
-                    />
+                <div className="ec-label-max-char-container">
+                    <label htmlFor="text-description">Event Description: </label>
+                    <p className={textDescription.length >= 300 ? "field-count-max" : undefined}>{textDescription.length}/300</p>
                 </div>
-            </div>
+                <textarea
+                    className="ec-text-description"
+                    placeholder="Enter a description here.."
+                    maxLength={300}
+                    id="textDescription"
+                    value={textDescription}
+                    onChange={(e) => {
+                        setTextDescription(e.target.value)
+                    }}
+                    rows="8"
+                    cols="30"
+                />
 
-            <label  htmlFor="text-description">Event Description: </label>
-            <textarea
-                className="ec-text-description"
-                placeholder="Enter a description here.."
-                id="textDescription"
-                rows="8"
-                cols="30"
-                {...register("textDescription")}
-            />
-
-            <label className="ec-upload" htmlFor="image-upload">Select image to upload:
-                <input
-                    type="file"
-                    id="image-upload"
-                    accept="image/*"
-                    onChange={onImageChange}
-                /></label>
-
-            <button
-                className="standard-button"
-                id="post-button"
-                type="submit"
-            >Post Event
-            </button>
-        </form>
-            </div>
+                <button
+                    className="standard-button"
+                    id="post-button"
+                    type="submit"
+                >Post Event
+                </button>
+            </form>}
+        </div>
     )
 }
 

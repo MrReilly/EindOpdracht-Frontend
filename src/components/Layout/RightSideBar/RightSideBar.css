@@ -1,43 +1,33 @@
 
+
 .rightSideBar-container {
-
-
+    z-index: 2;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex: 1;
-    max-width: 300px;
     align-items: center;
     height: 100%;
-    padding: 15px;
-    box-shadow: inset -20px 0 15px rgba(5, 8, 8, 0.5);
-}
-
-.rightSideBar-container-shadow {
-
-
-    box-shadow: -20px 0 15px rgba(5, 8, 8, 0.5);
-    height: 100%;
-    width: fit-content;
-}
-
-.empty-bar{
     width: 220px;
+    padding: 15px;
+    box-shadow: -12px 0 12px rgba(5, 8, 8, 0.5);
+    transition: 0.6s ease-in-out;
+}
+.rsb-in{
+    width: 30px;
 }
 
 @media screen and (max-width: 1024px) {
 
     .rightSideBar-container{
         flex-direction: row;
-        width: 100%;
-        max-width: 100%;
-        max-height: 160px;
-        box-shadow: none;
-        padding: 0;
-    }
-    .rightSideBar-container-shadow{
-        width: 100%;
-        max-height: 160px;
+        min-width: 100%;
+        max-height: 200px;
+        box-shadow: 0 -12px 12px rgba(5, 8, 8, 0.5);
     }
 
+    .rsb-in{
+        height: 30px;
+        overflow: hidden;
+    }
 }

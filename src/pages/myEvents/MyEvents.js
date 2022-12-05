@@ -1,33 +1,31 @@
+import React, {useEffect, useContext, useState} from "react";
+import MediaQuery from "react-responsive";
+import axios from "axios";
+import {MapFormContext} from "../../components/Context/MapFormContextProvider";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
-import Map from "../../components/Map/Map";
+import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import RightSideBar from "../../components/Layout/RightSideBar/RightSideBar";
+import Map from "../../components/Map/Map";
 import EventList from "../../components/EventList/EventList";
 import EventCreateForm from "../../components/EventCreateForm/EventCreateForm";
-import React, {useEffect, useContext, useState} from "react";
-import Button from "../../components/Button/Button";
-import axios from "axios";
-import {AuthContext} from "../../components/Context/AuthContext";
-import {MapFormContext} from "../../components/Context/MapFormContextProvider";
 import EventView from "../../components/EventView/EventView";
-import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
-import MediaQuery from "react-responsive";
+import Button from "../../components/Button/Button";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
 function MyEvents() {
 
-    const {user} = useContext(AuthContext)
-    const {events, setEvents} = useContext(MapFormContext)
-    const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
+    const {setEvents} = useContext(MapFormContext)
+    const {setViewEventClicked} = useContext(MapFormContext)
+    const {setViewEventMounted} = useContext(MapFormContext)
+    const {selectedEvent} = useContext(MapFormContext)
 
     const [createFormClicked, setCreateFormClicked] = useState(false)
+    const [createSubmitResponse, setCreateSubmitResponse] = useState(null)
+    const [deleteSubmitResponse, setDeleteSubmitResponse] = useState(null)
 
     const zoom = 7
 
-    const title = `${user}'s Events`
-
-    useEffect(() => { return (() => {
-            setViewEventClicked(false)
-            setEvents([])}
-    )}, [])
+    const title = "My Events"
 
     useEffect(() => {
         async function getEvents() {
@@ -47,40 +45,98 @@ function MyEvents() {
                 console.error(e);
             }
         }
+
         getEvents()
+
+        return (() => {
+            setViewEventMounted(false)
+            setViewEventClicked(false)
+            setEvents([])
+        })
 
     }, [createFormClicked])
 
-    return (<>
-        <MediaQuery query="(min-device-width: 1024px)">
-            <LeftSideBar
-            className="lsb-slim-container"/>
-        </MediaQuery>
+    async function handleClickDelete() {
+
+        const token = localStorage.getItem("token")
+
+        try {
+            const response = await axios.delete(`http://localhost:8080/event/${selectedEvent.id}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`
+                }
+            })
+
+            setDeleteSubmitResponse({message: response.data, status: response.status})
+
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    function handleCreateSubmitMessageClose() {
+        setCreateSubmitResponse(null)
+        setCreateFormClicked(false)
+    }
+
+    function handleDeleteMessageClose() {
+        setDeleteSubmitResponse(null)
+        setViewEventClicked(false)
+    }
+
+    return (
+        <>
+
+            <MediaQuery query="(min-device-width: 1024px)">
+                <LeftSideBar
+                    className="lsb-container lsb-slim"/>
+            </MediaQuery>
 
             <MiddleSection>
+
+                {deleteSubmitResponse && <MessageBox
+                    click={() => {
+                        handleDeleteMessageClose()
+                    }}>
+                    <p>{deleteSubmitResponse.message}</p>
+                </MessageBox>}
+
+                {createSubmitResponse && <MessageBox
+                    click={() => {
+                        handleCreateSubmitMessageClose()
+                    }}>
+                    <p>{createSubmitResponse.message}</p>
+                </MessageBox>}
 
                 <Map zoom={zoom}/>
 
                 <Button
-                    click={() => {setCreateFormClicked(true)}}
+                    click={() => {
+                        setCreateFormClicked(true)
+                    }}
                     className="standard-button"
                 >{"Create Event"}
                 </Button>
 
-                {viewEventClicked &&
-                    <EventView
-                        buttonName="Delete this Event"
-                    setViewEventClicked={setViewEventClicked}/>}
+                <EventView
+                    buttonName="Delete this Event"
+                    submitButtonClicked={() => {
+                        handleClickDelete()
+                    }}
+                />
 
-                {createFormClicked &&
-                    <EventCreateForm
-                        setCreateFormClicked={setCreateFormClicked}/>}
-
+                <EventCreateForm
+                    createFormClicked={createFormClicked}
+                    setCreateFormClicked={setCreateFormClicked}
+                    setCreateSubmitResponse={setCreateSubmitResponse}
+                />
             </MiddleSection>
 
-            <RightSideBar className="rightSideBar-container">
+            <RightSideBar>
 
-                {events.length > 0 ? <EventList title={title}/> : null}
+                <EventList
+                    title={title}/>
 
             </RightSideBar>
         </>

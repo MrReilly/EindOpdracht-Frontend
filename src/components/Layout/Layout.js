@@ -20,7 +20,6 @@ import '../ReviewForm/ReviewForm.css'
 import '../../pages/profile/MyProfile.css'
 
 
-
 export const Layout = ({children}) => {
 
     return (
@@ -28,11 +27,13 @@ export const Layout = ({children}) => {
         <>
             <Navbar/>
             <main>
+                <div className="left-outside"/>
                 <div className="inner-main">
 
                     {children}
 
                 </div>
+                <div className="right-outside"/>
             </main>
             <footer/>
         </>

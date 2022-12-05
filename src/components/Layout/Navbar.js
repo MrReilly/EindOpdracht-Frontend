@@ -19,8 +19,8 @@ const Navbar = () => {
                             <li key = "logout"><a href="/" onClick={logout}>Log out</a></li>
                             {role === "ORGANIZER" || role === "ADMIN" ?
                                 <li key = "myEvent"><NavLink to="/my-events">My Events</NavLink></li> : null}
-                            {role === "VISITOR" || role === "ADMIN" ?
-                                <li key = "myFavorites" ><NavLink to="/my-favorite-events">My Favorite Events</NavLink></li> : null}
+
+                                <li key = "myFavorites" ><NavLink to="/my-favorite-events">My Favorite Events</NavLink></li>
                             <li key = "myProfile"><NavLink to="/my-profile">My Profile</NavLink></li>
                             <li key = "hiUser" id="hiUser"><p>Hi {user} ({role})</p></li>
                         </div> :

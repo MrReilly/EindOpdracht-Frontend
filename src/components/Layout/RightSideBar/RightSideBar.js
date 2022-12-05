@@ -1,18 +1,19 @@
-import React from "react";
+import React, {useContext} from "react";
+import {MapFormContext} from "../../Context/MapFormContextProvider";
 
-const RightSideBar = ({children, className}) => {
+const RightSideBar = ({children}) => {
+
+    const {events} = useContext(MapFormContext)
 
     return (
-        <>
-            <div className="rightSideBar-container-shadow">
-            <section className={className}>
-
+            <section
+                className={`rightSideBar-container ${!events.length > 0 ? "rsb-in" : null}`}>
 
                 {children}
 
             </section>
-            </div>
-        </>
+
+
     )
 }
 

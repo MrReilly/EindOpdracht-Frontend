@@ -82,14 +82,13 @@ function MyProfile() {
                         <p>Profile updated successfully!</p>
                     </MessageBox>}
 
-                    <div className="mp-container">
-                        <h1>My Profile</h1>
-
 
 
                         <form
                             onSubmit={onFormSubmit}
                             className="mp-form">
+
+                            <h1>My Profile</h1>
 
                            <div className="role-organizationName-container">
 
@@ -156,7 +155,7 @@ function MyProfile() {
 
                             </form>
 
-                    </div>
+
 
                 </MiddleSection>
             </div>

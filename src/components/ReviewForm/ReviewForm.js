@@ -5,13 +5,15 @@ import {MapFormContext} from "../Context/MapFormContextProvider";
 import DateConverter from "../Utils/DateConverter";
 
 function ReviewForm(props) {
-    const {setReviewClicked} = props
+    const {setReviewClicked, setReviewSubmitResponse} = props
 
     const{selectedEvent} = useContext(MapFormContext)
 
     const [reviewText, setReviewText] =useState("")
     const [reviewDate] = useState(DateConverter(new Date()))
     const [starRating, setStarRating] = useState(null)
+
+
 
      async function handleSubmit(e){
         e.preventDefault()
@@ -23,7 +25,6 @@ function ReviewForm(props) {
                      reviewText: reviewText,
                      reviewDate: reviewDate,
                      starRating: starRating,
-
                  },
                  {
                  headers: {
@@ -31,7 +32,7 @@ function ReviewForm(props) {
                      Authorization: `${token}`
                  }
              })
-             console.log(response)
+             setReviewSubmitResponse({message: response.data, status: response.status})
 
          } catch (e) {
              console.error(e);
@@ -53,9 +54,11 @@ function ReviewForm(props) {
                 >&times;</Button>
                 <h2>Event Review</h2>
                 <form onSubmit={(e)=>{handleSubmit(e)}}>
+                    <p className={reviewText.length >= 255 ? "field-count-max" : undefined}>{reviewText.length}/255</p>
                 <textarea
                     placeholder="Enter a review here.."
                     onChange={(e)=>{setReviewText(e.target.value)}}
+                    maxLength={255}
                     id="review-text"
                     rows="8"
                     cols="30"

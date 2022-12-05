@@ -1,30 +1,54 @@
 
 .ev-container {
-
+    z-index: 1;
     position: absolute;
-    top:0;
-    left: 0;
+    top: 50%;
+    right: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
+    height: 95%;
     width: 98%;
-    height: 100%;
-    max-height: 100%;
-    background-color: 	hsla(196, 30%, 30%, 0.9);
-    box-shadow: 15px 0 15px rgba(0, 0, 0, 0.8);
-    border-radius: 30px 30px 0 0 ;
+    min-height: 300px;
+    max-width: 800px;
+    max-height: fit-content;
+    background-color: hsla(185, 40%, 40%, 0.9);
+    box-shadow: -8px 0 12px rgba(0, 0, 0, 0.6);
+    border-radius: 30px 0 0 30px;
     border-style: none;
-    overflow-y: scroll;
+    transition: width ease-in-out 0.5s ;
+    transform: translateY(-50%);
+    overflow-x: hidden;
 }
 
-.ev-inner-container{
-    width: 80%;
+.ev-in{
+    width: 20px;
+    overflow-x: hidden;
+}
+
+.ev-outer-inner-container{
+    flex: 1 1 700px;
+    max-width: 700px;
     height: 80%;
     position: relative;
     background-color: white;
     padding: 30px 20px 0 20px;
-    margin: 50px 0 50px 0;
+    margin: 8%;
+    border-style: solid;
+    border-color: hsl(170 60% 100%);
+    border-radius: 10px;
+    box-shadow: inset 0 0 15px 2px #274E5C;
+    transition: ease-in 0.5s;
+}
+
+.ev-oic-in{
+    margin: 20px;
+}
+
+.ev-inner-container{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .ev-category{
@@ -141,6 +165,10 @@ font-size: 12px;
 
     .ev-4-element-container {
         flex-basis: 100px;
+    }
+
+    .ev-in{
+        width: 10px;
     }
 }
 

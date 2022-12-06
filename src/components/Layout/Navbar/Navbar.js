@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {NavLink} from "react-router-dom";
-import {AuthContext} from "../Context/AuthContext";
+import {AuthContext} from "../../Context/AuthContext";
 
 
 const Navbar = () => {
@@ -16,7 +16,7 @@ const Navbar = () => {
                 <ul className= "nav-right-side-links">
                     {isAuth ?
                         <div key= "navContainer1" className="nav-links-container">
-                            <li key = "logout"><a href="/" onClick={logout}>Log out</a></li>
+                            <li key = "logout"><a href="/src/pages" onClick={logout}>Log out</a></li>
                             {role === "ORGANIZER" || role === "ADMIN" ?
                                 <li key = "myEvent"><NavLink to="/my-events">My Events</NavLink></li> : null}
 

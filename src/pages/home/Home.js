@@ -1,5 +1,5 @@
 import Map from "../../components/Map/Map";
-import React, {useContext, useEffect, useState} from "react";
+import React, {Fragment, useContext, useEffect, useState} from "react";
 import EventList from "../../components/EventList/EventList";
 import EventSearchForm from "../../components/EventSearchForm/EventSearchForm";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
@@ -10,12 +10,13 @@ import EventView from "../../components/EventView/EventView";
 import {MapFormContext} from "../../components/Context/MapFormContextProvider";
 import CategoryGrid from "../../components/CategoryGrid/CategoryGrid";
 import PlaceSearchBox from "../../components/PlaceSearchBox/PlaceSearchBox";
-import DistanceKmCalculator from "../../components/Utils/DistanceKmCalculator";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import getAllEvents from "../../Hooks/GetAllEvents";
+import getFavorites from "../../Hooks/GetFavorites";
+import mapAllEvents from "../../Hooks/MapAllEvents";
 
 function Home() {
 
-    const [allEvents, setAllEvents] = useState([])
     const [distance, setDistance] = useState(85)
     const [selectedCategories, setSelectedCategories] = useState([])
     const [startDate, setStartDate] = useState(null)
@@ -23,14 +24,22 @@ function Home() {
     const [zoom, setZoom] = useState(7)
 
     const [favoriteSaveResponse, setFavoriteSaveResponse] = useState(null)
+    const [allEvents, setAllEvents] = useState([])
 
+    const {favorites} = useContext(MapFormContext)
     const {setEvents} = useContext(MapFormContext)
+
     const {setViewEventClicked} = useContext(MapFormContext)
     const {selectedEvent} = useContext(MapFormContext)
     const {center} = useContext(MapFormContext)
 
-
     const title = "Results";
+
+    getFavorites()
+
+    getAllEvents(setAllEvents)
+
+    mapAllEvents(distance, startDate, endDate, center, selectedCategories, allEvents)
 
     useEffect(() => {
         return (() => {
@@ -40,53 +49,6 @@ function Home() {
             }
         )
     }, [])
-
-    useEffect(() => {
-
-        async function getEvents() {
-
-            try {
-                const response = await axios.get('http://localhost:8080/event/all', {
-                    headers: {
-                        "Content-Type": "application/json",
-                    }
-                })
-                setAllEvents(response.data)
-
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        getEvents()
-
-    }, [])
-
-    useEffect(() => {
-
-        const eventArray = []
-
-        allEvents.map((e) => {
-
-            const distanceEvent = DistanceKmCalculator(e.latCoordinate, center.lat, e.longCoordinate, center.lng)
-
-            if (selectedCategories.includes(e.category.category)) {
-
-                if (distanceEvent <= distance) {
-
-                    if ((e.startDate >= startDate && e.startDate <= endDate) || (e.endDate >= startDate && e.endDate <= endDate)) {
-
-                        eventArray.push(e)
-
-                    }
-                    return null
-                }
-                return null
-            }
-            return null
-        })
-        setEvents(eventArray)
-    }, [distance, startDate, endDate, center, selectedCategories])
 
     useEffect(() => {
 
@@ -139,13 +101,16 @@ function Home() {
         } catch (e) {
             console.error(e);
         }
+    }
 
-        console.log(favoriteSaveResponse)
+    function handleFavoriteMessageClose(){
+        setFavoriteSaveResponse(null)
+        setViewEventClicked(false)
     }
 
     return (
 
-        <>
+        <Fragment>
             <div className="leftSideBar-middleSection-container">
 
                 <LeftSideBar
@@ -169,11 +134,12 @@ function Home() {
                 <MiddleSection>
 
                     {favoriteSaveResponse && <MessageBox
-                        click={() => {setFavoriteSaveResponse(null)}}>
+                        click={() => {handleFavoriteMessageClose()}}>
                         <p>{favoriteSaveResponse.message}</p>
                     </MessageBox>}
 
-                    <Map zoom={zoom}/>
+                    <Map zoom={zoom}
+                        />
 
                         <EventView
                             setViewEventClicked={setViewEventClicked}
@@ -189,11 +155,13 @@ function Home() {
 
                 <RightSideBar>
 
+                    {favorites.length > 0 ?
                     <EventList
-                        title={title}/>
+                        title={title}
+                        /> : null}
 
                 </RightSideBar>
-        </>
+        </Fragment>
     )
 }
 

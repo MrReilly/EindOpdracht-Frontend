@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {Fragment, useCallback, useState} from 'react';
 import MediaQuery from "react-responsive";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
@@ -68,7 +68,7 @@ function MyProfile() {
     }
 
     return (
-        <>
+        <Fragment>
             <div className="leftSideBar-middleSection-container">
 
                 <MediaQuery query="(min-device-width: 768px)">
@@ -166,7 +166,7 @@ function MyProfile() {
                 </RightSideBar>
 
             </MediaQuery>
-        </>)
+        </Fragment>)
 }
 
 export default MyProfile

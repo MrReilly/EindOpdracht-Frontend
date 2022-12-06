@@ -1,5 +1,5 @@
-import React from "react";
-import {createContext, useState} from "react";
+
+import React, {createContext, useState} from "react";
 import {useLoadScript} from "@react-google-maps/api";
 
 const placesLibrary = ["places"]
@@ -10,6 +10,9 @@ function MapFormContextProvider ({children}) {
 
     const [selectedEvent, setSelectedEvent] =useState({})
     const [events, setEvents] = useState([])
+
+    const [allEvents, setAllEvents] = useState([])
+    const [favorites, setFavorites] = useState([])
 
     const [reviews, setReviews] = useState([])
 
@@ -41,6 +44,10 @@ function MapFormContextProvider ({children}) {
         setLocation: setLocation,
         reviews: reviews,
         setReviews: setReviews,
+        favorites: favorites,
+        setFavorites: setFavorites,
+        allEvents: allEvents,
+        setAllEvents: setAllEvents
     }
 
     return (

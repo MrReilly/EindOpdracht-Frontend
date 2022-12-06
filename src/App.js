@@ -1,4 +1,3 @@
-
 import React, {useContext} from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
 
@@ -29,13 +28,13 @@ function App() {
                     <CreateAccount/>
                 </Route>
                 <Route exact path="/my-profile">
-                    {isAuth ?  <MyProfile/> : <Redirect to="/" />}
+                    {isAuth ? <MyProfile/> : <Redirect to="/"/>}
                 </Route>
                 <Route exact path="/my-favorite-events">
-                    {isAuth ? <MyFavorites /> : <Redirect to="/" />}
+                    {isAuth ? <MyFavorites/> : <Redirect to="/"/>}
                 </Route>
                 <Route exact path="/my-events">
-                    {isAuth ? <MyEvents/> : <Redirect to="/" />}
+                    {isAuth ? <MyEvents/> : <Redirect to="/"/>}
                 </Route>
             </Switch>
         </Layout>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import axios from "axios";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
@@ -55,7 +55,7 @@ function CreateAccount(){
     }
 
     return (
-        <>
+        <Fragment>
             <div className="leftSideBar-middleSection-container">
 
                 <MediaQuery query="(min-device-width: 768px)">
@@ -128,7 +128,7 @@ function CreateAccount(){
                 <div className="empty-bar"></div>
             </RightSideBar>
             </MediaQuery>
-        </>)
+        </Fragment>)
 
 }
 

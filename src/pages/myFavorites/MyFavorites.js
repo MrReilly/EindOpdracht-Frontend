@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {useContext, useEffect} from "react";
 import {MapFormContext} from "../../components/Context/MapFormContextProvider";
-import axios from "axios";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
 import Map from "../../components/Map/Map";
 import EventView from "../../components/EventView/EventView";
@@ -12,12 +11,14 @@ import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import MediaQuery from "react-responsive";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import getFavorites from "../../Hooks/GetFavorites";
 
 function MyFavorites() {
 
     const {events, setEvents} = useContext(MapFormContext)
     const {setViewEventClicked} = useContext(MapFormContext)
     const {setViewEventMounted} = useContext(MapFormContext)
+    const {favorites} = useContext(MapFormContext)
 
     const [reviewClicked, setReviewClicked] = useState(false)
     const [reviewSubmitResponse, setReviewSubmitResponse] = useState(null)
@@ -26,26 +27,11 @@ function MyFavorites() {
 
     const title = "My Favorites"
 
+    getFavorites()
+
+    useEffect(() => {setEvents(favorites)},[favorites])
+
     useEffect(() => {
-        async function getFavorites() {
-
-            const token = localStorage.getItem("token")
-
-            try {
-                const response = await axios.get('http://localhost:8080/user/myFavorites', {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `${token}`
-                    }
-                })
-                setEvents(response.data.myFavoriteEvents)
-
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        getFavorites()
 
         return (() => {
             setViewEventMounted(false)
@@ -54,6 +40,8 @@ function MyFavorites() {
 
     }, [])
 
+
+
     function handleReviewSuccessMessageClose() {
         setReviewSubmitResponse(null)
         setReviewClicked(false)
@@ -61,7 +49,7 @@ function MyFavorites() {
     }
 
 
-    return (<>
+    return (<Fragment>
             <MediaQuery query="(min-device-width: 1024px)">
 
                 <LeftSideBar className="lsb-container lsb-slim"/>
@@ -102,7 +90,7 @@ function MyFavorites() {
               <EventList title={title}/>
 
             </RightSideBar>
-        </>
+        </Fragment>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import axios from "axios";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
@@ -38,7 +38,7 @@ function Login() {
 
 
     return (
-        <>
+        <Fragment>
             <div className="leftSideBar-middleSection-container">
 
                 <MediaQuery query="(min-device-width: 768px)">
@@ -89,7 +89,7 @@ function Login() {
                 </RightSideBar>
 
             </MediaQuery>
-        </>)
+        </Fragment>)
 }
 
 export default Login

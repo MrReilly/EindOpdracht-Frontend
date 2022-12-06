@@ -69,6 +69,17 @@
     border-radius: 10px;
 }
 
+.el-category-star-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.el-category-star-container img {
+
+    width: 20px;
+}
+
 .el-search-result{
     background-color: hsla(170, 70%, 80%, 0.5);
 }

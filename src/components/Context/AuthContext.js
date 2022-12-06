@@ -77,6 +77,8 @@ function AuthContextProvider ({children}) {
 
             });
 
+            console.log(response)
+
             if (redirectUrl) {
                 history.push(redirectUrl);
             }

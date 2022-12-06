@@ -1,6 +1,7 @@
-import React from "react";
-import Navbar from "./Navbar";
+import React, {Fragment} from "react";
+import Navbar from "./Navbar/Navbar";
 import './Layout.css'
+import './Navbar/NavBar.css'
 import './LeftSideBar/LeftSideBar.css'
 import './Logo/Logo-Eventifire.css'
 import './MiddleSection/MiddleSection.css'
@@ -19,12 +20,11 @@ import '../MessageBox/MessageBox.css'
 import '../ReviewForm/ReviewForm.css'
 import '../../pages/profile/MyProfile.css'
 
-
 export const Layout = ({children}) => {
 
     return (
 
-        <>
+        <Fragment>
             <Navbar/>
             <main>
                 <div className="left-outside"/>
@@ -36,7 +36,7 @@ export const Layout = ({children}) => {
                 <div className="right-outside"/>
             </main>
             <footer/>
-        </>
+        </Fragment>
     )
 }
 

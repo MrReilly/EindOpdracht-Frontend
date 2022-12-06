@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from "react";
+import React, {useEffect, useContext, useState, Fragment} from "react";
 import MediaQuery from "react-responsive";
 import axios from "axios";
 import {MapFormContext} from "../../components/Context/MapFormContextProvider";
@@ -11,50 +11,28 @@ import EventCreateForm from "../../components/EventCreateForm/EventCreateForm";
 import EventView from "../../components/EventView/EventView";
 import Button from "../../components/Button/Button";
 import MessageBox from "../../components/MessageBox/MessageBox";
+import getMyEvents from "../../Hooks/getMyEvents";
 
 function MyEvents() {
 
     const {setEvents} = useContext(MapFormContext)
     const {setViewEventClicked} = useContext(MapFormContext)
-    const {setViewEventMounted} = useContext(MapFormContext)
     const {selectedEvent} = useContext(MapFormContext)
 
     const [createFormClicked, setCreateFormClicked] = useState(false)
     const [createSubmitResponse, setCreateSubmitResponse] = useState(null)
     const [deleteSubmitResponse, setDeleteSubmitResponse] = useState(null)
 
+    const [myEvents, setMyEvents] = useState([])
+
     const zoom = 7
 
     const title = "My Events"
 
-    useEffect(() => {
-        async function getEvents() {
+    getMyEvents(setMyEvents, createFormClicked)
 
-            const token = localStorage.getItem("token")
+    useEffect(() => {setEvents(myEvents)},[myEvents])
 
-            try {
-                const response = await axios.get('http://localhost:8080/user/myEvents', {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `${token}`
-                    }
-                })
-                setEvents(response.data.myEvents)
-
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        getEvents()
-
-        return (() => {
-            setViewEventMounted(false)
-            setViewEventClicked(false)
-            setEvents([])
-        })
-
-    }, [createFormClicked])
 
     async function handleClickDelete() {
 
@@ -86,7 +64,7 @@ function MyEvents() {
     }
 
     return (
-        <>
+        <Fragment>
 
             <MediaQuery query="(min-device-width: 1024px)">
                 <LeftSideBar
@@ -139,7 +117,7 @@ function MyEvents() {
                     title={title}/>
 
             </RightSideBar>
-        </>
+        </Fragment>
     )
 }
 

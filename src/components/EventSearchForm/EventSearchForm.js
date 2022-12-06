@@ -1,8 +1,6 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 
-
-
 export default function EventSearchForm(props) {
     const {
         buttonName,
@@ -31,7 +29,7 @@ export default function EventSearchForm(props) {
                     <input
                         className="date"
                         placeholder="start:"
-                        id="start-date"
+                        min={new Date().toISOString().split("T")[0]}
                         type="date"
                         onChange="this.className=(this.value!=''?'has-value':'')"
                         {...register("startDate")}
@@ -42,6 +40,7 @@ export default function EventSearchForm(props) {
                         placeholder="end:"
                         id="end-date"
                         type="date"
+                        min={new Date().toISOString().split("T")[0]}
                         onChange="this.className=(this.value!=''?'has-value':'')"
                         {...register("endDate")}
                     />
@@ -50,6 +49,7 @@ export default function EventSearchForm(props) {
                         className="distance"
                         id="distance"
                         type="number"
+                        max={200}
                         placeholder="distance .. km"
                         onChange="this.className=(this.value!=''?'has-value':'')"
                         {...register("distance")}

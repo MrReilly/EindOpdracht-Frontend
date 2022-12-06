@@ -4,10 +4,11 @@ import noImage from "../../assets/No-Image-Placeholder.svg.png"
 import Button from "../Button/Button";
 import axios from "axios";
 import StarRating from "../StarRating/StarRating";
+import {AuthContext} from "../Context/AuthContext";
 
 function EventView(props) {
     const {buttonName, submitButtonClicked} = props
-
+    const {role} = useContext(AuthContext)
     const {selectedEvent, setSelectedEvent} = useContext(MapFormContext)
     const {setReviews} = useContext(MapFormContext)
     const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
@@ -125,18 +126,18 @@ function EventView(props) {
                             </div>
                         </div>
 
-
                         <div className="ev-text-button-container">
                             <label htmlFor="ev-textDescription">Description:
                                 <p id="ev-textDescription">
                                     {selectedEvent.textDescription}
                                 </p></label>
 
+                            { buttonName === "Review this Event!" && role === "ORGANIZER" ? null :
                             <Button
                                 className="standard-button"
                                 click={submitButtonClicked}
                             >{buttonName}
-                            </Button>
+                            </Button>}
                         </div>
                     </div>
                 </div>}

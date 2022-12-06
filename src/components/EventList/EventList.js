@@ -1,19 +1,20 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import {MapFormContext} from "../Context/MapFormContextProvider";
 import StarRating from "../StarRating/StarRating";
+import star from "../../assets/star.png"
 
 function EventList(props) {
     const {title} = props
 
-    const {events} = useContext(MapFormContext)
     const {setSelectedEvent} = useContext(MapFormContext)
     const {reviews} = useContext(MapFormContext)
 
+    const {events} = useContext(MapFormContext)
+    const {favorites} = useContext(MapFormContext)
     const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
     const {setViewEventMounted} = useContext(MapFormContext)
 
-
-    useEffect(() => {},[reviews])
+    console.log(favorites)
 
     return (
         <div className={`el-container ${!events.length > 0 ?  "el-in" : null}`}>
@@ -34,7 +35,12 @@ function EventList(props) {
                                  setViewEventMounted(true)
                              }}
                         >
+                            <div className="el-category-star-container">
                             <h5>{event.category.category}</h5>
+
+                                {favorites.map((favorite) => {if(favorite.id === event.id){ return <img src={star} alt="favorite star"/>}}) }
+
+                            </div>
                             <StarRating
                                 item={event}/>
                             <h5>{event.name}</h5>

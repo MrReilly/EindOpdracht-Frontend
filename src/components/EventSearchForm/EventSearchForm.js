@@ -1,4 +1,5 @@
-import React from "react";
+import './EventSearchForm.css'
+import React, {Fragment} from "react";
 import {useForm} from "react-hook-form";
 
 export default function EventSearchForm(props) {
@@ -20,7 +21,7 @@ export default function EventSearchForm(props) {
     }
 
     return (
-        <>
+        <Fragment>
             <form onSubmit={handleSubmit(onFormSubmit)}
                   className="event-search-form">
 
@@ -55,15 +56,14 @@ export default function EventSearchForm(props) {
                         {...register("distance")}
                     />
 
-
-                <button
-                    id="searchEventButton"
-                    className="standard-button"
-                    type="submit"
-                > {buttonName}
-                </button>
+                    <button
+                        id="searchEventButton"
+                        className="standard-button"
+                        type="submit"
+                    > {buttonName}
+                    </button>
                 </div>
             </form>
-        </>
+        </Fragment>
     )
 }

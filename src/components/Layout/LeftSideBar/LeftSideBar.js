@@ -1,3 +1,4 @@
+import './LeftSideBar.css'
 import React from "react"
 
 const LeftSideBar = ({children, className}) => {
@@ -8,7 +9,6 @@ const LeftSideBar = ({children, className}) => {
            {children}
 
         </section>
-
     )
 }
 

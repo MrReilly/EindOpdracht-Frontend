@@ -1,3 +1,4 @@
+import './Login.css'
 import React, {Fragment, useContext, useState} from 'react';
 import axios from "axios";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
@@ -34,9 +35,6 @@ function Login() {
         }
     }
 
-
-
-
     return (
         <Fragment>
             <div className="leftSideBar-middleSection-container">
@@ -48,7 +46,7 @@ function Login() {
                 <MiddleSection>
                         <div className="login-form-container">
 
-                            <h1 className="login-title">Login</h1>
+                            <h1 className="login-title">Log in</h1>
                         <form
                             onSubmit={handleSubmit}
                             className="login-form">
@@ -75,7 +73,7 @@ function Login() {
                             <button
                                 type="submit"
                                 className="standard-button"
-                            >Login
+                            >Log in
                             </button>
                         </form>
                         </div>

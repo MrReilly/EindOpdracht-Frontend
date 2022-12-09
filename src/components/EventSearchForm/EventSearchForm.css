@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-height: 100% ;
+    max-height: 100%;
     font-size: 13px;
 }
 
@@ -47,7 +47,7 @@
     }
 
     .event-search-form-date-label {
-       display: none;
+        display: none;
     }
 
     .distance {
@@ -70,8 +70,7 @@
 
 @media screen and (max-width: 480px) {
 
-    .event-search-form-date-distance-container{
+    .event-search-form-date-distance-container {
         flex-wrap: wrap;
-
     }
 }

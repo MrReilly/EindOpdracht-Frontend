@@ -12,13 +12,17 @@ import MediaQuery from "react-responsive";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
 import MessageBox from "../../components/MessageBox/MessageBox";
 import getFavorites from "../../Hooks/GetFavorites";
+import {AuthContext} from "../../components/Context/AuthContext";
 
 function MyFavorites() {
 
-    const {events, setEvents} = useContext(MapFormContext)
+    const {setEvents} = useContext(MapFormContext)
     const {setViewEventClicked} = useContext(MapFormContext)
     const {setViewEventMounted} = useContext(MapFormContext)
     const {favorites} = useContext(MapFormContext)
+    const {setSelectedEvent} = useContext(MapFormContext)
+
+    const {isAuth} = useContext(AuthContext);
 
     const [reviewClicked, setReviewClicked] = useState(false)
     const [reviewSubmitResponse, setReviewSubmitResponse] = useState(null)
@@ -27,27 +31,24 @@ function MyFavorites() {
 
     const title = "My Favorites"
 
-    getFavorites()
-
-    useEffect(() => {setEvents(favorites)},[favorites])
+    if(isAuth){getFavorites()}
 
     useEffect(() => {
-
+        setEvents(favorites)
         return (() => {
             setViewEventMounted(false)
             setViewEventClicked(false)
-            setEvents([])})
+            setSelectedEvent(null)
+            setEvents([])
+        })
 
-    }, [])
-
-
+    }, [favorites])
 
     function handleReviewSuccessMessageClose() {
         setReviewSubmitResponse(null)
         setReviewClicked(false)
         setViewEventClicked(false)
     }
-
 
     return (<Fragment>
             <MediaQuery query="(min-device-width: 1024px)">
@@ -67,12 +68,12 @@ function MyFavorites() {
 
                 <Map zoom={zoom}/>
 
-                  <EventView
-                        buttonName={"Review this Event!"}
-                        submitButtonClicked={() => {
-                            setReviewClicked(true)
-                        }}
-                    />
+                <EventView
+                    buttonName={"Review this Event!"}
+                    submitButtonClicked={() => {
+                        setReviewClicked(true)
+                    }}
+                />
 
 
                 {reviewClicked &&
@@ -83,11 +84,9 @@ function MyFavorites() {
             </MiddleSection>
 
 
-            <RightSideBar
+            <RightSideBar>
 
-                className={`rightSideBar-container ${!events.length > 0 ?  "rsb-in" : null}`}>
-
-              <EventList title={title}/>
+                <EventList title={title}/>
 
             </RightSideBar>
         </Fragment>

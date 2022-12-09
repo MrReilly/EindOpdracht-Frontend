@@ -1,3 +1,4 @@
+import './MiddleSection.css'
 import React from "react"
 import LogoEventifire from "../Logo/Logo-Eventifire";
 

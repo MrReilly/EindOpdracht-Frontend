@@ -1,39 +1,49 @@
-import React, {useContext} from "react"
-import {useEffect} from "react";
+import {useContext, useEffect} from "react"
+
 import axios from "axios";
 import {MapFormContext} from "../components/Context/MapFormContextProvider";
+import {AuthContext} from "../components/Context/AuthContext";
 
-function getFavorites(){
+function getFavorites() {
 
+    const {isAuth} = useContext(AuthContext)
     const {setFavorites} = useContext(MapFormContext)
 
     useEffect(() => {
 
-        async function getFavorites() {
+        if (isAuth) {
 
-            const token = localStorage.getItem("token")
+            async function getFavorites() {
 
-            try {
-                const response = await axios.get('http://localhost:8080/user/myFavorites', {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `${token}`
-                    }
-                })
-                setFavorites(response.data.myFavoriteEvents)
+                const token = localStorage.getItem("token")
 
-            } catch (e) {
-                console.error(e);
+                try {
+                    const response = await axios.get('http://localhost:8080/user/myFavorites', {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `${token}`
+                        }
+                    })
+                    setFavorites(response.data.myFavoriteEvents)
+
+                } catch (e) {
+                    console.error(e);
+                }
             }
+
+            getFavorites()
+
         }
-
-        getFavorites()
-
     }, [])
 
-
-    return null
-
 }
+
+
+
+
+
+
+
+
 
 export default getFavorites

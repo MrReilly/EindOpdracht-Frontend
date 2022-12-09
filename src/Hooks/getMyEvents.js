@@ -1,5 +1,4 @@
-import React, {useContext} from "react"
-import {useEffect} from "react";
+import {useContext, useEffect} from "react"
 import axios from "axios";
 import {MapFormContext} from "../components/Context/MapFormContextProvider";
 

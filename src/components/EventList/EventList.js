@@ -1,3 +1,4 @@
+import './EventList.css'
 import React, {useContext} from "react";
 import {MapFormContext} from "../Context/MapFormContextProvider";
 import StarRating from "../StarRating/StarRating";
@@ -11,16 +12,15 @@ function EventList(props) {
 
     const {events} = useContext(MapFormContext)
     const {favorites} = useContext(MapFormContext)
+
     const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
     const {setViewEventMounted} = useContext(MapFormContext)
 
-    console.log(favorites)
-
     return (
-        <div className={`el-container ${!events.length > 0 ?  "el-in" : null}`}>
+        <div className={`el-container ${events.length > 0 ? "el-out" : null}`}>
             {viewEventClicked ?
                 <h2 className="results-titel">Event Reviews</h2> :
-                <h2 className="results-titel">{title}</h2> }
+                <h2 className="results-titel">{title}</h2>}
 
             <div className="results-container">
 
@@ -36,13 +36,22 @@ function EventList(props) {
                              }}
                         >
                             <div className="el-category-star-container">
-                            <h5>{event.category.category}</h5>
+                                <h5>{event.category.category}</h5>
 
-                                {favorites.map((favorite) => {if(favorite.id === event.id){ return <img src={star} alt="favorite star"/>}}) }
+                                {favorites.map((favorite) => {
+                                    if (favorite.id === event.id) {
+                                        return <img
+                                            src={star}
+                                            alt="favorite star"
+                                            key={`Star${event.id}`}/>
+                                    }
+                                    return null
+                                })}
 
                             </div>
                             <StarRating
-                                item={event}/>
+                                item={event}
+                            />
                             <h5>{event.name}</h5>
                             <div className="search-result-date-container">
                                 <p className="search-result-date">van: {event.startDate}</p>
@@ -54,21 +63,20 @@ function EventList(props) {
 
                 {viewEventClicked ?
 
-                reviews.map(review => (
-                    <div key={review.id}  className="el-list-item el-review">
+                    reviews.map(review => (
+                        <div key={review.id} className="el-list-item el-review">
 
-                        <p>{review.reviewDate}</p>
-                        <p>{review.reviewText}</p>
-                        <div className="el-legend-image-container">
-                        <legend>{review.authorName}'s rating:</legend>
-                            <StarRating
-                                item={review}/>
+                            <p>{review.reviewDate}</p>
+                            <p>{review.reviewText}</p>
+                            <div className="el-legend-image-container">
+                                <legend>{review.authorName}'s rating:</legend>
+                                <StarRating
+                                    item={review}/>
 
-                    </div>
-                    </div>)) : null}
+                            </div>
+                        </div>)) : null}
             </div>
         </div>)
-
 }
 
 export default EventList

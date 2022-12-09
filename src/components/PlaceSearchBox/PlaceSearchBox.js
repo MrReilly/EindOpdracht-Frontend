@@ -1,3 +1,4 @@
+import './PlaceSearchBox.css'
 import React, {useContext, useEffect} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
@@ -9,7 +10,9 @@ function PlaceSearchBox() {
 
     const {isLoaded, loadError} = useContext(MapFormContext)
 
-    useEffect(() => {return (setLocation(""))},[])
+    useEffect(() => {
+        return (setLocation(""))
+    }, [])
 
     async function handleSelect(value) {
         const results = await geocodeByAddress(value);
@@ -36,6 +39,7 @@ function PlaceSearchBox() {
                             {...getInputProps({
                                 placeholder: 'Location.. (City or town)',
                                 className: 'location-search-input',
+                                required: true
                             })}
                         />
                         <div className="autocomplete-dropdown-container">

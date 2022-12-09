@@ -1,11 +1,10 @@
-
 import React, {createContext, useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 
 export const AuthContext = createContext({})
 
-function AuthContextProvider ({children}) {
+function AuthContextProvider({children}) {
 
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
@@ -17,14 +16,14 @@ function AuthContextProvider ({children}) {
 
     const history = useHistory()
 
-    useEffect(() =>{
+    useEffect(() => {
 
         const token = localStorage.getItem("token")
 
         if (token) {
             getUserDetails(token);
         } else {
-            // als er GEEN token is doen we niks, en zetten we de status op 'done'
+
             toggleIsAuth({
                 isAuth: false,
                 user: null,
@@ -73,11 +72,9 @@ function AuthContextProvider ({children}) {
                 user: response.data.username,
                 role: response.data.role,
                 organizationName: response.data.organizationName,
-                status:"done"
+                status: "done"
 
             });
-
-            console.log(response)
 
             if (redirectUrl) {
                 history.push(redirectUrl);
@@ -85,7 +82,7 @@ function AuthContextProvider ({children}) {
 
         } catch (e) {
             console.error(e);
-            // ging er iets mis? Plaatsen we geen data in de state
+
             toggleIsAuth({
                 isAuth: false,
                 user: null,
@@ -107,7 +104,7 @@ function AuthContextProvider ({children}) {
 
     return (
         <AuthContext.Provider value={authContextData}>
-            { isAuth.status === 'done' ? children : <p>Loading...</p> }
+            {isAuth.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );
 }

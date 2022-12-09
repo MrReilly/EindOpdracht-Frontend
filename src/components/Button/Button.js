@@ -1,15 +1,15 @@
+import './Button.css'
 import React from "react"
 
-function Button({children, click, className, name}){
+function Button({children, click, className, name}) {
 
-
-    return(
+    return (
 
         <button
             name={name}
             type="button"
             className={className}
-            onClick= {click}
+            onClick={click}
         >{children}
         </button>
     )

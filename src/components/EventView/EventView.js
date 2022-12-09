@@ -1,3 +1,4 @@
+import './EventView.css'
 import React, {useContext, useEffect} from "react";
 import {MapFormContext} from "../Context/MapFormContextProvider";
 import noImage from "../../assets/No-Image-Placeholder.svg.png"
@@ -13,7 +14,6 @@ function EventView(props) {
     const {setReviews} = useContext(MapFormContext)
     const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
     const {viewEventMounted, setViewEventMounted} = useContext(MapFormContext)
-
 
     useEffect(() => {
         return (() => {
@@ -46,10 +46,9 @@ function EventView(props) {
         return null
     }
 
-
     return (
 
-        <div className={`ev-container ${viewEventClicked ? "ev-out" : "ev-in"}`}>
+        <div className={`ev-container ${viewEventClicked ? null : "ev-in"}`}>
             <Button
                 className="mid-drop-close-button"
                 click={() => {
@@ -59,7 +58,7 @@ function EventView(props) {
 
             {viewEventMounted &&
                 <div
-                    className={`ev-outer-inner-container ${viewEventClicked ? "ev-oic-out" : "ev-oic-in"}`}
+                    className={`ev-outer-inner-container ${viewEventClicked ? null : "ev-oic-in"}`}
                     onTransitionEnd={() => {
                         setViewEventMounted(false)
                         setSelectedEvent(null)
@@ -132,12 +131,12 @@ function EventView(props) {
                                     {selectedEvent.textDescription}
                                 </p></label>
 
-                            { buttonName === "Review this Event!" && role === "ORGANIZER" ? null :
-                            <Button
-                                className="standard-button"
-                                click={submitButtonClicked}
-                            >{buttonName}
-                            </Button>}
+                            {buttonName === "Review this Event!" && role === "ORGANIZER" ? null :
+                                <Button
+                                    className="standard-button"
+                                    click={submitButtonClicked}
+                                >{buttonName}
+                                </Button>}
                         </div>
                     </div>
                 </div>}

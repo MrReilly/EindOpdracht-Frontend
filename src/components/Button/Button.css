@@ -1,26 +1,26 @@
 
-.standard-button{
+.standard-button {
     width: max-content;
     max-width: 100%;
     padding: 8px 25px 8px 25px;
     border-radius: 12px 3px 12px 3px;
     border-style: none;
-    background-image: linear-gradient(to bottom right, 	hsla(195, 24%, 20%, 1),	hsla(190, 45%, 69%, 1));
+    background-image: linear-gradient(to bottom right, hsla(195, 24%, 20%, 1), hsla(190, 45%, 69%, 1));
     font-weight: bold;
     font-size: 18px;
     color: white;
-    margin: 5px;
+    margin: 10px;
 }
 
-.standard-button:hover{
-    background-image: linear-gradient(to bottom right, 	hsla(175, 40%, 20%, 1),	hsla(175, 60%, 69%, 1));
+.standard-button:hover {
+    background-image: linear-gradient(to bottom right, hsla(175, 40%, 20%, 1), hsla(175, 60%, 69%, 1));
 }
 
-.standard-button:active{
-    background-image: linear-gradient(to bottom right, 	hsla(175, 40%, 50%, 1),	hsla(175, 60%, 80%, 1));
+.standard-button:active {
+    background-image: linear-gradient(to bottom right, hsla(175, 40%, 50%, 1), hsla(175, 60%, 80%, 1));
 }
 
-.mid-drop-close-button{
+.mid-drop-close-button {
     z-index: 1;
     position: absolute;
     top: 10px;
@@ -28,12 +28,12 @@
     width: 30px;
     height: 30px;
     font-size: 40px;
-    background-color: rgba(0,0,0, 0);
+    background-color: hsla(0, 0%, 0%, 0);
     border: none;
-    color:white;
+    color: white;
 }
 
-.mid-drop-close-button:hover{
+.mid-drop-close-button:hover {
     color: #274E5C
 }
 

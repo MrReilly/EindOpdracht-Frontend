@@ -1,3 +1,4 @@
+import './Map.css'
 import {GoogleMap, InfoWindowF, Marker} from "@react-google-maps/api"
 import mapStyles from "./MapStyles";
 import React, {useContext, useEffect} from "react";
@@ -52,7 +53,7 @@ function Map(props) {
                     />
                 ))}
 
-                {selectedEvent && (
+                {events.length > 0 && selectedEvent && (
 
                     <InfoWindowF
                         position={{lat: selectedEvent.latCoordinate, lng: selectedEvent.longCoordinate}}

@@ -1,3 +1,4 @@
+import './CategoryGrid.css'
 import React, {useState} from "react";
 import conferenceImage from "../../assets/Conventie icon white.png";
 import artImage from "../../assets/gallery-white.png";
@@ -29,7 +30,7 @@ export default function CategoryGrid(props) {
     const [sportsClicked, setSportsClicked] = useState(false)
     const [otherClicked, setOtherClicked] = useState(false)
 
-   const categoryList = [
+    const categoryList = [
         {category: "conference", image: conferenceImage, click: conferenceClicked, set: setConferenceClicked, buttonColor: "blue1"},
         {category: "art", image: artImage, click: artClicked, set: setArtClicked, buttonColor: "blue1"},
         {category: "market", image: marketImage, click: marketClicked, set: setMarketClicked, buttonColor: "blue1"},
@@ -62,16 +63,14 @@ export default function CategoryGrid(props) {
 
         found.set(!found.click)
 
-        if(selectedCategories.includes(found.category.toString().toUpperCase())) {
+        if (selectedCategories.includes(found.category.toString().toUpperCase())) {
 
             setSelectedCategories(current => current.filter(selectedCategories => {
                 return selectedCategories !== found.category.toString().toUpperCase()
             }))
-        }
-        else {
+        } else {
             setSelectedCategories(current => [...current, found.category.toString().toUpperCase()])
         }
-
     }
 
     return (
@@ -88,28 +87,23 @@ export default function CategoryGrid(props) {
             <div className="category-grid"
                  id="category-grid">
                 {categoryList.map(c => (
-                    <div key= {`ovlc ${c.category}`}
-                        className="cg-button-overlay-container">
-                        <div key= {`ovl ${c.category}`}
-                            className="cg-button-overlay"
+                    <div key={`ovlc ${c.category}`}
+                         className="category-button-overlay-container">
+
+                        <div className="category-button-overlay"
                              onClick={() => handleCategorySelection(c.category)}
                         >{c.category}</div>
-                    <Button
-                        id={c.category}
-                        key={c.category}
-                        className={
-                        !selectedCategories.includes(c.category.toUpperCase())
+
+                        <Button className={!selectedCategories.includes(c.category.toUpperCase())
                             ? `category-button ${c.buttonColor}`
-                            : `category-button ${c.buttonColor} cat-clicked`
+                            : `category-button ${c.buttonColor} category-clicked`
                         }
-                        name={c.category}
-                       >
-                        <img key= {`img ${c.category}`}
-                             className="category-image"
-                             name="category-image"
-                             src={c.image}
-                             alt={c.category}/>
-                    </Button>
+                        >
+                            <img className="category-image"
+                                 name="category-image"
+                                 src={c.image}
+                                 alt={c.category}/>
+                        </Button>
 
                     </div>))}
 

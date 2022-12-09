@@ -1,6 +1,5 @@
 import React, {useEffect, useContext, useState, Fragment} from "react";
 import MediaQuery from "react-responsive";
-import axios from "axios";
 import {MapFormContext} from "../../components/Context/MapFormContextProvider";
 import MiddleSection from "../../components/Layout/MiddleSection/MiddleSection";
 import LeftSideBar from "../../components/Layout/LeftSideBar/LeftSideBar";
@@ -11,13 +10,15 @@ import EventCreateForm from "../../components/EventCreateForm/EventCreateForm";
 import EventView from "../../components/EventView/EventView";
 import Button from "../../components/Button/Button";
 import MessageBox from "../../components/MessageBox/MessageBox";
+
 import getMyEvents from "../../Hooks/getMyEvents";
+import deleteEvent from "../../Hooks/deleteEvent";
 
 function MyEvents() {
 
     const {setEvents} = useContext(MapFormContext)
     const {setViewEventClicked} = useContext(MapFormContext)
-    const {selectedEvent} = useContext(MapFormContext)
+    const {selectedEvent, setSelectedEvent} = useContext(MapFormContext)
 
     const [createFormClicked, setCreateFormClicked] = useState(false)
     const [createSubmitResponse, setCreateSubmitResponse] = useState(null)
@@ -31,27 +32,16 @@ function MyEvents() {
 
     getMyEvents(setMyEvents, createFormClicked)
 
-    useEffect(() => {setEvents(myEvents)},[myEvents])
-
-
-    async function handleClickDelete() {
-
-        const token = localStorage.getItem("token")
-
-        try {
-            const response = await axios.delete(`http://localhost:8080/event/${selectedEvent.id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `${token}`
+    useEffect(() => {
+            setEvents(myEvents)
+            return (() => {
+                    setViewEventClicked(false)
+                    setSelectedEvent(null)
+                    setEvents([])
                 }
-            })
-
-            setDeleteSubmitResponse({message: response.data, status: response.status})
-
-        } catch (e) {
-            console.error(e);
+            )
         }
-    }
+            ,[myEvents])
 
     function handleCreateSubmitMessageClose() {
         setCreateSubmitResponse(null)
@@ -59,8 +49,10 @@ function MyEvents() {
     }
 
     function handleDeleteMessageClose() {
+        console.log(deleteSubmitResponse)
         setDeleteSubmitResponse(null)
         setViewEventClicked(false)
+        window.location.reload(false)
     }
 
     return (
@@ -100,7 +92,7 @@ function MyEvents() {
                 <EventView
                     buttonName="Delete this Event"
                     submitButtonClicked={() => {
-                        handleClickDelete()
+                        deleteEvent(setDeleteSubmitResponse, selectedEvent)
                     }}
                 />
 

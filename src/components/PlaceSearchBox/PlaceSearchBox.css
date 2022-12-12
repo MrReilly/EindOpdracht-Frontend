@@ -1,5 +1,5 @@
 
-.search-container{
+.search-container {
     width: 100%;
     position: relative;
     max-height: 30px;
@@ -8,7 +8,7 @@
 }
 
 
-.autocomplete-dropdown-container{
+.autocomplete-dropdown-container {
     width: 100%;
     position: absolute;
     font-family: Tahoma, serif;
@@ -21,6 +21,6 @@
     height: auto;
     border: none;
     padding: 10px 20px 10px 20px;
-    box-shadow: inset  0 0 5px var(--box-shadow-dark-grey);
+    box-shadow: inset 0 0 5px var(--box-shadow-dark-grey);
     z-index: 2;
 }

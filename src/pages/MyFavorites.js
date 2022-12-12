@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {useContext, useEffect} from "react";
 import {GlobalContext} from "../components/Context/GlobalContextProvider";
 import MiddleSection from "../components/MiddleSection/MiddleSection";
@@ -50,7 +50,8 @@ function MyFavorites() {
         setViewEventClicked(false)
     }
 
-    return (<Fragment>
+    return (
+        <>
             <MediaQuery query="(min-device-width: 1024px)">
 
                 <LeftSideBar className="lsb-container lsb-slim"/>
@@ -89,7 +90,7 @@ function MyFavorites() {
                 <EventList title={title}/>
 
             </RightSideBar>
-        </Fragment>
+        </>
     )
 }
 

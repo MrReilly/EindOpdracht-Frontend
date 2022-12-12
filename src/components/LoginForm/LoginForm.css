@@ -1,9 +1,9 @@
 
-.login-dropdown-button{
+.login-dropdown-button {
     display: none;
 }
 
-.login-form-container{
+.login-form-container {
 
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     color: dimgrey;
 }
 
-.login-form{
+.login-form {
 
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@
     width: 90%;
 }
 
-.login-input{
+.login-input {
 
     padding: 10px;
     border-radius: 3px;
@@ -39,13 +39,13 @@
     width: 100%;
 }
 
-.password-error{
+.password-error {
     color: red;
 
 }
 
-.login-title{
-    padding: 0  0 30px 0;
+.login-title {
+    padding: 0 0 30px 0;
     font-size: 30px;
     font-weight: unset;
 

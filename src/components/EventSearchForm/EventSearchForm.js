@@ -1,5 +1,5 @@
-import './EventSearchForm.css'
-import React, {Fragment} from "react";
+import './EventSearchForm.css';
+import React from "react";
 import {useForm} from "react-hook-form";
 
 export default function EventSearchForm(props) {
@@ -15,13 +15,12 @@ export default function EventSearchForm(props) {
     function onFormSubmit(data, e) {
         e.preventDefault()
 
-        setStartDate(data.startDate)
-        setEndDate(data.endDate)
-        setDistance(data.distance)
+        setStartDate(data.startDate);
+        setEndDate(data.endDate);
+        setDistance(data.distance);
     }
 
     return (
-        <Fragment>
             <form onSubmit={handleSubmit(onFormSubmit)}
                   className="event-search-form">
 
@@ -64,6 +63,5 @@ export default function EventSearchForm(props) {
                     </button>
                 </div>
             </form>
-        </Fragment>
     )
 }

@@ -1,14 +1,14 @@
 import React from "react"
-import fiveStars from "../../assets/5-star-rating.png";
-import fourStars from "../../assets/4-star-rating.png";
-import threeStars from "../../assets/3-star-rating.png";
-import twoStars from "../../assets/2-star-rating.png";
-import oneStars from "../../assets/1-star-rating.png";
+import fiveStars from "../../assets/starRating/5-star-rating.png";
+import fourStars from "../../assets/starRating/4-star-rating.png";
+import threeStars from "../../assets/starRating/3-star-rating.png";
+import twoStars from "../../assets/starRating/2-star-rating.png";
+import oneStars from "../../assets/starRating/1-star-rating.png";
 
-function StarRating(props){
+function StarRating(props) {
     const {item} = props
 
-    return(
+    return (
         <>
             {item.starRating >= 4.5 && item.starRating <= 5 ?
                 <img src={fiveStars} alt="5 star rating"/> : null}

@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState, Fragment} from "react";
+import React, {useEffect, useContext, useState} from "react";
 import MediaQuery from "react-responsive";
 import {GlobalContext} from "../components/Context/GlobalContextProvider";
 import MiddleSection from "../components/MiddleSection/MiddleSection";
@@ -56,8 +56,7 @@ function MyEvents() {
     }
 
     return (
-        <Fragment>
-
+        <>
             <MediaQuery query="(min-device-width: 1024px)">
                 <LeftSideBar
                     className="lsb-container lsb-slim"/>
@@ -102,7 +101,7 @@ function MyEvents() {
                     title={title}/>
 
             </RightSideBar>
-        </Fragment>
+        </>
     )
 }
 

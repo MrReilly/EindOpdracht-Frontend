@@ -1,6 +1,6 @@
 import {useEffect} from "react"
 
-function setZoomDistance(distance, setZoom){
+function setZoomDistance(distance, setZoom) {
 
     useEffect(() => {
 

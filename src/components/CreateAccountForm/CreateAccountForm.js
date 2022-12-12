@@ -2,7 +2,7 @@ import './CreateAccountForm.css'
 import React, {useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import Select from "react-select";
-import axios from "axios";
+import postUser from "../APIs/postUser";
 
 function CreateAccountForm(props) {
     const {setCreateAccountResponse} = props
@@ -22,24 +22,8 @@ function CreateAccountForm(props) {
 
         toggleError(false);
 
-        try {
-            const response = await axios.post('http://localhost:8080/user', {
+        postUser(setCreateAccountResponse, data)
 
-                    username: data.username,
-                    password: data.password,
-                    role: data.role.value,
-                    organizationName: data.organizationName,
-                }
-            )
-
-            setCreateAccountResponse({
-                message: response.data,
-                status: response.status
-            })
-
-        } catch (e) {
-            console.error(e.response)
-        }
     }
 
     return (

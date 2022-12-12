@@ -2,7 +2,7 @@ import './EventList.css'
 import React, {useContext} from "react";
 import {GlobalContext} from "../Context/GlobalContextProvider";
 import StarRating from "../StarRating/StarRating";
-import star from "../../assets/star.png"
+import star from "../../assets/favorites/star.png"
 
 function EventList(props) {
     const {title} = props

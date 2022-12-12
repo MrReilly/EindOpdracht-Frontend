@@ -16,7 +16,7 @@ footer {
 }
 
 main {
-    background-image: url("../../assets/blueAbstract.svg");
+    background-image: url("../../assets/background/blueAbstract.svg");
     background-position: center;
     background-size: 4000px;
     display: flex;

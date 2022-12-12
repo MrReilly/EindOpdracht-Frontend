@@ -20,7 +20,6 @@ function getAllEvents(setAllEvents){
                 console.error(e);
             }
         }
-
         getAllEvents()
 
     }, [])

@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import MiddleSection from "../components/MiddleSection/MiddleSection";
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
 import RightSideBar from "../components/RightSideBar/RightSideBar";
@@ -8,7 +8,7 @@ import LoginForm from "../components/LoginForm/LoginForm";
 function Login() {
 
     return (
-        <Fragment>
+        <>
             <div className="leftSideBar-middleSection-container">
 
                 <MediaQuery query="(min-device-width: 768px)">
@@ -28,7 +28,7 @@ function Login() {
                 </RightSideBar>
 
             </MediaQuery>
-        </Fragment>)
+        </>)
 }
 
 export default Login

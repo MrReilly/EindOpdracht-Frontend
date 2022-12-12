@@ -1,4 +1,4 @@
-.create-account-form-container{
+.create-account-form-container {
 
     display: flex;
     flex-direction: column;
@@ -16,13 +16,13 @@
 
 }
 
-.create-account-form-container h1{
-    padding: 0  0 5px 0;
+.create-account-form-container h1 {
+    padding: 0 0 5px 0;
     font-size: 30px;
     font-weight: unset;
 }
 
-.create-account-form-container form{
+.create-account-form-container form {
     width: 60%;
 }
 
@@ -30,9 +30,9 @@
     font-size: 12px;
 }
 
-.create-account-form-container form input{
+.create-account-form-container form input {
     flex: auto;
-    width:100%;
+    width: 100%;
     padding: 7px;
     border-radius: 3px;
     border-color: lightgrey;
@@ -40,7 +40,7 @@
     border-style: solid;
 }
 
-.create-account-form{
+.create-account-form {
 
     display: flex;
     flex-direction: column;
@@ -52,7 +52,7 @@
 
 @media screen and (max-height: 550px) {
 
-    .create-account-form-container h1{
+    .create-account-form-container h1 {
         font-size: 15px;
     }
 
@@ -60,17 +60,18 @@
         font-size: 10px;
     }
 
-    .create-account-form-container form input{
+    .create-account-form-container form input {
         padding: 5px;
     }
 }
 
 @media screen and (max-height: 1024px) {
-   .create-account-form-container {
-       width: 80%;
-   }
+    .create-account-form-container {
+        width: 80%;
+    }
 
 }
+
 @media screen and (max-height: 768px) {
     .create-account-form-container {
         width: 90%;

@@ -1,51 +1,31 @@
 import './EventView.css'
 import React, {useContext, useEffect} from "react";
 import {GlobalContext} from "../Context/GlobalContextProvider";
-import noImage from "../../assets/No-Image-Placeholder.svg.png"
+import noImage from "../../assets/categories/No-Image-Placeholder.svg.png"
 import Button from "../Button/Button";
-import axios from "axios";
 import StarRating from "../StarRating/StarRating";
 import {AuthContext} from "../Context/AuthContext";
 import removeFromFavorites from "../APIs/updateFavorites";
+import getReviews from "../APIs/getReviews";
 
 function EventView(props) {
     const {buttonName, submitButtonClicked} = props
     const {role, isAuth} = useContext(AuthContext)
     const {favorites} = useContext(GlobalContext)
-    const {selectedEvent, setSelectedEvent} =  useContext(GlobalContext)
+    const {selectedEvent, setSelectedEvent} = useContext(GlobalContext)
     const {setReviews} = useContext(GlobalContext)
     const {viewEventClicked, setViewEventClicked} = useContext(GlobalContext)
     const {viewEventMounted, setViewEventMounted} = useContext(GlobalContext)
 
     useEffect(() => {
+        getReviews(viewEventClicked, selectedEvent, setReviews)
+
         return (() => {
                 setReviews([])
             }
         )
-    }, [])
+    }, [viewEventClicked])
 
-    useEffect(() => {
-        getReviews()
-    }, [viewEventClicked,])
-
-    async function getReviews() {
-
-        if (viewEventClicked) {
-
-            try {
-                const response = await axios.get(`http://localhost:8080/review/${selectedEvent.id}`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    }
-                })
-                setReviews(response.data)
-
-            } catch (e) {
-                console.error(e);
-            }
-        }
-        return null
-    }
 
     return (
 
@@ -140,9 +120,11 @@ function EventView(props) {
                                 </Button>}
 
                             {favorites.includes(selectedEvent) &&
-                            <Button
-                                className="standard-button"
-                                click= {() => {removeFromFavorites(selectedEvent.id, isAuth)}}
+                                <Button
+                                    className="standard-button"
+                                    click={() => {
+                                        removeFromFavorites(selectedEvent.id, isAuth)
+                                    }}
                                 >Remove from Favorites</Button>}
 
                         </div>

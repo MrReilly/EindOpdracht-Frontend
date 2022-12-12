@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { useState} from 'react';
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
 import MiddleSection from "../components/MiddleSection/MiddleSection";
 import RightSideBar from "../components/RightSideBar/RightSideBar";
@@ -19,7 +19,7 @@ function CreateAccount() {
     }
 
     return (
-        <Fragment>
+        <>
             <div className="leftSideBar-middleSection-container">
 
                 <MediaQuery query="(min-device-width: 768px)">
@@ -43,7 +43,7 @@ function CreateAccount() {
                     <div className="empty-bar"></div>
                 </RightSideBar>
             </MediaQuery>
-        </Fragment>)
+        </>)
 
 }
 

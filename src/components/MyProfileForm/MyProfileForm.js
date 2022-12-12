@@ -1,5 +1,5 @@
 import './MyProfileForm.css'
-import React,  {useContext, useState} from "react"
+import React, {useContext, useState} from "react"
 import Button from "../Button/Button";
 import Select from "react-select";
 
@@ -26,15 +26,15 @@ function MyProfileForm(props) {
         {value: "VISITOR", label: "Visitor"},
         {value: "ORGANIZER", label: "Organizer"},
         {value: "ADMIN", label: "Admin"}
-]
+    ]
 
-        function onFormSubmit(e) {
-            e.preventDefault();
+    function onFormSubmit(e) {
+        e.preventDefault();
 
-            updateUser(newRole, newPassword, newOrganizationName, setProfileUpdateResponse)
-        }
+        updateUser(newRole, newPassword, newOrganizationName, setProfileUpdateResponse)
+    }
 
-    return(
+    return (
 
         <form
             onSubmit={onFormSubmit}

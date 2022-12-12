@@ -5,7 +5,7 @@ import './LoginForm.css'
 import Button from "../Button/Button";
 import {AuthContext} from "../Context/AuthContext";
 
-function LoginForm(){
+function LoginForm() {
 
     const {login} = useContext(AuthContext)
 
@@ -13,19 +13,21 @@ function LoginForm(){
     const [password, setPassword] = useState("")
     const [error, toggleError] = useState(false)
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
         toggleError(false);
 
         loginApi(e, login, toggleError, username, password)
     }
 
-    return(
+    return (
         <div className="login-form-container">
 
             <h1 className="login-title">Log in</h1>
             <form
-                onSubmit= { (e) => {handleSubmit(e)}}
+                onSubmit={(e) => {
+                    handleSubmit(e)
+                }}
                 className="login-form">
                 <label htmlFor="login-input">Username
                     <input

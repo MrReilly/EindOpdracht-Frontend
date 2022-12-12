@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useEffect, useState, useCallback} from "react";
+import React, {useContext, useEffect, useState, useCallback} from "react";
 import {GlobalContext} from "../components/Context/GlobalContextProvider";
 import EventList from "../components/EventList/EventList";
 import EventSearchForm from "../components/EventSearchForm/EventSearchForm";
@@ -61,7 +61,7 @@ function Home() {
 
     return (
 
-        <Fragment>
+        <>
             <div className="leftSideBar-middleSection-container">
 
                 <LeftSideBar
@@ -108,7 +108,7 @@ function Home() {
                     title={title}
                 />
            </RightSideBar>
-        </Fragment>
+        </>
     )
 }
 

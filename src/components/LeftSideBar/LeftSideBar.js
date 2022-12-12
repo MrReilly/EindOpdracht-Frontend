@@ -6,7 +6,7 @@ const LeftSideBar = ({children, className}) => {
     return (
         <aside className={className}>
 
-           {children}
+            {children}
 
         </aside>
     )

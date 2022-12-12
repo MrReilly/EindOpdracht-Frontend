@@ -2,20 +2,24 @@
 .el-container{
     display: flex;
     flex-direction: column;
-    transform: translateX(190px);
     align-items: center;
     height: 100%;
     width: 100%;
-    transition: 0.6s ease-in-out ;
+    transition: 0.6s ease-in-out;
 }
+
 
 .el-out{
-    transform: translateX(0px);
+    transform: translateX(0);
 }
 
-.results-titel{
+.el-in{
+    transform: translateX(190px);
+}
+
+.el-container h1{
     font-size: 25px;
-    font-family: "Bradley Hand", serif;
+    font-family: "JetBrains Mono", monospace;
     flex-shrink: 2;
     width: 150px;
     max-height: 75px;
@@ -33,7 +37,7 @@
     width: 180px;
     overflow-y: auto;
     overflow-x: hidden;
-    box-shadow:  inset 0 0 15px rgba(0, 0, 0, 0.8);
+    box-shadow:  inset 0 0 15px var(--box-shadow-dark-grey);
     padding: 5px;
 }
 
@@ -44,9 +48,9 @@
 }
 
 .results-container::-webkit-scrollbar-thumb {
-    background: hsl(195, 100%, 35%);
+    background: var(--blue-5);
     -webkit-border-radius: 1ex;
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0 1px 2px var(--box-shadow-dark-grey);
 }
 
 .results-container::-webkit-scrollbar-corner {
@@ -62,7 +66,7 @@
     width: 160px;
     padding: 10px;
     margin: 5px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0 0 10px var(--box-shadow-dark-grey);
     font-family: Arial, serif ;
     border-style: solid;
     border-color: white;
@@ -81,11 +85,11 @@
 }
 
 .el-search-result{
-    background-color: hsla(170, 70%, 80%, 0.5);
+    background-color: var(--blue-1);
 }
 
 .el-search-result:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 5px 15px var(--box-shadow-dark-grey);
     background-color: hsla(170, 100%, 80%, 0.7);
 }
 
@@ -100,7 +104,7 @@
 .el-list-item p{
     padding: 3px;
     font-size: 12px;
-    color: #274E5C;
+    color: var(--green-1);
     font-weight: bold;
     max-width: 400px;
 }
@@ -134,7 +138,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        transform: translateY(60px);
+        transform: translateY(100px);
     }
 
     .el-out{
@@ -156,7 +160,7 @@
         height: 140px;
     }
 
-    .results-titel{
+    .el-container h1{
         rotate: 270deg;
         height: 45px;
         width: 60px;

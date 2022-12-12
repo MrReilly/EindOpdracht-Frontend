@@ -1,14 +1,17 @@
-import React, {useContext} from "react";
+import React, {lazy, Suspense, useContext} from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
 
-import Home from "./pages/home/Home";
-import Login from './pages/login/Login'
-import CreateAccount from './pages/createAccount/CreateAccount'
-import MyEvents from './pages/myEvents/MyEvents'
-import MyProfile from './pages/profile/MyProfile'
+
 import {Layout} from "./components/Layout/Layout";
 import {AuthContext} from "./components/Context/AuthContext";
-import MyFavorites from "./pages/myFavorites/MyFavorites";
+
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import('./pages/Login'));
+const CreateAccount = lazy(() => import('./pages/CreateAccount'));
+const MyProfile = lazy(() => import('./pages/MyProfile'));
+const MyEvents = lazy(() => import('./pages/MyEvents'));
+const MyFavorites = lazy(() => import("./pages/MyFavorites"));
+
 
 function App() {
 
@@ -18,26 +21,29 @@ function App() {
 
         <Layout>
             <Switch>
-                <Route exact path="/">
-                    <Home/>
-                </Route>
-                <Route exact path="/login">
-                    <Login/>
-                </Route>
-                <Route exact path="/create-account">
-                    <CreateAccount/>
-                </Route>
-                <Route exact path="/my-profile">
-                    {isAuth ? <MyProfile/> : <Redirect to="/"/>}
-                </Route>
-                <Route exact path="/my-favorite-events">
-                    {isAuth ? <MyFavorites/> : <Redirect to="/"/>}
-                </Route>
-                <Route exact path="/my-events">
-                    {isAuth ? <MyEvents/> : <Redirect to="/"/>}
-                </Route>
+                <Suspense>
+                    <Route exact path="/">
+                        <Home/>
+                    </Route>
+                    <Route exact path="/login">
+                        <Login/>
+                    </Route>
+                    <Route exact path="/create-account">
+                        <CreateAccount/>
+                    </Route>
+                    <Route exact path="/my-profile">
+                        {isAuth ? <MyProfile/> : <Redirect to="/"/>}
+                    </Route>
+                    <Route exact path="/my-favorite-events">
+                        {isAuth ? <MyFavorites/> : <Redirect to="/"/>}
+                    </Route>
+                    <Route exact path="/my-events">
+                        {isAuth ? <MyEvents/> : <Redirect to="/"/>}
+                    </Route>
+                </Suspense>
             </Switch>
         </Layout>
+
     )
 }
 

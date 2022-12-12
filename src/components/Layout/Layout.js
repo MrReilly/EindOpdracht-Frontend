@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import './Layout.css'
+import '../../App.css'
 
 export const Layout = ({children}) => {
 

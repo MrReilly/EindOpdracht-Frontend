@@ -2,22 +2,22 @@ import './Map.css'
 import {GoogleMap, InfoWindowF, Marker} from "@react-google-maps/api"
 import mapStyles from "./MapStyles";
 import React, {useContext, useEffect} from "react";
-import {MapFormContext} from "../Context/MapFormContextProvider";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 import categoryMarkerIcon from "./CategoryMarkerIcon";
 import StarRating from "../StarRating/StarRating";
 
 function Map(props) {
     const {zoom} = props
 
-    const {selectedEvent, setSelectedEvent} = useContext(MapFormContext)
-    const {events} = useContext(MapFormContext)
+    const {selectedEvent, setSelectedEvent} = useContext(GlobalContext)
+    const {events} = useContext(GlobalContext)
 
-    const {setViewEventClicked} = useContext(MapFormContext)
-    const {setViewEventMounted} = useContext(MapFormContext)
+    const {setViewEventClicked} = useContext(GlobalContext)
+    const {setViewEventMounted} = useContext(GlobalContext)
 
-    const {center} = useContext(MapFormContext)
+    const {center} = useContext(GlobalContext)
 
-    const {isLoaded, loadError} = useContext(MapFormContext)
+    const {isLoaded, loadError} = useContext(GlobalContext)
 
     useEffect(() => {
         return (setSelectedEvent(null))

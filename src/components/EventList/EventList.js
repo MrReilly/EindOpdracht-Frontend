@@ -1,26 +1,26 @@
 import './EventList.css'
 import React, {useContext} from "react";
-import {MapFormContext} from "../Context/MapFormContextProvider";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 import StarRating from "../StarRating/StarRating";
 import star from "../../assets/star.png"
 
 function EventList(props) {
     const {title} = props
 
-    const {setSelectedEvent} = useContext(MapFormContext)
-    const {reviews} = useContext(MapFormContext)
+    const {setSelectedEvent} = useContext(GlobalContext)
+    const {reviews} = useContext(GlobalContext)
 
-    const {events} = useContext(MapFormContext)
-    const {favorites} = useContext(MapFormContext)
+    const {events} = useContext(GlobalContext)
+    const {favorites} = useContext(GlobalContext)
 
-    const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
-    const {setViewEventMounted} = useContext(MapFormContext)
+    const {viewEventClicked, setViewEventClicked} = useContext(GlobalContext)
+    const {setViewEventMounted} = useContext(GlobalContext)
 
     return (
-        <div className={`el-container ${events.length > 0 ? "el-out" : null}`}>
+        <div className={`el-container ${events.length > 0 ? "el-out" : "el-in"}`}>
             {viewEventClicked ?
-                <h2 className="results-titel">Event Reviews</h2> :
-                <h2 className="results-titel">{title}</h2>}
+                <h1>Event Reviews</h1> :
+                <h1>{title}</h1>}
 
             <div className="results-container">
 

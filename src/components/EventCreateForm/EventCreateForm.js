@@ -2,23 +2,23 @@ import './EventCreateFrom.css'
 import React, {useContext, useEffect, useState} from "react"
 import Select from "react-select"
 import {useForm, Controller} from "react-hook-form";
-import axios from "axios";
 import PlaceSearchBox from "../PlaceSearchBox/PlaceSearchBox";
-import {MapFormContext} from "../Context/MapFormContextProvider";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 import Button from "../Button/Button";
+import postEvent from "../APIs/postEvent";
+
 
 function EventCreateForm(props) {
     const {
         createFormClicked,
         setCreateFormClicked,
-        setCreateSubmitResponse
+        setCreateSubmitResponse,
     } = props
 
     const [image, setImage] = useState([])
-    const [previewURL, setPreviewURL] = useState('')
 
-    const {center, setCenter} = useContext(MapFormContext)
-    const {location, setLocation} = useContext(MapFormContext)
+    const {center, setCenter} = useContext(GlobalContext)
+    const {location, setLocation} = useContext(GlobalContext)
 
     const {register, handleSubmit, control} = useForm();
 
@@ -50,61 +50,13 @@ function EventCreateForm(props) {
 
     function onImageChange(e) {
 
-        const uploadedImage = e.target.files[0];
-        console.log(image, previewURL)
-        setImage(uploadedImage)
-        setPreviewURL(URL.createObjectURL(uploadedImage))
+        setImage(e.target.files[0])
     }
 
-    async function onFormSubmit(data, e) {
+    function onFormSubmit(data, e) {
         e.preventDefault()
-        const token = localStorage.getItem("token")
 
-        try {
-            const responseEvent = await axios.post('http://localhost:8080/event', {
-
-                category: data.category.value,
-                name: eventName,
-                location: location,
-                address: address,
-                latCoordinate: center.lat,
-                longCoordinate: center.lng,
-                entryPrice: entryPrice,
-                textDescription: textDescription,
-                startDate: data.startDate,
-                endDate: data.endDate
-
-            }, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `${token}`
-                },
-            })
-            setCreateSubmitResponse({message: responseEvent.data, status: responseEvent.status})
-
-
-            const formData = new FormData();
-            formData.append('image', image, 'image')
-
-            const responseDataSplitArray = responseEvent.data.split(" ");
-            let eventId = responseDataSplitArray[1];
-
-
-            const responseImage = await axios.post(`http://localhost:8080/image/${eventId}`,
-
-                formData
-
-                , {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        Authorization: `${token}`
-                    },
-                })
-            console.log(responseImage)
-
-        } catch (e) {
-            console.error(e);
-        }
+        postEvent(eventName, location, address, center, entryPrice, textDescription, data, setCreateSubmitResponse, image)
 
         setLocation('')
         setCreateFormClicked(false)
@@ -117,7 +69,6 @@ function EventCreateForm(props) {
                 click={() => {
                     setCreateFormClicked(false)
                 }}
-
             >&times;</Button>
 
             {createFormMounted &&
@@ -137,7 +88,7 @@ function EventCreateForm(props) {
                     <Controller
                         name="category"
                         control={control}
-                        rules={{required:true}}
+                        rules={{required: true}}
                         defaultValue=""
                         render={({field}) => (
                             <Select options={options} {...field} label="category"/>)}/>

@@ -30,8 +30,8 @@
     max-width: 500px;
     height: 20%;
     max-height: 200px;
-    background-color: hsl(196, 30%, 40%);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    background-color: var(--green-1);
+    box-shadow: 0 15px 25px var(--box-shadow-green);
     border-style: none;
     border-radius: 10px;
     align-self: center;
@@ -49,11 +49,11 @@
     right:20px;
     width: 10px;
     font-size: 40px;
-    background-color: rgba(0,0,0, 0);
+    background-color: transparent;
     border: none;
     color:white;
 }
 
 .mid-drop-close-button:hover{
-    color: #274E5C
+    color: var(--green-1)
 }

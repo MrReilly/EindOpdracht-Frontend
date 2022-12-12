@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import{BrowserRouter as Router} from "react-router-dom";
-import MapFormContextProvider from "./components/Context/MapFormContextProvider";
+import GlobalContextProvider from "./components/Context/GlobalContextProvider";
 import AuthContextProvider from "./components/Context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,9 +12,9 @@ root.render(
     <Router>
         <React.StrictMode>
     <AuthContextProvider>
-    <MapFormContextProvider>
+    <GlobalContextProvider>
     <App />
-    </MapFormContextProvider>
+    </GlobalContextProvider>
     </AuthContextProvider>
         </React.StrictMode>
     </Router>

@@ -13,7 +13,7 @@
     max-width: 800px;
     max-height: fit-content;
     background-color: hsla(185, 40%, 40%, 0.9);
-    box-shadow: -8px 0 12px rgba(0, 0, 0, 0.6);
+    box-shadow: -8px 0 12px var(--box-shadow-green);
     border-radius: 30px 0 0 30px;
     border-style: none;
     transition: width ease-in-out 0.5s;
@@ -35,9 +35,9 @@
     padding: 30px 20px 0 20px;
     margin: 8%;
     border-style: solid;
-    border-color: hsl(170 60% 100%);
+    border-color: white;
     border-radius: 10px;
-    box-shadow: inset 0 0 15px 2px #274E5C;
+    box-shadow: inset 0 0 15px 2px var(--green-1);
     transition: ease-in 0.5s;
 }
 
@@ -99,7 +99,7 @@
 
 .ev-4-element-container label {
     font-size: 10px;
-    color: #274E5C;
+    color: var(--green-1);
 }
 
 .ev-4-element-container p {
@@ -135,7 +135,7 @@
 
 .ev-2-text-container label {
     font-size: 10px;
-    color: #274E5C;
+    color: var(--green-1);
 }
 
 .ev-2-text-container p {
@@ -151,7 +151,7 @@
 
 .ev-text-button-container label {
     font-size: 10px;
-    color: #274E5C;
+    color: var(--green-1);
 }
 
 .ev-text-button-container p {

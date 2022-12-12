@@ -2,13 +2,13 @@ import './ReviewForm.css'
 import React, {useContext, useState} from "react"
 import Button from "../Button/Button";
 import axios from "axios";
-import {MapFormContext} from "../Context/MapFormContextProvider";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 import DateConverter from "../Utils/DateConverter";
 
 function ReviewForm(props) {
     const {setReviewClicked, setReviewSubmitResponse} = props
 
-    const {selectedEvent} = useContext(MapFormContext)
+    const {selectedEvent} = useContext(GlobalContext)
 
     const [reviewText, setReviewText] = useState("")
     const [reviewDate] = useState(DateConverter(new Date()))

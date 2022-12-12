@@ -1,19 +1,21 @@
 import './EventView.css'
 import React, {useContext, useEffect} from "react";
-import {MapFormContext} from "../Context/MapFormContextProvider";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 import noImage from "../../assets/No-Image-Placeholder.svg.png"
 import Button from "../Button/Button";
 import axios from "axios";
 import StarRating from "../StarRating/StarRating";
 import {AuthContext} from "../Context/AuthContext";
+import removeFromFavorites from "../APIs/updateFavorites";
 
 function EventView(props) {
     const {buttonName, submitButtonClicked} = props
-    const {role} = useContext(AuthContext)
-    const {selectedEvent, setSelectedEvent} = useContext(MapFormContext)
-    const {setReviews} = useContext(MapFormContext)
-    const {viewEventClicked, setViewEventClicked} = useContext(MapFormContext)
-    const {viewEventMounted, setViewEventMounted} = useContext(MapFormContext)
+    const {role, isAuth} = useContext(AuthContext)
+    const {favorites} = useContext(GlobalContext)
+    const {selectedEvent, setSelectedEvent} =  useContext(GlobalContext)
+    const {setReviews} = useContext(GlobalContext)
+    const {viewEventClicked, setViewEventClicked} = useContext(GlobalContext)
+    const {viewEventMounted, setViewEventMounted} = useContext(GlobalContext)
 
     useEffect(() => {
         return (() => {
@@ -21,7 +23,6 @@ function EventView(props) {
             }
         )
     }, [])
-
 
     useEffect(() => {
         getReviews()
@@ -137,6 +138,13 @@ function EventView(props) {
                                     click={submitButtonClicked}
                                 >{buttonName}
                                 </Button>}
+
+                            {favorites.includes(selectedEvent) &&
+                            <Button
+                                className="standard-button"
+                                click= {() => {removeFromFavorites(selectedEvent.id, isAuth)}}
+                                >Remove from Favorites</Button>}
+
                         </div>
                     </div>
                 </div>}

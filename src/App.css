@@ -1,31 +1,39 @@
-
-/*////////////////////////
-Table of Contents
-1. Global Styles
-2. Areas
-2.1 Navigation
-2.2 Header
-3. Media Queries
-////////////////////////*/
-
 /* ------------------------------- 1. Global Styles -------------------------------- */
 
-/* ------------------------------- 2. Areas ---------------------------------------- */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
+:root {
 
-/* --------------- 2.1 Navigation ------------------------- */
+    --green-1: #274E5C;
+    --green-2: hsla(196, 40%, 60%, 1);
+    --blue-1: hsla(190, 76%, 82%, 0.5);
+    --blue-2: hsla(190, 100%, 42%, 0.5);
+    --blue-3: hsla(201, 100%, 36%, 0.5);
+    --blue-4: hsla(214, 97%, 27%, 0.5);
+    --blue-5: hsla(195, 100%, 35%, 1);
+    --box-shadow-green: hsla(180, 23%, 3%, 0.6);
+    --box-shadow-grey: hsla(0, 0%, 25%, 1);
+    --box-shadow-dark-grey: hsla(0, 0%, 0%, 0.8);
+}
 
+.date {
+    width: 100%;
+    padding: 8px;
+    border-color: lightgrey;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: thin;
+    font-size: 11px;
+}
 
-
-
-
-
-
-
-
-
-
-/* ------------------------------- 3. Media Queries -------------------------------- */
+input[type="date"]:not(.has-value):before {
+    color: var(--green-1);
+    content: attr(placeholder);
+}
 
 
 

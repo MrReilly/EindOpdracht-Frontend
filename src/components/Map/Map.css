@@ -3,21 +3,21 @@
 
     display: flex;
     flex: 0 1 100%;
-    box-shadow: inset  0 0 15px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 5px;
 }
 
-.map-container{
+.map-container {
 
     flex: 1;
     height: 100%;
     width: 100%;
-    box-shadow: 3px 3px 15px  1px #274E5C;
+    box-shadow: 3px 3px 15px 1px var(--green-1);
     border-radius: 3px;
 }
 
-.marker-info-window{
+.marker-info-window {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,39 +30,39 @@
     border-width: 5px;
     border-radius: 15px;
     border-color: hsl(190, 70%, 90%);
-    box-shadow: inset 1px 1px 10px  1px #274E5C;;
+    box-shadow: inset 1px 1px 10px 1px var(--green-1);
     background-color: hsl(170, 40%, 90%);
-    color: #274E5C;
+    color: var(--green-1)
 }
 
-.marker-info-window:hover{
+.marker-info-window:hover {
 
     background-color: hsl(172, 30%, 60%);
-    box-shadow: inset 2px 2px 10px  1px #274E5C;
+    box-shadow: inset 2px 2px 10px 1px var(--green-1);
     color: white;
 }
 
-.marker-info-window h4{
+.marker-info-window h4 {
     text-align: center;
 }
 
-.marker-info-window p{
+.marker-info-window p {
     font-weight: bold;
     font-size: 11px;
 }
 
-.miw-category-star-container{
+.miw-category-star-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
-.miw-category-star-container img{
+.miw-category-star-container img {
     width: 70px
 }
 
-.miw-date-container{
+.miw-date-container {
     display: flex;
     flex-direction: row;
     gap: 10px;

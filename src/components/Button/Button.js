@@ -1,13 +1,13 @@
 import './Button.css'
 import React from "react"
 
-function Button({children, click, className, name}) {
+function Button({children, click, className, name, type}) {
 
     return (
 
         <button
             name={name}
-            type="button"
+            type={type}
             className={className}
             onClick={click}
         >{children}

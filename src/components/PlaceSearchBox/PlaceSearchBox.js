@@ -2,13 +2,13 @@ import './PlaceSearchBox.css'
 import React, {useContext, useEffect} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
-import {MapFormContext} from "../Context/MapFormContextProvider";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 
 function PlaceSearchBox() {
 
-    const {setCenter, location, setLocation} = useContext(MapFormContext)
+    const {setCenter, location, setLocation} = useContext(GlobalContext)
 
-    const {isLoaded, loadError} = useContext(MapFormContext)
+    const {isLoaded, loadError} = useContext(GlobalContext)
 
     useEffect(() => {
         return (setLocation(""))

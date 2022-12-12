@@ -7,7 +7,6 @@
 }
 
 .category-grid-container {
-
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -20,7 +19,6 @@
 }
 
 .category-grid {
-
     display: flex;
     flex: 0 1 auto;
     flex-flow: row wrap;
@@ -54,13 +52,13 @@
     opacity: 0;
     font-size: 12px;
     border-style: outset;
-    border-color: hsl(196, 40%, 60%);
+    border-color: var(--green-2);
     color: white;
     font-weight: bold;
-    box-shadow: 10px 10px 20px hsl(196, 40%, 15%);
+    box-shadow: 10px 10px 20px var(--box-shadow-green);
 }
 
-.cg-button-overlay-container:hover .cg-button-overlay {
+.category-button-overlay-container:hover .category-button-overlay {
     opacity: 1;
 }
 
@@ -72,25 +70,25 @@
 }
 
 .category-clicked {
-    box-shadow: 0 10px 10px hsl(0, 0%, 25%);
+    box-shadow: 0 10px 10px var(--box-shadow-grey);
     background-image: linear-gradient(45deg, hsl(43, 81%, 40%), hsl(43, 81%, 60%));
     border-radius: 3px;
 }
 
 .blue1 {
-    background-color: rgba(173, 232, 244, 0.5)
+    background-color: var(--blue-1);
 }
 
 .blue2 {
-    background-color: rgba(0, 180, 216, 0.5)
+    background-color: var(--blue-2);
 }
 
 .blue3 {
-    background-color: rgba(0, 119, 182, 0.5)
+    background-color: var(--blue-3);
 }
 
 .blue4 {
-    background-color: rgba(2, 62, 138, 0.5);
+    background-color: var(--blue-4);
 }
 
 .category-image {

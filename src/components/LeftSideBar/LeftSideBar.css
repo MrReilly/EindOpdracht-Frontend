@@ -1,0 +1,61 @@
+@keyframes slideInFromLeft {
+
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.lsb-container {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+    height: 100%;
+    max-width: 220px;
+    padding: 18px;
+    box-shadow: 12px 0 12px var(--box-shadow-green);
+    animation: 0.6s ease-in-out slideInFromLeft;
+}
+
+.lsb-slim {
+    max-width: 30px;
+}
+
+.leftSideBar-myEvents-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 40px 0 40px 0;
+}
+
+.event-create-button {
+    padding: 20px 30px 20px 30px;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .lsb-container {
+        padding: 10px;
+        box-shadow: inset 0 0 20px var(--box-shadow-green)
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .lsb-container {
+        order: 1;
+        max-width: 700px;
+        width: 100%;
+        max-height: fit-content;
+        padding: 15px;
+        box-shadow: 0 0 15px var(--box-shadow-green)
+    }
+}

@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import Navbar from "../Navbar/Navbar";
 import './Layout.css'
 import '../../App.css'
@@ -7,7 +7,7 @@ export const Layout = ({children}) => {
 
     return (
 
-        <Fragment>
+        <>
             <Navbar/>
             <main>
                 <div className="left-outside"/>
@@ -19,7 +19,7 @@ export const Layout = ({children}) => {
                 <div className="right-outside"/>
             </main>
             <footer/>
-        </Fragment>
+        </>
     )
 }
 

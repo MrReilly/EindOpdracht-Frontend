@@ -3,6 +3,7 @@ import React, {useContext} from "react";
 import {GlobalContext} from "../Context/GlobalContextProvider";
 import StarRating from "../StarRating/StarRating";
 import star from "../../assets/favorites/star.png"
+import distanceKmCalculator from "../Utils/distanceKmCalculator";
 
 function EventList(props) {
     const {title} = props
@@ -12,6 +13,7 @@ function EventList(props) {
 
     const {events} = useContext(GlobalContext)
     const {favorites} = useContext(GlobalContext)
+    const {center} = useContext(GlobalContext)
 
     const {viewEventClicked, setViewEventClicked} = useContext(GlobalContext)
     const {setViewEventMounted} = useContext(GlobalContext)
@@ -47,7 +49,7 @@ function EventList(props) {
                                     }
                                     return null
                                 })}
-
+                                <p>{distanceKmCalculator(event.latCoordinate, center.lat, event.longCoordinate, center.lng).toFixed(1)} km</p>
                             </div>
                             <StarRating
                                 item={event}

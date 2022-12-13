@@ -10,6 +10,7 @@
 
     --green-1: #274E5C;
     --green-2: hsla(196, 40%, 60%, 1);
+    --green-3: hsla(215, 80%, 5%, 0.6);
     --blue-1: hsla(190, 76%, 82%, 0.5);
     --blue-2: hsla(190, 100%, 42%, 0.5);
     --blue-3: hsla(201, 100%, 36%, 0.5);
@@ -18,6 +19,7 @@
     --box-shadow-green: hsla(180, 23%, 3%, 0.6);
     --box-shadow-grey: hsla(0, 0%, 25%, 1);
     --box-shadow-dark-grey: hsla(0, 0%, 0%, 0.8);
+    --linear-gradient-1: linear-gradient(to right, hsla(200, 60%, 15%, 1), hsla(185, 60%, 40%, 1));
 }
 
 .date {

@@ -5,6 +5,7 @@ import React, {useContext, useEffect} from "react";
 import {GlobalContext} from "../Context/GlobalContextProvider";
 import categoryMarkerIcon from "./CategoryMarkerIcon";
 import StarRating from "../StarRating/StarRating";
+import distanceKmCalculator from "../Utils/distanceKmCalculator";
 
 function Map(props) {
     const {zoom} = props
@@ -71,6 +72,7 @@ function Map(props) {
                                 <h5>{selectedEvent.category.category}</h5>
                                 <StarRating
                                     item={selectedEvent}/>
+                                <p>{distanceKmCalculator(selectedEvent.latCoordinate, center.lat, selectedEvent.longCoordinate, center.lng).toFixed(1)} km</p>
                             </div>
                             <h4>{selectedEvent.name} </h4>
                             <div className="miw-date-container">

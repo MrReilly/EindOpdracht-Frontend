@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react"
-import DistanceKmCalculator from "./DistanceKmCalculator";
+import DistanceKmCalculator from "./distanceKmCalculator";
 import {GlobalContext} from "../Context/GlobalContextProvider";
 
 function mapAllEvents(distance, startDate, endDate, center, selectedCategories, allEvents) {

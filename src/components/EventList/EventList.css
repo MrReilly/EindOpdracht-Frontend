@@ -57,10 +57,6 @@
     background: #000;
 }
 
-.el-list-item img {
-    width: 70px;
-}
-
 .el-list-item {
     height: fit-content;
     width: 160px;
@@ -80,8 +76,19 @@
 }
 
 .el-category-star-container img {
-
     width: 20px;
+}
+
+.starRating-distance-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.starRating-distance-container img{
+    width: 70px;
+    height: 14px;
 }
 
 .el-search-result {
@@ -157,7 +164,7 @@
         margin: 0 5px 0 5px;
 
         min-width: fit-content;
-        height: 140px;
+        height: 145px;
     }
 
     .el-container h1 {

@@ -19,7 +19,11 @@
     --box-shadow-green: hsla(180, 23%, 3%, 0.6);
     --box-shadow-grey: hsla(0, 0%, 25%, 1);
     --box-shadow-dark-grey: hsla(0, 0%, 0%, 0.8);
-    --linear-gradient-1: linear-gradient(to right, hsla(200, 60%, 15%, 1), hsla(185, 60%, 40%, 1));
+    --linear-gradient-1: linear-gradient(90deg, hsla(200, 60%, 10%, 1), hsla(185, 60%, 30%, 1));
+    --button-color-1: linear-gradient(45deg, hsla(195, 40%, 20%, 1), hsla(190, 45%, 60%, 1));
+    --button-color-2: linear-gradient(45deg, hsl(43, 81%, 40%), hsl(43, 81%, 60%));
+    --button-color-3: linear-gradient(45deg, hsla(210, 80%, 20%, 1),hsla(180, 60%, 55%, 1));
+
 }
 
 .date {

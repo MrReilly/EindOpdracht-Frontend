@@ -49,11 +49,13 @@ function EventList(props) {
                                     }
                                     return null
                                 })}
-                                <p>{distanceKmCalculator(event.latCoordinate, center.lat, event.longCoordinate, center.lng).toFixed(1)} km</p>
                             </div>
-                            <StarRating
-                                item={event}
-                            />
+                            <div className= "starRating-distance-container">
+                                <StarRating item={event} />
+
+                                <p>{distanceKmCalculator(event.latCoordinate, center.lat, event.longCoordinate, center.lng).toFixed(1)} km</p>
+
+                            </div>
                             <h5>{event.name}</h5>
                             <div className="search-result-date-container">
                                 <p className="search-result-date">van: {event.startDate}</p>

@@ -102,7 +102,7 @@ export default function CategoryGrid(props) {
     return (
         <section className="category-grid-container">
             <Button
-                className="standard-button"
+                className="standard-button button-color-1"
                 click={() => handleSelectAll()}
             >Select All</Button>
 

@@ -77,7 +77,6 @@ function EventCreateForm(props) {
                     className={`ec-form ${createFormClicked ? "ecf-out" : "ecf-in"}`}
                 >
 
-
                     <PlaceSearchBox
                         setCenter={setCenter}
                         setLocation={setLocation}
@@ -194,7 +193,7 @@ function EventCreateForm(props) {
                     />
 
                     <button
-                        className="standard-button"
+                        className="standard-button button-color-1"
                         id="post-button"
                         type="submit"
                     >Post Event

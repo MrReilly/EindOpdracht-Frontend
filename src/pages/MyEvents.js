@@ -77,7 +77,7 @@ function MyEvents() {
                     click={() => {
                         setCreateFormClicked(true)
                     }}
-                    className="standard-button"
+                    className="standard-button button-color-2"
                 >{"Create Event"}
                 </Button>
 

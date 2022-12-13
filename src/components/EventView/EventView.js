@@ -112,21 +112,22 @@ function EventView(props) {
                                     {selectedEvent.textDescription}
                                 </p></label>
 
+                            <div>
                             {buttonName === "Review this Event!" && role === "ORGANIZER" ? null :
                                 <Button
-                                    className="standard-button"
+                                    className="standard-button button-color-1"
                                     click={submitButtonClicked}
                                 >{buttonName}
                                 </Button>}
 
                             {favorites.includes(selectedEvent) &&
                                 <Button
-                                    className="standard-button"
+                                    className="standard-button button-color-2"
                                     click={() => {
                                         removeFromFavorites(selectedEvent.id, isAuth)
                                     }}
                                 >Remove from Favorites</Button>}
-
+                              </div>
                         </div>
                     </div>
                 </div>}

@@ -48,6 +48,8 @@ function MyFavorites() {
         setReviewSubmitResponse(null)
         setReviewClicked(false)
         setViewEventClicked(false)
+        window.location.reload(false)
+
     }
 
     return (

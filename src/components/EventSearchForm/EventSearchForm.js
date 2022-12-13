@@ -57,7 +57,7 @@ export default function EventSearchForm(props) {
 
                     <button
                         id="searchEventButton"
-                        className="standard-button"
+                        className="standard-button button-color-3"
                         type="submit"
                     > {buttonName}
                     </button>

@@ -80,7 +80,7 @@ function CreateAccountForm(props) {
 
                 <button
                     type="submit"
-                    className="standard-button"
+                    className="standard-button b button-color-1"
                 >Create Account
                 </button>
             </form>

@@ -50,7 +50,7 @@ function MyProfileForm(props) {
                     <p> {`Role: ${role}`}</p>
 
                     {!changeRoleClicked && <Button
-                        className="standard-button"
+                        className="standard-button button-color-1"
                         click={() => {
                             setChangeRoleClicked(true)
                         }}
@@ -71,7 +71,7 @@ function MyProfileForm(props) {
                     <p> {`Organization Name: ${organizationName}`}</p>
 
                     {!changeOrganizationNameClicked && <Button
-                        className="standard-button"
+                        className="standard-button button-color-1"
                         click={() => {
                             setChangeOrganizationNameClicked(true)
                         }}
@@ -93,7 +93,7 @@ function MyProfileForm(props) {
             </div>
 
             {!changePasswordClicked && <Button
-                className="standard-button"
+                className="standard-button button-color-3"
                 click={() => {
                     setChangePasswordClicked(true)
                 }}
@@ -112,7 +112,7 @@ function MyProfileForm(props) {
                 </div>}
 
             <button
-                className="standard-button"
+                className="standard-button button-color-2"
                 type="submit"
             >Update my Profile
             </button>

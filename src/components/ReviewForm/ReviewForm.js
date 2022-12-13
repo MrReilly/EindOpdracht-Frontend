@@ -96,7 +96,7 @@ function ReviewForm(props) {
                     </fieldset>
                     <button
                         id="reviewButton"
-                        className="standard-button"
+                        className="standard-button button-color-1"
                         type="submit"
                     >Post Review
                     <

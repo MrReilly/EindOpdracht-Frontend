@@ -51,7 +51,7 @@ function LoginForm() {
                 {error && <p className="password-error">Username or password is incorrect</p>}
                 <Button
                     type="submit"
-                    className="standard-button"
+                    className="standard-button button-color-1"
                 >Log in
                 </Button>
             </form>

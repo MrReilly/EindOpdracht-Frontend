@@ -37,7 +37,7 @@ function PlaceSearchBox() {
                     <div>
                         <input
                             {...getInputProps({
-                                placeholder: 'Location.. (City or town)',
+                                placeholder: 'Location..',
                                 className: 'location-search-input',
                                 required: true
                             })}

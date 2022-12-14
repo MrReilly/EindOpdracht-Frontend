@@ -5,6 +5,7 @@ import Select from "react-select";
 
 import {AuthContext} from "../Context/AuthContext";
 import updateUser from "../APIs/updateUser";
+import {GlobalContext} from "../Context/GlobalContextProvider";
 
 function MyProfileForm(props) {
 

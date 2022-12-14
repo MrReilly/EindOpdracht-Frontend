@@ -21,19 +21,23 @@ function MyFavorites() {
     const {setViewEventMounted} = useContext(GlobalContext)
     const {favorites} = useContext(GlobalContext)
     const {setSelectedEvent} = useContext(GlobalContext)
+    const {setCenter} = useContext(GlobalContext)
 
-    const {isAuth} = useContext(AuthContext);
+    const {isAuth, latLng} = useContext(AuthContext);
 
     const [reviewClicked, setReviewClicked] = useState(false)
     const [reviewSubmitResponse, setReviewSubmitResponse] = useState(null)
 
-    const zoom = 7
+    const zoom = 9
 
     const title = "My Favorites"
 
     if(isAuth){getFavorites()}
 
     useEffect(() => {
+
+       setCenter(latLng)
+
         setEvents(favorites)
         return (() => {
             setViewEventMounted(false)
@@ -49,7 +53,6 @@ function MyFavorites() {
         setReviewClicked(false)
         setViewEventClicked(false)
         window.location.reload(false)
-
     }
 
     return (

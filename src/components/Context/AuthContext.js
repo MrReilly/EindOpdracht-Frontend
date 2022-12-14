@@ -11,6 +11,7 @@ function AuthContextProvider({children}) {
         user: null,
         role: null,
         organizationName: null,
+        latLng: {lat: 52.0845, lng: 5.0975},
         status: "pending"
     });
 
@@ -29,6 +30,7 @@ function AuthContextProvider({children}) {
                 user: null,
                 role: null,
                 organizationName: null,
+                latLng: {lat: 52.0845, lng: 5.0975},
                 status: 'done',
             });
         }
@@ -48,6 +50,7 @@ function AuthContextProvider({children}) {
             user: null,
             role: null,
             organizationName: null,
+            latLng: {lat: 52.0845, lng: 5.0975},
             status: "done"
         });
 
@@ -66,15 +69,29 @@ function AuthContextProvider({children}) {
                 }
             });
 
-            toggleIsAuth({
-                ...isAuth,
-                isAuth: true,
-                user: response.data.username,
-                role: response.data.role,
-                organizationName: response.data.organizationName,
-                status: "done"
+            if(response.data.defaultLatCoordinate === null){
+                toggleIsAuth({
+                    ...isAuth,
+                    isAuth: true,
+                    user: response.data.username,
+                    role: response.data.role,
+                    organizationName: response.data.organizationName,
+                    status: "done"
 
-            });
+                });
+            }
+            else {
+                toggleIsAuth({
+                    ...isAuth,
+                    isAuth: true,
+                    user: response.data.username,
+                    role: response.data.role,
+                    organizationName: response.data.organizationName,
+                    latLng: {lat: response.data.defaultLatCoordinate, lng: response.data.defaultLongCoordinate},
+                    status: "done"
+
+                });
+            }
 
             if (redirectUrl) {
                 history.push(redirectUrl);
@@ -88,6 +105,7 @@ function AuthContextProvider({children}) {
                 user: null,
                 roles: null,
                 organizationName: null,
+                latLng: {lat: 52.0845, lng: 5.0975},
                 status: 'done',
             });
         }
@@ -98,6 +116,8 @@ function AuthContextProvider({children}) {
         user: isAuth.user,
         role: isAuth.role,
         organizationName: isAuth.organizationName,
+        latLng: isAuth.latLng,
+
         login: login,
         logout: logout,
     };

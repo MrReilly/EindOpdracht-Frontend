@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function postUser(setCreateAccountResponse, data){
+async function postUser(setCreateAccountResponse, data, latLng){
 
     try {
         const response = await axios.post('http://localhost:8080/user', {
@@ -9,6 +9,8 @@ async function postUser(setCreateAccountResponse, data){
                 password: data.password,
                 role: data.role.value,
                 organizationName: data.organizationName,
+                defaultLatCoordinate: latLng.lat,
+                defaultLongCoordinate: latLng.lng
             }
         )
 

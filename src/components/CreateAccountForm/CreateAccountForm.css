@@ -14,7 +14,11 @@
     max-height: 600px;
     box-shadow:  10px 10px 15px var(--box-shadow-green);
     color: white;
+}
 
+.role-select {
+
+    color: dimgrey;
 }
 
 .create-account-form-container h1 {

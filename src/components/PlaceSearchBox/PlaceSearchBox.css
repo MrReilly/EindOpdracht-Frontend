@@ -12,6 +12,7 @@
     width: 100%;
     position: absolute;
     font-family: Tahoma, serif;
+    color: dimgrey;
     z-index: 2;
 }
 

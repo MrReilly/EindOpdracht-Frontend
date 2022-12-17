@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
 import MiddleSection from "../components/MiddleSection/MiddleSection";
 import RightSideBar from "../components/RightSideBar/RightSideBar";
@@ -6,7 +6,6 @@ import MediaQuery from "react-responsive";
 import MessageBox from "../components/MessageBox/MessageBox";
 import {useHistory} from "react-router-dom";
 import CreateAccountForm from "../components/CreateAccountForm/CreateAccountForm";
-import {GlobalContext} from "../components/Context/GlobalContextProvider";
 
 function CreateAccount() {
 
@@ -34,7 +33,7 @@ function CreateAccount() {
 
                     <CreateAccountForm
 
-                    setCreateAccountResponse={setCreateAccountResponse}/>
+                        setCreateAccountResponse={setCreateAccountResponse}/>
 
                 </MiddleSection>
             </div>

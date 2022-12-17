@@ -35,6 +35,16 @@
     color: var(--green-1)
 }
 
+.marker-info-window img{
+    max-width:160px;
+    opacity: 60%;
+}
+
+.marker-info-window:hover img{
+
+    opacity: 100%;
+}
+
 .marker-info-window:hover {
 
     background-color: hsl(172, 30%, 60%);

@@ -2,14 +2,17 @@ import './CreateAccountForm.css'
 import React, {useState, useContext} from "react";
 import {Controller, useForm} from "react-hook-form";
 import Select from "react-select";
-import postUser from "../APIs/postUser";
+import postUser from "../../APIs/postUser";
 import PlaceSearchBox from "../PlaceSearchBox/PlaceSearchBox";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 
 function CreateAccountForm(props) {
     const {setCreateAccountResponse} = props
 
-    const {center} = useContext(GlobalContext)
+    const {
+        locationName,
+        latLng
+    } = useContext(GlobalContext)
 
     const {register, handleSubmit, control} = useForm();
 
@@ -26,7 +29,7 @@ function CreateAccountForm(props) {
 
         toggleError(false);
 
-        postUser(setCreateAccountResponse, data, center)
+        postUser(setCreateAccountResponse, data, latLng, locationName)
 
     }
 
@@ -71,7 +74,7 @@ function CreateAccountForm(props) {
                     /></label>
                 {error && <p className="password-error">Username or password is incorrect</p>}
 
-                <label >Default Location
+                <label>Default Location
                     <PlaceSearchBox/></label>
 
                 <label htmlFor="organizationName">Organization Name

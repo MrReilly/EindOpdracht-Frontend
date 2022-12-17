@@ -2,23 +2,28 @@ import './PlaceSearchBox.css'
 import React, {useContext, useEffect} from 'react';
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 
 function PlaceSearchBox() {
 
-    const {setCenter, location, setLocation} = useContext(GlobalContext)
-
-    const {isLoaded, loadError} = useContext(GlobalContext)
+    const {
+        locationName,
+        setLocationName,
+        setLatLng,
+        isLoaded,
+        loadError
+    } = useContext(GlobalContext)
 
     useEffect(() => {
-        return (setLocation(""))
+        return (setLocationName(""))
     }, [])
 
     async function handleSelect(value) {
         const results = await geocodeByAddress(value);
         const ll = await getLatLng(results[0])
-        setCenter(ll)
-        setLocation(value)
+
+        setLocationName(value)
+        setLatLng({lat: ll.lat, lng: ll.lng});
     }
 
     if (loadError) return <p>Error Loading </p>
@@ -29,8 +34,8 @@ function PlaceSearchBox() {
             <PlacesAutocomplete
                 name="search"
                 id="search"
-                value={location}
-                onChange={setLocation}
+                value={locationName}
+                onChange={setLocationName}
                 onSelect={handleSelect}
             >
                 {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (

@@ -2,8 +2,8 @@ import './ReviewForm.css'
 import React, {useContext, useState} from "react"
 import Button from "../Button/Button";
 import axios from "axios";
-import {GlobalContext} from "../Context/GlobalContextProvider";
-import DateConverter from "../Utils/DateConverter";
+import {GlobalContext} from "../../context/GlobalContext";
+import DateConverter from "../../utils/DateConverter";
 
 function ReviewForm(props) {
     const {setReviewClicked, setReviewSubmitResponse} = props

@@ -1,9 +1,9 @@
 import React from "react";
-import loginApi from "../APIs/loginAPI";
+import loginApi from "../../APIs/loginAPI";
 import {useState, useContext} from "react";
 import './LoginForm.css'
 import Button from "../Button/Button";
-import {AuthContext} from "../Context/AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 
 function LoginForm() {
 

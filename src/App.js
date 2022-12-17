@@ -2,8 +2,8 @@ import React, {lazy, Suspense, useContext} from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
 
 
-import {Layout} from "./components/Layout/Layout";
-import {AuthContext} from "./components/Context/AuthContext";
+import {Layout} from "./layout/Layout";
+import {AuthContext} from "./context/AuthContext";
 
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import('./pages/Login'));
@@ -43,7 +43,6 @@ function App() {
                 </Suspense>
             </Switch>
         </Layout>
-
     )
 }
 

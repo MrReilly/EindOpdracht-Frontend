@@ -1,11 +1,14 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 import {useLoadScript} from "@react-google-maps/api";
+import {AuthContext} from "./AuthContext";
 
 const placesLibrary = ["places"]
 
 export const GlobalContext = createContext({})
 
 function GlobalContextProvider({children}) {
+
+    const {defaultLocation, defaultLat, defaultLng} = useContext(AuthContext)
 
     const [selectedEvent, setSelectedEvent] = useState({})
     const [events, setEvents] = useState([])
@@ -18,8 +21,8 @@ function GlobalContextProvider({children}) {
     const [viewEventClicked, setViewEventClicked] = useState(false)
     const [viewEventMounted, setViewEventMounted] = useState(false)
 
-    const [center, setCenter] = useState({lat: 52.0845, lng: 5.0975})
-    const [location, setLocation] = useState("")
+    const [locationName, setLocationName] = useState(defaultLocation)
+    const [latLng, setLatLng] = useState({lat: defaultLat, lng: defaultLng})
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, libraries: placesLibrary
@@ -37,10 +40,10 @@ function GlobalContextProvider({children}) {
         setEvents: setEvents,
         isLoaded: isLoaded,
         loadError: loadError,
-        center: center,
-        setCenter: setCenter,
-        location: location,
-        setLocation: setLocation,
+        locationName: locationName,
+        setLocationName: setLocationName,
+        latLng: latLng,
+        setLatLng: setLatLng,
         reviews: reviews,
         setReviews: setReviews,
         favorites: favorites,

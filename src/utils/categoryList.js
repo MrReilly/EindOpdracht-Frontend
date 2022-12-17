@@ -1,15 +1,15 @@
-import conferenceImage from "../../assets/categories/Conventie icon white.png";
-import artImage from "../../assets/categories/gallery-white.png";
-import marketImage from "../../assets/categories/market-white.png";
-import festivalImage from "../../assets/categories/festival-white.png";
-import theaterImage from "../../assets/categories/theater.-whitepng.png";
-import concertImage from "../../assets/categories/concert-white.png";
-import kidsImage from "../../assets/categories/kids icon white.png";
-import fairImage from "../../assets/categories/carousel-white.png";
-import circusImage from "../../assets/categories/circus tens icon white.png";
-import natureImage from "../../assets/categories/leaf icon white.png";
-import sportsImage from "../../assets/categories/trophy-white.png";
-import otherImage from "../../assets/categories/questionmark icon white.png";
+import conferenceImage from "../assets/categories/Conventie icon white.png";
+import artImage from "../assets/categories/gallery-white.png";
+import marketImage from "../assets/categories/market-white.png";
+import festivalImage from "../assets/categories/festival-white.png";
+import theaterImage from "../assets/categories/theater.-whitepng.png";
+import concertImage from "../assets/categories/concert-white.png";
+import kidsImage from "../assets/categories/kids icon white.png";
+import fairImage from "../assets/categories/carousel-white.png";
+import circusImage from "../assets/categories/circus tens icon white.png";
+import natureImage from "../assets/categories/leaf icon white.png";
+import sportsImage from "../assets/categories/trophy-white.png";
+import otherImage from "../assets/categories/questionmark icon white.png";
 
 export const categoryList = [
     {

@@ -1,23 +1,35 @@
 import './EventView.css'
 import React, {useContext, useEffect} from "react";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 import noImage from "../../assets/categories/No-Image-Placeholder.svg.png"
 import Button from "../Button/Button";
 import StarRating from "../StarRating/StarRating";
-import {AuthContext} from "../Context/AuthContext";
-import removeFromFavorites from "../APIs/updateFavorites";
-import getReviews from "../APIs/getReviews";
+import {AuthContext} from "../../context/AuthContext";
+import removeFromFavorites from "../../APIs/updateFavorites";
+import getReviews from "../../APIs/getReviews";
 
 function EventView(props) {
     const {buttonName, submitButtonClicked} = props
-    const {role, isAuth} = useContext(AuthContext)
-    const {favorites} = useContext(GlobalContext)
-    const {selectedEvent, setSelectedEvent} = useContext(GlobalContext)
-    const {setReviews} = useContext(GlobalContext)
-    const {viewEventClicked, setViewEventClicked} = useContext(GlobalContext)
-    const {viewEventMounted, setViewEventMounted} = useContext(GlobalContext)
+
+    const {
+        role,
+        isAuth
+    } = useContext(AuthContext)
+
+    const {
+        favorites,
+        selectedEvent,
+        setSelectedEvent,
+        setReviews,
+        viewEventClicked,
+        setViewEventClicked,
+        viewEventMounted,
+        setViewEventMounted
+    } = useContext(GlobalContext)
+
 
     useEffect(() => {
+
         getReviews(viewEventClicked, selectedEvent, setReviews)
 
         return (() => {
@@ -113,21 +125,21 @@ function EventView(props) {
                                 </p></label>
 
                             <div>
-                            {buttonName === "Review this Event!" && role === "ORGANIZER" ? null :
-                                <Button
-                                    className="standard-button button-color-1"
-                                    click={submitButtonClicked}
-                                >{buttonName}
-                                </Button>}
+                                {buttonName === "Review this Event!" && role === "ORGANIZER" ? null :
+                                    <Button
+                                        className="standard-button button-color-1"
+                                        click={submitButtonClicked}
+                                    >{buttonName}
+                                    </Button>}
 
-                            {favorites.includes(selectedEvent) &&
-                                <Button
-                                    className="standard-button button-color-2"
-                                    click={() => {
-                                        removeFromFavorites(selectedEvent.id, isAuth)
-                                    }}
-                                >Remove from Favorites</Button>}
-                              </div>
+                                {favorites.includes(selectedEvent) &&
+                                    <Button
+                                        className="standard-button button-color-2"
+                                        click={() => {
+                                            removeFromFavorites(selectedEvent.id, isAuth)
+                                        }}
+                                    >Remove from Favorites</Button>}
+                            </div>
                         </div>
                     </div>
                 </div>}

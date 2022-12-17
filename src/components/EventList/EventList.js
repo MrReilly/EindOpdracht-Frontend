@@ -1,22 +1,24 @@
 import './EventList.css'
 import React, {useContext} from "react";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 import StarRating from "../StarRating/StarRating";
 import star from "../../assets/favorites/star.png"
-import distanceKmCalculator from "../Utils/distanceKmCalculator";
+import distanceKmCalculator from "../../utils/distanceKmCalculator";
 
 function EventList(props) {
     const {title} = props
 
-    const {setSelectedEvent} = useContext(GlobalContext)
-    const {reviews} = useContext(GlobalContext)
+    const {
+        setSelectedEvent,
+        reviews,
+        events,
+        favorites,
+        latLng,
+        viewEventClicked,
+        setViewEventClicked,
+        setViewEventMounted
+    } = useContext(GlobalContext)
 
-    const {events} = useContext(GlobalContext)
-    const {favorites} = useContext(GlobalContext)
-    const {center} = useContext(GlobalContext)
-
-    const {viewEventClicked, setViewEventClicked} = useContext(GlobalContext)
-    const {setViewEventMounted} = useContext(GlobalContext)
 
     return (
         <div className={`el-container ${events.length > 0 ? "el-out" : "el-in"}`}>
@@ -53,7 +55,7 @@ function EventList(props) {
                             <div className= "starRating-distance-container">
                                 <StarRating item={event} />
 
-                                <p>{distanceKmCalculator(event.latCoordinate, center.lat, event.longCoordinate, center.lng).toFixed(1)} km</p>
+                                <p>{distanceKmCalculator(event.latCoordinate, latLng.lat, event.longCoordinate, latLng.lng).toFixed(1)} km</p>
 
                             </div>
                             <h5>{event.name}</h5>

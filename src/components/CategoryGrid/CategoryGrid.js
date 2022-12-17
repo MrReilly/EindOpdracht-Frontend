@@ -2,7 +2,7 @@ import './CategoryGrid.css'
 import React, {useState} from "react";
 
 import Button from "../Button/Button";
-import {categoryList} from "../Utils/categoryList";
+import {categoryList} from "../../utils/categoryList";
 
 export default function CategoryGrid(props) {
     const {selectedCategories, setSelectedCategories} = props

@@ -21,7 +21,7 @@ function MyProfile() {
         <>
             <div className="leftSideBar-middleSection-container">
 
-                <MediaQuery query="(min-device-width: 768px)">
+                <MediaQuery query="(min-device-width: 1024px)">
                     <LeftSideBar className="lsb-container"/>
                 </MediaQuery>
 

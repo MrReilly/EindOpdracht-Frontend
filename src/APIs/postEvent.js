@@ -2,7 +2,7 @@
 import axios from "axios";
 import postImage from "./postImage";
 
-async function postEvent(eventName, location, address, center, entryPrice, textDescription, data, setCreateSubmitResponse, image){
+async function postEvent(eventName, locationName, latLng, address, entryPrice, textDescription, data, setCreateSubmitResponse, image){
 
     const token = localStorage.getItem("token")
 
@@ -11,10 +11,10 @@ async function postEvent(eventName, location, address, center, entryPrice, textD
 
             category: data.category.value,
             name: eventName,
-            location: location,
+            location: locationName,
             address: address,
-            latCoordinate: center.lat,
-            longCoordinate: center.lng,
+            latCoordinate: latLng.lat,
+            longCoordinate: latLng.lng,
             entryPrice: entryPrice,
             textDescription: textDescription,
             startDate: data.startDate,
@@ -29,7 +29,9 @@ async function postEvent(eventName, location, address, center, entryPrice, textD
 
         setCreateSubmitResponse({message: responseEvent.data, status: responseEvent.status})
 
-        postImage(responseEvent.data, image)
+
+           postImage(responseEvent.data, image)
+
 
     } catch (e) {
         console.error(e);

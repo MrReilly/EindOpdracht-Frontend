@@ -1,8 +1,8 @@
 import {useContext, useEffect} from "react"
 
 import axios from "axios";
-import {GlobalContext} from "../Context/GlobalContextProvider";
-import {AuthContext} from "../Context/AuthContext";
+import {GlobalContext} from "../context/GlobalContext";
+import {AuthContext} from "../context/AuthContext";
 
 function getFavorites() {
 

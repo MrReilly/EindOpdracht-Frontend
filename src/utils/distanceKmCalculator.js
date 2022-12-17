@@ -1,4 +1,5 @@
 function DistanceKmCalculator(lat1, lat2, lon1, lon2) {
+
     lon1 = lon1 * Math.PI / 180;
     lon2 = lon2 * Math.PI / 180;
     lat1 = lat1 * Math.PI / 180;

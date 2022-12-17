@@ -1,6 +1,6 @@
 import React from 'react';
 import {useContext, useEffect} from "react";
-import {GlobalContext} from "../components/Context/GlobalContextProvider";
+import {GlobalContext} from "../context/GlobalContext";
 import MiddleSection from "../components/MiddleSection/MiddleSection";
 import Map from "../components/Map/Map";
 import EventView from "../components/EventView/EventView";
@@ -11,19 +11,27 @@ import ReviewForm from "../components/ReviewForm/ReviewForm";
 import MediaQuery from "react-responsive";
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
 import MessageBox from "../components/MessageBox/MessageBox";
-import getFavorites from "../components/APIs/getFavorites";
-import {AuthContext} from "../components/Context/AuthContext";
+import getFavorites from "../APIs/getFavorites";
+import {AuthContext} from "../context/AuthContext";
 
 function MyFavorites() {
 
-    const {setEvents} = useContext(GlobalContext)
-    const {setViewEventClicked} = useContext(GlobalContext)
-    const {setViewEventMounted} = useContext(GlobalContext)
-    const {favorites} = useContext(GlobalContext)
-    const {setSelectedEvent} = useContext(GlobalContext)
-    const {setCenter} = useContext(GlobalContext)
+    const {
+        setEvents,
+        setViewEventClicked,
+        setViewEventMounted,
+        favorites,
+        setSelectedEvent,
+        setLocationName,
+        setLatLng
+    } = useContext(GlobalContext)
 
-    const {isAuth, latLng} = useContext(AuthContext);
+    const {
+        isAuth,
+        defaultLocation,
+        defaultLat,
+        defaultLng
+    } = useContext(AuthContext);
 
     const [reviewClicked, setReviewClicked] = useState(false)
     const [reviewSubmitResponse, setReviewSubmitResponse] = useState(null)
@@ -36,7 +44,8 @@ function MyFavorites() {
 
     useEffect(() => {
 
-       setCenter(latLng)
+       setLocationName(defaultLocation)
+       setLatLng({lat: defaultLat, lng: defaultLng})
 
         setEvents(favorites)
         return (() => {

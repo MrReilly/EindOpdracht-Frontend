@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import './Layout.css'
-import '../../App.css'
+import '../App.css'
 
 export const Layout = ({children}) => {
 

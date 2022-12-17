@@ -11,7 +11,6 @@ async function loginApi(e, login, toggleError, username, password){
                 })
 
                 login(response.headers.authorization);
-                console.log(response)
 
             } catch (e) {
                 console.error(e);

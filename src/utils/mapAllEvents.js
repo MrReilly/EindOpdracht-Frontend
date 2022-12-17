@@ -1,8 +1,8 @@
 import {useContext, useEffect} from "react"
 import DistanceKmCalculator from "./distanceKmCalculator";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../context/GlobalContext";
 
-function mapAllEvents(distance, startDate, endDate, center, selectedCategories, allEvents) {
+function mapAllEvents(distance, startDate, endDate, latLng, selectedCategories, allEvents) {
 
     const {setEvents} = useContext(GlobalContext)
 
@@ -12,7 +12,7 @@ function mapAllEvents(distance, startDate, endDate, center, selectedCategories, 
 
         allEvents.map((e) => {
 
-            const distanceEvent = DistanceKmCalculator(e.latCoordinate, center.lat, e.longCoordinate, center.lng)
+            const distanceEvent = DistanceKmCalculator(e.latCoordinate, latLng.lat, e.longCoordinate, latLng.lng)
 
             if (selectedCategories.includes(e.category.category)) {
 
@@ -30,7 +30,7 @@ function mapAllEvents(distance, startDate, endDate, center, selectedCategories, 
             return null
         })
         setEvents(eventArray)
-    }, [distance, startDate, endDate, center, selectedCategories, allEvents])
+    }, [distance, startDate, endDate, latLng, selectedCategories, allEvents])
 
 
     return null

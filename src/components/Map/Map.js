@@ -2,23 +2,25 @@ import './Map.css'
 import {GoogleMap, InfoWindowF, Marker} from "@react-google-maps/api"
 import mapStyles from "./MapStyles";
 import React, {useContext, useEffect} from "react";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 import categoryMarkerIcon from "./CategoryMarkerIcon";
 import StarRating from "../StarRating/StarRating";
-import distanceKmCalculator from "../Utils/distanceKmCalculator";
+import distanceKmCalculator from "../../utils/distanceKmCalculator";
+import noImage from "../../assets/categories/No-Image-Placeholder.svg.png";
 
 function Map(props) {
     const {zoom} = props
 
-    const {selectedEvent, setSelectedEvent} = useContext(GlobalContext)
-    const {events} = useContext(GlobalContext)
-
-    const {setViewEventClicked} = useContext(GlobalContext)
-    const {setViewEventMounted} = useContext(GlobalContext)
-
-    const {center} = useContext(GlobalContext)
-
-    const {isLoaded, loadError} = useContext(GlobalContext)
+    const {
+        selectedEvent,
+        setSelectedEvent,
+        events,
+        setViewEventClicked,
+        setViewEventMounted,
+        latLng,
+        isLoaded,
+        loadError
+    } = useContext(GlobalContext)
 
     useEffect(() => {
         return (setSelectedEvent(null))
@@ -32,7 +34,7 @@ function Map(props) {
         <div className="map-box">
 
             <GoogleMap
-                center={center}
+                center={{lat: latLng.lat, lng: latLng.lng}}
                 zoom={zoom}
                 options={{styles: mapStyles, disableDefaultUI: true, zoomControl: true}}
                 mapContainerClassName="map-container"
@@ -72,9 +74,15 @@ function Map(props) {
                                 <h5>{selectedEvent.category.category}</h5>
                                 <StarRating
                                     item={selectedEvent}/>
-                                <p>{distanceKmCalculator(selectedEvent.latCoordinate, center.lat, selectedEvent.longCoordinate, center.lng).toFixed(1)} km</p>
+                                <p>{distanceKmCalculator(selectedEvent.latCoordinate, latLng.lat, selectedEvent.longCoordinate, latLng.lng).toFixed(1)} km</p>
                             </div>
                             <h4>{selectedEvent.name} </h4>
+                            {selectedEvent.imageData ? (
+                            <img src={`http://localhost:8080/image/${selectedEvent.imageData.id}`}
+                                 alt={selectedEvent.name}/>)
+                            : <img src={noImage}
+                                   alt="unavailable"
+                        />}
                             <div className="miw-date-container">
                                 <p>van: {selectedEvent.startDate}</p>
                                 <p>tot: {selectedEvent.endDate}</p>

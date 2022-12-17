@@ -14,7 +14,7 @@ async function postImage(responseEventData, image) {
 
     try {
 
-        const responseImage = await axios.post(`http://localhost:8080/image/${eventId}`,
+        await axios.post(`http://localhost:8080/image/${eventId}`,
 
             formData
 
@@ -24,8 +24,6 @@ async function postImage(responseEventData, image) {
                     Authorization: `${token}`
                 },
             })
-
-        console.log(responseImage)
 
     } catch (e) {
         console.error(e);

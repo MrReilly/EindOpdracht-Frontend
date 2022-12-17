@@ -1,6 +1,6 @@
 import React, {useEffect, useContext, useState} from "react";
 import MediaQuery from "react-responsive";
-import {GlobalContext} from "../components/Context/GlobalContextProvider";
+import {GlobalContext} from "../context/GlobalContext";
 import MiddleSection from "../components/MiddleSection/MiddleSection";
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
 import RightSideBar from "../components/RightSideBar/RightSideBar";
@@ -10,23 +10,24 @@ import EventCreateForm from "../components/EventCreateForm/EventCreateForm";
 import EventView from "../components/EventView/EventView";
 import Button from "../components/Button/Button";
 import MessageBox from "../components/MessageBox/MessageBox";
-import getMyEvents from "../components/APIs/getMyEvents";
-import deleteEvent from "../components/APIs/deleteEvent";
+import getMyEvents from "../APIs/getMyEvents";
+import deleteEvent from "../APIs/deleteEvent";
 
 function MyEvents() {
 
-    const {setEvents} = useContext(GlobalContext)
-    const {setViewEventClicked} = useContext(GlobalContext)
-    const {selectedEvent, setSelectedEvent} = useContext(GlobalContext)
+    const {
+        setEvents,
+        setViewEventClicked,
+        selectedEvent,
+        setSelectedEvent
+    } = useContext(GlobalContext)
 
     const [createFormClicked, setCreateFormClicked] = useState(false)
     const [createSubmitResponse, setCreateSubmitResponse] = useState(null)
     const [deleteSubmitResponse, setDeleteSubmitResponse] = useState(null)
-
     const [myEvents, setMyEvents] = useState([])
 
-    const zoom = 7
-
+    const zoom = 9
     const title = "My Events"
 
     getMyEvents(setMyEvents, createFormClicked)
@@ -40,7 +41,7 @@ function MyEvents() {
                 }
             )
         }
-            ,[myEvents])
+        , [myEvents])
 
     function handleCreateSubmitMessageClose() {
         setCreateSubmitResponse(null)

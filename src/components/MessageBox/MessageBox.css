@@ -26,14 +26,16 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 50%;
-    max-width: 500px;
-    height: 20%;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 100px;
     max-height: 200px;
-    background-color: var(--green-1);
-    box-shadow: 0 15px 25px var(--box-shadow-green);
-    border-style: none;
-    border-radius: 10px;
+    background-color: var(--green-4-tr);
+    box-shadow:   5px 10px 15px var(--box-shadow-green);
+    border-style: outset;
+    border-color: white;
+    border-width: 5px;
+    border-radius: 20px;
     align-self: center;
     color: white;
     text-align: center;
@@ -41,6 +43,10 @@
 
 }
 
+.message-box p {
+    text-wrap: normal;
+    margin: 10px;
+}
 
 .message-box-close-button {
     z-index: 1;

@@ -1,6 +1,6 @@
 import {useContext, useEffect} from "react"
 import axios from "axios";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../context/GlobalContext";
 
 function getMyEvents(setMyEvents, createFormClicked){
 

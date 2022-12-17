@@ -3,10 +3,9 @@ import React, {useContext, useEffect, useState} from "react"
 import Select from "react-select"
 import {useForm, Controller} from "react-hook-form";
 import PlaceSearchBox from "../PlaceSearchBox/PlaceSearchBox";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 import Button from "../Button/Button";
-import postEvent from "../APIs/postEvent";
-
+import postEvent from "../../APIs/postEvent";
 
 function EventCreateForm(props) {
     const {
@@ -15,19 +14,19 @@ function EventCreateForm(props) {
         setCreateSubmitResponse,
     } = props
 
-    const [image, setImage] = useState([])
-
-    const {center, setCenter} = useContext(GlobalContext)
-    const {location, setLocation} = useContext(GlobalContext)
-
-    const {register, handleSubmit, control} = useForm();
+    const {
+        latLng,
+        locationName,
+    } = useContext(GlobalContext)
 
     const [createFormMounted, setCreateFormMounted] = useState(false)
-
+    const [image, setImage] = useState([])
     const [entryPrice, setEntryPrice] = useState("")
     const [address, setAddress] = useState("")
     const [eventName, setEventName] = useState("")
     const [textDescription, setTextDescription] = useState("")
+
+    const {register, handleSubmit, control} = useForm();
 
     useEffect(() => {
         setCreateFormMounted(true)
@@ -56,9 +55,8 @@ function EventCreateForm(props) {
     function onFormSubmit(data, e) {
         e.preventDefault()
 
-        postEvent(eventName, location, address, center, entryPrice, textDescription, data, setCreateSubmitResponse, image)
+        postEvent(eventName, locationName, latLng, address, entryPrice, textDescription, data, setCreateSubmitResponse, image)
 
-        setLocation('')
         setCreateFormClicked(false)
     }
 
@@ -77,11 +75,7 @@ function EventCreateForm(props) {
                     className={`ec-form ${createFormClicked ? "ecf-out" : "ecf-in"}`}
                 >
 
-                    <PlaceSearchBox
-                        setCenter={setCenter}
-                        setLocation={setLocation}
-                        location={location}
-                    />
+                    <PlaceSearchBox/>
 
                     <label htmlFor="category">Category:</label>
                     <Controller

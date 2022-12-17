@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState, useCallback} from "react";
-import {GlobalContext} from "../components/Context/GlobalContextProvider";
+import {GlobalContext} from "../context/GlobalContext";
 import EventList from "../components/EventList/EventList";
 import EventSearchForm from "../components/EventSearchForm/EventSearchForm";
 import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
@@ -10,13 +10,21 @@ import Map from "../components/Map/Map";
 import CategoryGrid from "../components/CategoryGrid/CategoryGrid";
 import PlaceSearchBox from "../components/PlaceSearchBox/PlaceSearchBox";
 import MessageBox from "../components/MessageBox/MessageBox";
-import getAllEvents from "../components/APIs/getAllEvents";
-import getFavorites from "../components/APIs/getFavorites";
-import mapAllEvents from "../components/Utils/mapAllEvents";
-import saveFavorite from "../components/APIs/saveFavorite";
-import setZoomDistance from "../components/Utils/setZoom";
+import getAllEvents from "../APIs/getAllEvents";
+import getFavorites from "../APIs/getFavorites";
+import mapAllEvents from "../utils/mapAllEvents";
+import saveFavorite from "../APIs/saveFavorite";
+import setZoomDistance from "../utils/setZoom";
 
 function Home() {
+
+    const {
+        selectedEvent,
+        setSelectedEvent,
+        setEvents,
+        setViewEventClicked,
+        latLng
+    } = useContext(GlobalContext)
 
     const [distance, setDistance] = useState(85)
     const [selectedCategories, setSelectedCategories] = useState([])
@@ -26,18 +34,13 @@ function Home() {
     const [allEvents, setAllEvents] = useState([])
     const [favoriteSaveResponse, setFavoriteSaveResponse] = useState(null)
 
-    const {selectedEvent, setSelectedEvent} = useContext(GlobalContext)
-    const {setEvents} = useContext(GlobalContext)
-    const {setViewEventClicked} = useContext(GlobalContext)
-    const {center} = useContext(GlobalContext)
-
     const title = "Results";
 
     getFavorites()
 
     getAllEvents(setAllEvents)
 
-    mapAllEvents(distance, startDate, endDate, center, selectedCategories, allEvents)
+    mapAllEvents(distance, startDate, endDate, latLng, selectedCategories, allEvents)
 
     setZoomDistance(distance, setZoom)
 

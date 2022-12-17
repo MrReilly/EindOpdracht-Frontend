@@ -157,13 +157,12 @@
         flex-direction: row;
         width: 100%;
         overflow-x: auto;
-
+        overflow-y: hidden;
     }
 
     .el-list-item {
         margin: 0 5px 0 5px;
-
-        min-width: fit-content;
+        min-width: max-content;
         height: 145px;
     }
 

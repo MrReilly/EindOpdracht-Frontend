@@ -1,6 +1,6 @@
 import './RightSideBar.css'
 import React, {useContext} from "react";
-import {GlobalContext} from "../Context/GlobalContextProvider";
+import {GlobalContext} from "../../context/GlobalContext";
 
 const RightSideBar = ({children}) => {
 

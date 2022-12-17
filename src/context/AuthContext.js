@@ -11,11 +11,18 @@ function AuthContextProvider({children}) {
         user: null,
         role: null,
         organizationName: null,
-        latLng: {lat: 52.0845, lng: 5.0975},
+        defaultLocation: "standard location Utrecht",
+        defaultLat: 52.0845,
+        defaultLng: 5.0975,
         status: "pending"
     });
 
     const history = useHistory()
+
+    const routeChange = () => {
+        const path = "/login";
+        history.push(path);
+    }
 
     useEffect(() => {
 
@@ -30,7 +37,9 @@ function AuthContextProvider({children}) {
                 user: null,
                 role: null,
                 organizationName: null,
-                latLng: {lat: 52.0845, lng: 5.0975},
+                defaultLocation: "standard location Utrecht",
+                defaultLat: 52.0845,
+                defaultLng: 5.0975,
                 status: 'done',
             });
         }
@@ -50,12 +59,14 @@ function AuthContextProvider({children}) {
             user: null,
             role: null,
             organizationName: null,
-            latLng: {lat: 52.0845, lng: 5.0975},
+            defaultLocation: "standard location Utrecht",
+            defaultLat: 52.0845,
+            defaultLng: 5.0975,
             status: "done"
         });
 
         console.log("gebruiker is uitgelogd!")
-        history.push("/")
+        routeChange()
     }
 
     async function getUserDetails(token, redirectUrl) {
@@ -69,7 +80,7 @@ function AuthContextProvider({children}) {
                 }
             });
 
-            if(response.data.defaultLatCoordinate === null){
+            if (response.data.defaultLatCoordinate === null) {
                 toggleIsAuth({
                     ...isAuth,
                     isAuth: true,
@@ -79,15 +90,16 @@ function AuthContextProvider({children}) {
                     status: "done"
 
                 });
-            }
-            else {
+            } else {
                 toggleIsAuth({
                     ...isAuth,
                     isAuth: true,
                     user: response.data.username,
                     role: response.data.role,
                     organizationName: response.data.organizationName,
-                    latLng: {lat: response.data.defaultLatCoordinate, lng: response.data.defaultLongCoordinate},
+                    defaultLocation: response.data.defaultLocationName,
+                    defaultLat: response.data.defaultLatCoordinate,
+                    defaultLng: response.data.defaultLongCoordinate,
                     status: "done"
 
                 });
@@ -105,7 +117,9 @@ function AuthContextProvider({children}) {
                 user: null,
                 roles: null,
                 organizationName: null,
-                latLng: {lat: 52.0845, lng: 5.0975},
+                defaultLocation: "standard location Utrecht",
+                defaultLat: 52.0845,
+                defaultLng: 5.0975,
                 status: 'done',
             });
         }
@@ -116,8 +130,9 @@ function AuthContextProvider({children}) {
         user: isAuth.user,
         role: isAuth.role,
         organizationName: isAuth.organizationName,
-        latLng: isAuth.latLng,
-
+        defaultLocation: isAuth.defaultLocation,
+        defaultLat: isAuth.defaultLat,
+        defaultLng: isAuth.defaultLng,
         login: login,
         logout: logout,
     };

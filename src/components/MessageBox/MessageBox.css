@@ -1,0 +1,65 @@
+.message-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+}
+
+@keyframes messageBoxShow {
+
+    0% {
+        transform: scaleX(0%) scaleY(0%);
+    }
+    100% {
+        transform: scaleX(100%) scaleY(100%);
+    }
+}
+
+.message-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 100px;
+    max-height: 200px;
+    background-color: var(--green-4-tr);
+    box-shadow:   5px 10px 15px var(--box-shadow-green);
+    border-style: outset;
+    border-color: white;
+    border-width: 5px;
+    border-radius: 20px;
+    align-self: center;
+    color: white;
+    text-align: center;
+    animation: 0.5s ease-in-out messageBoxShow
+
+}
+
+.message-box p {
+    text-wrap: normal;
+    margin: 10px;
+}
+
+.message-box-close-button {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 10px;
+    font-size: 40px;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.mid-drop-close-button:hover {
+    color: var(--green-1)
+}

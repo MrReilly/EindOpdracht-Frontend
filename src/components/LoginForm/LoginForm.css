@@ -1,0 +1,53 @@
+
+.login-dropdown-button {
+    display: none;
+}
+
+.login-form-container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    background-color: var(--green-3);
+    background-blend-mode: overlay;
+    width: 60%;
+    max-width: 600px;
+    height: 60%;
+    max-height: 500px;
+    box-shadow:  10px 10px 15px var(--box-shadow-green);
+    color: white;
+}
+
+.login-form {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 90%;
+}
+
+.login-input {
+
+    padding: 10px;
+    border-radius: 3px;
+    border-color: lightgrey;
+    border-width: thin;
+    border-style: solid;
+    width: 100%;
+}
+
+.password-error {
+    color: red;
+
+}
+
+.login-title {
+    padding: 0 0 30px 0;
+    font-size: 30px;
+    font-weight: unset;
+
+}

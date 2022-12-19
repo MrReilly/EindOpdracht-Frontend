@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
+/* ------------------------------- 1. Global Styles -------------------------------- */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+
+    --green-1: #274E5C;
+    --green-2: hsla(196, 40%, 60%, 1);
+    --green-3: hsla(215, 80%, 5%, 0.6);
+    --green-4-tr: hsla(196, 40%, 30%, 0.8);
+    --blue-1: hsla(190, 76%, 82%, 0.5);
+    --blue-2: hsla(190, 100%, 42%, 0.5);
+    --blue-3: hsla(201, 100%, 36%, 0.5);
+    --blue-4: hsla(214, 97%, 27%, 0.5);
+    --blue-5: hsla(195, 100%, 35%, 1);
+    --box-shadow-green: hsla(180, 23%, 3%, 0.6);
+    --box-shadow-grey: hsla(0, 0%, 25%, 1);
+    --box-shadow-dark-grey: hsla(0, 0%, 0%, 0.8);
+    --linear-gradient-1: linear-gradient(90deg, hsla(200, 60%, 10%, 1), hsla(185, 60%, 30%, 1));
+    --button-color-1: linear-gradient(45deg, hsla(195, 40%, 20%, 1), hsla(190, 45%, 60%, 1));
+    --button-color-2: linear-gradient(45deg, hsl(43, 81%, 40%), hsl(43, 81%, 60%));
+    --button-color-3: linear-gradient(45deg, hsla(210, 80%, 20%, 1),hsla(180, 60%, 55%, 1));
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.date {
+    width: 100%;
+    padding: 8px;
+    border-color: lightgrey;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: thin;
+    font-size: 11px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input[type="date"]:not(.has-value):before {
+    color: var(--green-1);
+    content: attr(placeholder);
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
